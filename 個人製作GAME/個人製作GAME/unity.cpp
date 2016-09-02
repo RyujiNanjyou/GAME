@@ -28,7 +28,7 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice)
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
 	int gyou = 1;		//行。
 	int retu = 0;		//列。
-	int numRetu = 10;	//列数。
+	int numRetu = 3;	//列数。
 	int execRetu = 0;	//配置した列の数。
 
 
@@ -42,7 +42,7 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice)
 			retu = 1;
 		}
 		else {
-
+			
 			seat[i].Setseat(D3DXVECTOR3(0.5f * retu, -0.7f, -0.5f * gyou));
 			seat[i].Init();
 			retu *= -1.0f;
@@ -87,9 +87,11 @@ void Unity::Update()
 	
 
 	const float moveSpeed = 0.08f;
+	
 	 moveDir = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	if (GetAsyncKeyState('W')) {
 		moveDir -= direction_z;
+
 	}
 	if (GetAsyncKeyState('S')) {
 		moveDir += direction_z;
@@ -100,6 +102,15 @@ void Unity::Update()
 	if (GetAsyncKeyState('D')) {
 		moveDir += direction_x;
 	}
+	if (game->GETPad()->Getf() == true)
+	{
+		D3DXVECTOR3 padmovedir;
+		padmovedir.x = game->GETPad()->GetLStickXF();
+		padmovedir.z = game->GETPad()->GetLStickYF();
+		moveDir.x = direction_x.x * padmovedir.x - direction_z.x * padmovedir.z;
+		moveDir.z = direction_x.z * padmovedir.x - direction_z.z * padmovedir.z;
+	}
+	
 	//カメラが向いている方向に進む。
 	direction_z = game->GetGameCamera().GetCameraDir();
 	D3DXVec3Normalize(&moveDir, &moveDir);
@@ -112,13 +123,16 @@ void Unity::Update()
 	D3DXVec3Cross(&axis, &direction_x, &D3DXVECTOR3(1.0f, 0.0f, 0.0f));
 	D3DXQuaternionRotationAxis(&rotation, &axis, -angle);
 	//ワールド行列の更新。
-	UpdateWorldMatrix(position, rotation, D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+	UpdateWorldMatrix(position, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));
 
 	for (int i = 0; i < SEAT_NUM; i++)
 	{
 		seat[i].Update();
 	}
-
+	if (game->GETPad()->IsTrigger(enButtonX))
+	{
+		
+	}
 	
 }
 //描画。

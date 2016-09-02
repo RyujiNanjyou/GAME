@@ -3,6 +3,7 @@
 #include "PlayerCamera.h"
 #include "unity.h"
 #include "Input.h"
+#include "game.h"
 
 PlayerCamera::PlayerCamera() :
 toEyePos(0.0f, 0.0f, 0.0f, 1.0f),
@@ -44,7 +45,7 @@ void PlayerCamera::UpdateCamera()
 }
 void PlayerCamera::PreUpdate()
 {
-	if (GetInput().IsMouseMove()) {
+	if (GetInput().IsMouseMove()&&game->GETPad()->Getf()==false) {
 		//マウスが動いた。
 		D3DXVECTOR2 mouseMove = GetInput().GetMouseMove();
 		//テスト
@@ -52,6 +53,17 @@ void PlayerCamera::PreUpdate()
 		D3DXMatrixRotationY(&mRot, (mouseMove.x / WINDOW_WIDTH) * 1.0f);
 		D3DXVec4Transform(&toEyePos, &toEyePos, &mRot);
 	}
+	if (game->GETPad()->Getf() == true)
+	{
+		//ゲームパッド
+		float padMove = game->GETPad()->GetRStickXF();
+		//テスト
+		D3DXMATRIX mRot;
+		D3DXMatrixRotationY(&mRot, (padMove / WINDOW_WIDTH) * 30.0f);
+		D3DXVec4Transform(&toEyePos, &toEyePos, &mRot);
+	}
+	
+
 	cameraDir = D3DXVECTOR3(toEyePos);
 	cameraDir.y = 0.0f;
 	D3DXVec3Normalize(&cameraDir, &cameraDir);

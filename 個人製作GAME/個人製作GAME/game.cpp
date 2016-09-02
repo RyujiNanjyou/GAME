@@ -35,7 +35,7 @@ void Game::Start()
 	ZeroMemory(g_diffuseLightColor, sizeof(g_diffuseLightColor));
 	playCamera.Start(&uni);
 	uni.Init(g_pd3dDevice);
-	for (int i = 0; i < DARK_UNITY; i++)
+	for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		int z = i % 10;
 		min[i].Init(g_pd3dDevice);
@@ -57,14 +57,14 @@ void Game::Update()
 	playCamera.PreUpdate();
 	uni.Update();
 	playCamera.Update();
-	for (int i = 0; i < DARK_UNITY; i++)
+	for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		min[i].Update();
 
 	}
 	
 	stg.Update();
-	
+	pad.Update();
 	
 }
 
@@ -80,7 +80,7 @@ void Game::Render()
 		g_diffuseLightColor,
 		g_ambientLight,
 		LIGHT_NUM);
-	for (int i = 0; i < DARK_UNITY; i++)
+	for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		min[i].Render(g_pd3dDevice,
 		GetCamera().GetViewMatrix(),
@@ -104,7 +104,7 @@ void Game::Render()
 void Game::Terminate()
 {
 	uni.Release();
-	for (int i = 0; i < DARK_UNITY; i++)
+	for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		min[i].Release();
 

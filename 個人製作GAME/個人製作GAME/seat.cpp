@@ -10,11 +10,19 @@ Seat::~Seat()
 }
 void Seat::Init()
 {
+	
 	toseat = seatpos - game->GETunity()->Getpos();
+	
+	
 }
 void Seat::Update()
 {
+	D3DXVECTOR4 ROT;
+	D3DXVec3Transform(&ROT, &toseat, &game->GETunity()->GetRot());
+	D3DXVECTOR3 Vec3(ROT.x, ROT.y, ROT.z);
 	
-	seatpos = game->GETunity()->Getpos() + toseat;
+	
+	seatpos = game->GETunity()->Getpos() + Vec3;
+	
 
 }

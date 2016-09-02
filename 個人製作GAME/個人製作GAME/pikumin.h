@@ -3,6 +3,9 @@
 #include "model.h"
 #include "unity.h"
 
+#define GRVITY 0.09f
+#define POWER 1.0f
+
 class Pikumin {
 public:
 	//コンストラクタ
@@ -41,4 +44,8 @@ private:
 	D3DXMATRIX				mWorld;			//ワールド行列。
 	D3DXMATRIX				mRotation;
 	int						m_seatNo;		//座っているシートの番号。
+	bool					flag_pikumin;   
+	float					len;
+	float					Speed;
+
 };

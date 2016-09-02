@@ -8,7 +8,9 @@
 #include "PlayerCamera.h"
 #include "pikumin.h"
 #include "seat.h"
-#define  DARK_UNITY 100
+#include "Pad.h"
+
+#define  PIKUMIN_NUM 100
 
 class Game{
 public:
@@ -49,13 +51,14 @@ public:
 		return playCamera;
 	}
 	Unity* GETunity(){ return &uni; }
-
+	CPad* GETPad(){ return &pad; }
 private:
+	CPad pad;
 	Seat seat[2];
 	PlayerCamera playCamera;			//ƒQ[ƒ€ƒJƒƒ‰B
 	Unity uni;
 	Stage stg;
-	Pikumin min[DARK_UNITY];
+	Pikumin min[PIKUMIN_NUM];
 };
 
 extern Game* game;

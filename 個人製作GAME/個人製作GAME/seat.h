@@ -6,7 +6,7 @@ class Seat
 	D3DXVECTOR3 seatpos;
 	bool FlagSeat;
 	D3DXVECTOR3	toseat;
-
+	
 public:
 	Seat();
 

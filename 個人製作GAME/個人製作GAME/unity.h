@@ -33,9 +33,9 @@ public:
 	void Release();
 
 
-	const D3DXVECTOR3& Getmove() const
+	const D3DXMATRIX& GetRot() const
 	{
-		return moveDir;
+		return mRotation;
 	}
 	const D3DXVECTOR3& Getpos() const
 	{

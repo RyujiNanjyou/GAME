@@ -27,7 +27,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -46,6 +46,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,6 +80,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -85,26 +88,35 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GAMEmain.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="KeyInput.cpp" />
     <ClCompile Include="model.cpp" />
+    <ClCompile Include="Pad.cpp" />
     <ClCompile Include="pikumin.cpp" />
     <ClCompile Include="PlayerCamera.cpp" />
     <ClCompile Include="seat.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="tkEnginePreCompile.cpp" />
     <ClCompile Include="unity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="KeyInput.h" />
     <ClInclude Include="model.h" />
+    <ClInclude Include="Pad.h" />
     <ClInclude Include="pikumin.h" />
     <ClInclude Include="PlayerCamera.h" />
     <ClInclude Include="seat.h" />
     <ClInclude Include="stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="tkAssert.h" />
+    <ClInclude Include="tkEnginePreCompile.h" />
+    <ClInclude Include="tkNoncopyable.h" />
+    <ClInclude Include="typedef.h" />
     <ClInclude Include="unity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
