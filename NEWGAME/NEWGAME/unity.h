@@ -7,7 +7,7 @@
 #include "CharacterController.h"
 
 #define SEAT_NUM 100
-#define PIKUMIN 1
+
 
 
 //unity‚¿‚á‚ñƒNƒ‰ƒXB

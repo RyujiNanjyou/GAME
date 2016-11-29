@@ -3,8 +3,9 @@
 #include "model.h"
 #include "GameObject.h"
 #include "CharacterController.h"
+#include "Enemy.h"
 
-#define GRVITY 13.0f
+#define GRVITY 15.8f
 #define POWER 10.0f
 
 enum PikuminStatus { STAND = 0, HOMING, THROW, ATTACK };
@@ -49,6 +50,7 @@ public:
 	{
 		return characterController;
 	}
+	D3DXVECTOR3 PikuminHoming(D3DXVECTOR3 SeatPos);
 private:
 	int						m_seatNo;		//座っているシートの番号。
 	bool					flag_pikumin;   
@@ -58,4 +60,5 @@ private:
 	D3DXVECTOR3				direction_x;	//プレイヤーのX方向。//回転行列。
 	PikuminStatus			nowStatus;
 	CharacterController     characterController;	//キャラクタコントローラ。
+	Enemy::EnemySeat*		ESeat;
 };

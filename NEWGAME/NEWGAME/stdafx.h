@@ -6,7 +6,7 @@
 #pragma warning( default : 4996 )
 #include <cstdlib>
 #include <vector>
-
+#include <Math.h>
 #include "System.h"
 
 #include "model.h"

@@ -18,7 +18,7 @@
 #include "Physics.h"
 #include "ParticleEmitter.h"
 #include  "Enemy.h"
-#define  PIKUMIN_NUM 1
+#define  PIKUMIN_NUM 10
 
 class Game{
 public:
@@ -68,6 +68,7 @@ public:
 	Pikumin* Getpikumin(){ return min; }
 	ShadowMap* Getshadow(){ return &shadow; }
 	pointer* Getpointer(){ return &ter; }
+	Enemy* GetEnemy(){ return &enemy; }
 	//•¨—ƒ[ƒ‹ƒh‚Ìæ“¾B
 	CPhysicsWorld* GetPhysicsWorld()
 	{

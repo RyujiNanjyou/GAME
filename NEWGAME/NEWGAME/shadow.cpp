@@ -99,7 +99,7 @@ void ShadowMap::Render(
 		true
 		);
 	Pikumin* min = game->Getpikumin();
-	for (int i = 0; i < PIKUMIN; i++)
+	for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		model[1].Render(pd3dDevice,
 			viewMatrix,

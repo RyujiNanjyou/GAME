@@ -1,0 +1,43 @@
+﻿2016/11/28 19:21:16 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット)。
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib BulletCollision_Debug.lib BulletDynamics_Debug.lib LinearMath_Debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.lib" /MACHINE:X86 Debug\camera.obj
+         Debug\CapsuleCollider.obj
+         Debug\CharacterController.obj
+         Debug\Enemy.obj
+         Debug\game.obj
+         Debug\GAMEmain.obj
+         Debug\GameObject.obj
+         Debug\IndexBuffer.obj
+         Debug\Input.obj
+         Debug\KeyInput.obj
+         Debug\lightcamera.obj
+         Debug\Map.obj
+         Debug\MapChip.obj
+         Debug\MeshCollider.obj
+         Debug\model.obj
+         Debug\Pad.obj
+         Debug\Particle.obj
+         Debug\ParticleEmitter.obj
+         Debug\Physics.obj
+         Debug\pikumin.obj
+         Debug\PlayerCamera.obj
+         Debug\pointer.obj
+         Debug\Primitive.obj
+         Debug\RenderTarget.obj
+         Debug\RigidBody.obj
+         Debug\seat.obj
+         Debug\shadow.obj
+         Debug\stage.obj
+         Debug\stdafx.obj
+         Debug\System.obj
+         Debug\tkEnginePreCompile.obj
+         Debug\unity.obj
+         Debug\VertexBuffer.obj
+         LINK : 前回のインクリメンタル リンクで E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+         NEWGAME.vcxproj -> E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe
+     1>プロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:01.01

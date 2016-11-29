@@ -125,11 +125,11 @@ void Unity::Update()
 	}
 	
 	D3DXVECTOR3 pos = position;
-	pos.y += 0.8f;
+	pos.y += 0.6f;
 	//ワールド行列の更新。
 	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(3.0f, 3.0f,3.0f));
 
-#if 0
+
 	for (int i = 0; i < SEAT_NUM; i++)
 	{
 		seat[i].Update();
@@ -144,7 +144,7 @@ void Unity::Update()
 		
 		float len = 100000000.0f;
 		
-		for (int i = 0; i < PIKUMIN; i++)
+		for (int i = 0; i < PIKUMIN_NUM; i++)
 		{
 			D3DXVECTOR3 to = position - min[i].Getpos();
 			float	toLength = D3DXVec3LengthSq(&to);
@@ -152,7 +152,6 @@ void Unity::Update()
 			{
 				OK = i;
 				len = toLength;
-				
 			}
 			
 		}
@@ -161,7 +160,6 @@ void Unity::Update()
 		}*/
 		if (OK != -1)
 		{
-			
 			seat[min[OK].GatseatNo()].Setflag(false);
 		}
 	}
@@ -171,10 +169,7 @@ void Unity::Update()
 	{
 		//投げれる状態。
 		Pikumin* min = game->Getpikumin();
-
-		//min[OK].Setpikuflag(true);
-		
-		min[OK].SetNowStatus(PikuminStatus::THROW);
+		min[OK].Setpos(position);
 		D3DXVECTOR3 pointerpos = game->Getpointer()->Getpos();
 		D3DXVECTOR3 topos = pointerpos - position;
 		float len;
@@ -185,12 +180,11 @@ void Unity::Update()
 		topos *= POWER;
 		topos.y = (-0.5*-GRVITY*time*time) / time;
 		min[OK].setspeed(topos);
-		min[OK].Setpos(position);
-		
+		min[OK].SetNowStatus(PikuminStatus::THROW);
 	
 	}
 	
-#endif
+
 	
 }
 

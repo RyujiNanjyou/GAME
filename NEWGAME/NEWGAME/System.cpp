@@ -74,12 +74,12 @@ INT  WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	{
 		sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L,
 		GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
-		"Shader Tutorial", NULL
+		"NEW GAME", NULL
 	};
 	RegisterClassEx(&wc);
 
 	// ウィンドウを作成。
-	HWND hWnd = CreateWindow("Shader Tutorial", "Shader Tutorial 00",
+	HWND hWnd = CreateWindow("NEW GAME", "NEW GAME",
 		WS_OVERLAPPEDWINDOW, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT,
 		NULL, NULL, wc.hInstance, NULL);
 	g_hwnd = hWnd;
@@ -110,6 +110,6 @@ INT  WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 			Render();
 		}
 	}
-	UnregisterClass("Shader Tutorial", wc.hInstance);
+	UnregisterClass("NEW GAME", wc.hInstance);
 	return 0;
 }
