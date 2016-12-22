@@ -36,6 +36,7 @@ void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* Eff
 		Num = i;
 	
 	}
+	Drowflag = false;
 }
 
 void Enemy::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
@@ -54,7 +55,7 @@ bool Enemy::Update()
 {
 
 	bool flag = true;
-	D3DXVECTOR3 origin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
 	//ピクミン追尾テスト操作
 	if (GetAsyncKeyState('W'))
 	{
@@ -99,14 +100,26 @@ bool Enemy::Update()
 		{
 			nowEnemyStatus = EnemyStatus::DEATH;
 		}
-		if (game->Getpikumin()->GetStatus() == PikuminStatus::GOHOME)
+		if (attackPikumin != NULL 
+			&& attackPikumin->GetStatus() == PikuminStatus::GOHOME)
 		{
-			position = game->Getpikumin()->Getpos();
+			//敵を運ぶピクミンのポジションを代入
+			position = attackPikumin->Getpos();
+			D3DXVECTOR3 Goolto = D3DXVECTOR3(0.0f, 0.0f, 0.0f) - position;
 			position.y += 2.5f;
-			if (position <= origin)
+		
+
+			float LeN = D3DXVec3Length(&Goolto);
+		if (LeN < 0.5f)
 			{
-				flag = false;
+				nowEnemyStatus = EnemyStatus::FOOD;
 			}
+		}
+
+		if (nowEnemyStatus == EnemyStatus::FOOD)
+		{
+			flag = false;
+			Drowflag = true;
 		}
 	}
 	UpdateWorldMatrix(position, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));

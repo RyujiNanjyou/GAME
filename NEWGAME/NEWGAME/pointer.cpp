@@ -25,6 +25,7 @@ void pointer::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* E
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
 	characterController.SetGravity(-20.0f);	//èdóÕã≠ÇﬂÅB
+	Drowflag = false;
 }
 
 void pointer::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)

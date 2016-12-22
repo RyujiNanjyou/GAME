@@ -3,8 +3,8 @@
 
 #define ENEMY_SEAT 5
 #define PI 3.14159265358979323846f
-
-enum EnemyStatus{IDOL = 0,DEATH,DAMAGE};
+class Pikumin;
+enum EnemyStatus{IDOL = 0,DEATH,DAMAGE,FOOD};
 class Enemy: public GameObject
 {
 public:
@@ -28,11 +28,16 @@ public:
 	EnemySeat*  FindUnuseSeat(const D3DXVECTOR3& pos); 
 	EnemyStatus GetStatus() { return nowEnemyStatus;}
 	void SetStatus(EnemyStatus ES) { nowEnemyStatus = ES; }
+	void SetAttackPikumin(Pikumin* pikumin)
+	{
+		attackPikumin = pikumin;
+	}
 private:
 	EnemySeat eseat[ENEMY_SEAT];
 	int life = 500;
 	int Num;
 	float Radian; 
 	EnemyStatus nowEnemyStatus;
+	Pikumin* attackPikumin = NULL;
 };
 

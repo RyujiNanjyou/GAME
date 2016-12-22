@@ -39,6 +39,7 @@ void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name, const char* Ef
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
 	//characterController.SetGravity(-GRVITY);	//重力
+	Drowflag = false;
 }
 //UpdateWorld
 void Pikumin::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
@@ -68,7 +69,7 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 	D3DXVec3Normalize(&moveDir, &moveDir);
 	D3DXVec3Cross(&direction_x, &direction_z, &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 
-	if (nowStatus == PikuminStatus::HOMING || nowStatus == PikuminStatus::ATTACK||nowStatus==PikuminStatus::GOHOME)
+	if (nowStatus == PikuminStatus::HOMING || nowStatus == PikuminStatus::ATTACK || nowStatus==PikuminStatus::GOHOME)
 	{
 		if (L < MoveSpeed * (1.0f / 60.0f))
 		{
@@ -93,6 +94,7 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 //更新。
 bool Pikumin::Update()
 {
+	D3DXVECTOR3 origin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 Move = characterController.GetMoveSpeed();
 	Move.x = 0.0f;
 	Move.z = 0.0f;
@@ -152,6 +154,9 @@ bool Pikumin::Update()
 				D3DXVec3Subtract(&moveDirTmp, &ESeat->position, &position);
 				moveDirTmp.y = 0.0f;
 				if (D3DXVec3LengthSq(&moveDirTmp) < Size) {
+					
+					//攻撃しているピクミンをセット
+					game->GetEnemy()->SetAttackPikumin(this);
 					//攻撃レンジに入った。
 					nowStatus = PikuminStatus::ATTACK;
 				}
@@ -190,6 +195,7 @@ bool Pikumin::Update()
 	//攻撃
 	if (nowStatus == PikuminStatus::ATTACK)
 	{
+
 		D3DXVECTOR3 dist;
 		D3DXVec3Subtract(&dist, &ESeat->position, &position);
 		dist.y = 0.0f;
@@ -214,10 +220,15 @@ bool Pikumin::Update()
 		D3DXVec3Normalize(&toSeat,&toSeat);
 		moveDir = toSeat;
 	}
+	
 	if (nowStatus == PikuminStatus::GOHOME)
 	{
-		Move = PikuminHoming(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+		Move = PikuminHoming(origin);
 	}
+	
+	
+		
+
 	characterController.SetMoveSpeed(Move);
 	//キャラクタコントローラーを実行。
 	characterController.Execute();

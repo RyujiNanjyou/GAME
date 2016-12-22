@@ -34,9 +34,10 @@ void GameObject::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char
 		MessageBox(NULL, (char*)(compileErrorBuffer->GetBufferPointer()), "error", MB_OK);
 		std::abort();
 	}
+	Drowflag = false;
 }
 
-bool GameObject::Render(LPDIRECT3DDEVICE9 pd3dDevice,
+void GameObject::Render(LPDIRECT3DDEVICE9 pd3dDevice,
 	D3DXMATRIX viewMatrix,
 	D3DXMATRIX projMatrix,
 	D3DXVECTOR4* diffuseLightDirection,
@@ -45,18 +46,22 @@ bool GameObject::Render(LPDIRECT3DDEVICE9 pd3dDevice,
 	int numDiffuseLight)
 {
 	model.Seteffect(effect);
-	model.Render(pd3dDevice,
-		viewMatrix,
-		mWorld,			//ワールド行列。
-		mRot,		//回転行列。
-		projMatrix,
-		diffuseLightDirection,
-		diffuseLightColor,
-		ambientLight,
-		numDiffuseLight,
-		false
-		);
-	return true;
+	if (Drowflag == false)
+	{
+		model.Render(pd3dDevice,
+			viewMatrix,
+			mWorld,			//ワールド行列。
+			mRot,		//回転行列。
+			projMatrix,
+			diffuseLightDirection,
+			diffuseLightColor,
+			ambientLight,
+			numDiffuseLight,
+			false
+			);
+	}
+	
+	
 }
 void GameObject::Release()
 {

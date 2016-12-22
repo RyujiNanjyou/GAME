@@ -12,12 +12,13 @@ protected:
 	D3DXMATRIX	mRot;
 	D3DXMATRIX	mWorld;			//ÉèÅ[ÉãÉhçsóÒ
 	D3DXVECTOR3	moveDir;
+	bool Drowflag;
 public:
 	GameObject();
 	~GameObject();
 	virtual void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name,const char* EffectName);
 	virtual bool Update() = 0;
-	bool Render(LPDIRECT3DDEVICE9 pd3dDevice,
+	void Render(LPDIRECT3DDEVICE9 pd3dDevice,
 		D3DXMATRIX viewMatrix,
 		D3DXMATRIX projMatrix,
 		D3DXVECTOR4* diffuseLightDirection,

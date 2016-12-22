@@ -67,7 +67,7 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name,const char* Effec
 	characterController.Init(0.3f, 1.0f, pos);
 	characterController.SetGravity(-20.0f);	//èdóÕã≠ÇﬂÅB
 	model.Setshadowflag(false);
-
+	Drowflag = false;
 }
 
 void Unity::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
