@@ -39,7 +39,7 @@ void pointer::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& 
 	mWorld = mScale * mRot * mTrans;
 }
 
-void pointer::Update()
+bool pointer::Update()
 {
 	D3DXVECTOR3 MoveSpeed = characterController.GetMoveSpeed();
 	MoveSpeed.x = 0.0f;
@@ -80,5 +80,5 @@ void pointer::Update()
 	pos.y += 0.2f;
 	//ワールド行列の更新。
 	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(3.0f, 0.0f, 3.0f));
-
+	return true;
 }

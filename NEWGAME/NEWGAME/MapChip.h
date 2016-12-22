@@ -18,7 +18,7 @@ public:
 	MapChip();
 	~MapChip();
 	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)override;
-	void Update()override;
+	bool Update()override;
 	
 private:
 	RigidBody rigidBody;		//çÑëÃÅB

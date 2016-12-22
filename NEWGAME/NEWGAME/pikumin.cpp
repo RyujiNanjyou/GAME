@@ -3,12 +3,13 @@
 #include "pikumin.h"
 #include "Input.h"
 #include "game.h"
+
 namespace {
 	/*const float PI = 3.14159265358979323846f;*/
 	const float MoveSpeed = 0.08f*60.0f;
 }
 
-
+//コンストラクタ
 Pikumin::Pikumin() :
 ESeat(nullptr)
 {
@@ -27,6 +28,7 @@ Pikumin::~Pikumin()
 {
 	Release();
 }
+//Init
 void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name, const char* EffectName)
 {
 	GameObject::Init(pd3dDevice, Name, EffectName);
@@ -38,6 +40,7 @@ void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name, const char* Ef
 	characterController.Init(0.3f, 1.0f, pos);
 	//characterController.SetGravity(-GRVITY);	//重力
 }
+//UpdateWorld
 void Pikumin::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
 {
 	D3DXMATRIX mTrans, mScale;
@@ -49,7 +52,7 @@ void Pikumin::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& 
 	mRot = mRot * mAddRot;*/
 	mWorld = mScale * mRot * mTrans;
 }
-
+//ピクミン追尾
 D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 {
 	D3DXVECTOR3 Move = characterController.GetMoveSpeed();
@@ -58,14 +61,14 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 
 	D3DXVECTOR3 to = SeatPos - position;
 	float L;
-	L = D3DXVec3LengthSq(&to);
+	L = D3DXVec3Length(&to);
 	moveDir = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 	moveDir = game->GETunity()->Getmovedir();
 	D3DXVec3Normalize(&to, &to);
 	D3DXVec3Normalize(&moveDir, &moveDir);
 	D3DXVec3Cross(&direction_x, &direction_z, &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 
-	if (nowStatus == PikuminStatus::HOMING || nowStatus == PikuminStatus::ATTACK)
+	if (nowStatus == PikuminStatus::HOMING || nowStatus == PikuminStatus::ATTACK||nowStatus==PikuminStatus::GOHOME)
 	{
 		if (L < MoveSpeed * (1.0f / 60.0f))
 		{
@@ -77,7 +80,7 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 			Move = to * MoveSpeed;
 
 		}
-		if (D3DXVec3Length(&moveDir) > 0.0f){
+		if (nowStatus == PikuminStatus::HOMING && D3DXVec3Length(&moveDir) > 0.0f){
 			D3DXVECTOR3 forward = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
 			float angle = acos(D3DXVec3Dot(&forward, &moveDir));
 			D3DXVECTOR3 axis;
@@ -88,12 +91,13 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 	return Move;
 }
 //更新。
-void Pikumin::Update()
+bool Pikumin::Update()
 {
 	D3DXVECTOR3 Move = characterController.GetMoveSpeed();
 	Move.x = 0.0f;
 	Move.z = 0.0f;
-	float Size = 5.0f;
+	float Size = 10.0f;
+	//立つ
 	if (nowStatus == PikuminStatus::STAND)
 	{
 		Seat* seat = game->GETunity()->Getseat();
@@ -138,7 +142,7 @@ void Pikumin::Update()
 				ESeat->ESeatflag = true;
 			}
 			if (ESeat == nullptr)
-			{
+			{		
 				//待機状態に。
 				nowStatus = PikuminStatus::STAND;
 			}
@@ -183,12 +187,13 @@ void Pikumin::Update()
 			}
 		}
 	}
-	
+	//攻撃
 	if (nowStatus == PikuminStatus::ATTACK)
 	{
 		D3DXVECTOR3 dist;
 		D3DXVec3Subtract(&dist, &ESeat->position, &position);
 		dist.y = 0.0f;
+
 		Move = PikuminHoming(ESeat->position);
 		
 
@@ -199,12 +204,19 @@ void Pikumin::Update()
 			ESeat = nullptr;
 			nowStatus = PikuminStatus::STAND;
 		}
-		
+		if (game->GetEnemy()->GetStatus() == EnemyStatus::DEATH)
+		{
+			//nowStatus = PikuminStatus::STAND;
+			nowStatus = PikuminStatus::GOHOME;
+		}
 	}
 	if (D3DXVec3LengthSq(&toSeat) > 0.01f) {
 		D3DXVec3Normalize(&toSeat,&toSeat);
 		moveDir = toSeat;
-
+	}
+	if (nowStatus == PikuminStatus::GOHOME)
+	{
+		Move = PikuminHoming(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	}
 	characterController.SetMoveSpeed(Move);
 	//キャラクタコントローラーを実行。
@@ -212,13 +224,8 @@ void Pikumin::Update()
 	position = characterController.GetPosition();
 	D3DXVECTOR3 pos = position;
 	pos.y += 0.6f;
-	
-	/*ESeat = NULL;
-	if (ESeat)
-	{
-		ESeat->ESeatflag = false;
-	}*/
 	//ワールド行列の更新。
 	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(5.0f, 5.0f, 5.0f));
+	return true;
 }
 

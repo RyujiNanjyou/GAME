@@ -36,13 +36,14 @@ void GameObject::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char
 	}
 }
 
-void GameObject::Render(LPDIRECT3DDEVICE9 pd3dDevice,
+bool GameObject::Render(LPDIRECT3DDEVICE9 pd3dDevice,
 	D3DXMATRIX viewMatrix,
 	D3DXMATRIX projMatrix,
 	D3DXVECTOR4* diffuseLightDirection,
 	D3DXVECTOR4* diffuseLightColor,
 	D3DXVECTOR4	 ambientLight,
-	int numDiffuseLight){
+	int numDiffuseLight)
+{
 	model.Seteffect(effect);
 	model.Render(pd3dDevice,
 		viewMatrix,
@@ -55,6 +56,7 @@ void GameObject::Render(LPDIRECT3DDEVICE9 pd3dDevice,
 		numDiffuseLight,
 		false
 		);
+	return true;
 }
 void GameObject::Release()
 {

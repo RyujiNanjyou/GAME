@@ -14,7 +14,7 @@ public:
 	//初期化。
 	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)override;
 	//更新。
-	void Update()override;
+	bool Update()override;
 	void UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale);
 };
 

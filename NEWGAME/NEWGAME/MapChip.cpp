@@ -46,7 +46,9 @@ void MapChip::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* E
 	game->GetPhysicsWorld()->AddRigidBody(&rigidBody);
 
 }
-void MapChip::Update()
+bool MapChip::Update()
 {
 	game->UpdateLight();
+
+	return true;
 }

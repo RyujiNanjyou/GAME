@@ -8,7 +8,7 @@
 #define GRVITY 15.8f
 #define POWER 10.0f
 
-enum PikuminStatus { STAND = 0, HOMING, THROW, ATTACK };
+enum PikuminStatus { STAND = 0, HOMING, THROW, ATTACK, GOHOME };
 
 
 class Pikumin : public GameObject {
@@ -20,7 +20,7 @@ public:
 	//初期化。
 	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)override;
 	//更新。
-	void Update()override;
+	bool Update()override;
 	//座標を設定。
 	void UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale);
 	bool Getpikuflag() { return flag_pikumin; }
@@ -42,6 +42,7 @@ public:
 		}
 	
 	}
+	PikuminStatus GetStatus(){ return nowStatus; }
 	void setspeed(D3DXVECTOR3 speed)
 	{
 		Speed = speed;
@@ -53,8 +54,7 @@ public:
 	D3DXVECTOR3 PikuminHoming(D3DXVECTOR3 SeatPos);
 private:
 	int						m_seatNo;		//座っているシートの番号。
-	bool					flag_pikumin;   
-						
+	bool					flag_pikumin;  
 	D3DXVECTOR3				Speed;
 	D3DXVECTOR3				direction_z;	//プレイヤーのZ方向。
 	D3DXVECTOR3				direction_x;	//プレイヤーのX方向。//回転行列。

@@ -1,6 +1,15 @@
-﻿2016/11/28 19:21:16 にビルドを開始しました。
+﻿2016/12/22 14:15:48 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット)。
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Enemy.cpp game.cpp
+         game.cpp
+         Enemy.cpp
+     1>e:\_users\buram_000\desktop\game\newgame\newgame\enemy.cpp(61): warning C4305: '-=' : 'double' から 'float' へ切り詰めます。
+     1>e:\_users\buram_000\desktop\game\newgame\newgame\enemy.cpp(65): warning C4305: '+=' : 'double' から 'float' へ切り詰めます。
+     1>e:\_users\buram_000\desktop\game\newgame\newgame\enemy.cpp(69): warning C4305: '+=' : 'double' から 'float' へ切り詰めます。
+     1>e:\_users\buram_000\desktop\game\newgame\newgame\enemy.cpp(73): warning C4305: '-=' : 'double' から 'float' へ切り詰めます。
+         コードを生成中...
+       Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib BulletCollision_Debug.lib BulletDynamics_Debug.lib LinearMath_Debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.lib" /MACHINE:X86 Debug\camera.obj
          Debug\CapsuleCollider.obj
          Debug\CharacterController.obj
@@ -34,10 +43,9 @@
          Debug\tkEnginePreCompile.obj
          Debug\unity.obj
          Debug\VertexBuffer.obj
-         LINK : 前回のインクリメンタル リンクで E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
          NEWGAME.vcxproj -> E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe
      1>プロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:01.01
+経過時間 00:00:04.13

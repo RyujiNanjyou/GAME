@@ -16,8 +16,8 @@ public:
 	GameObject();
 	~GameObject();
 	virtual void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name,const char* EffectName);
-	virtual void Update() = 0;
-	void Render(LPDIRECT3DDEVICE9 pd3dDevice,
+	virtual bool Update() = 0;
+	bool Render(LPDIRECT3DDEVICE9 pd3dDevice,
 		D3DXMATRIX viewMatrix,
 		D3DXMATRIX projMatrix,
 		D3DXVECTOR4* diffuseLightDirection,

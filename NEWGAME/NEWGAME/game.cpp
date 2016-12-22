@@ -19,10 +19,10 @@ void Game::Start()
 {
 	SParicleEmitParameter param;
 	param.texturePath = "Assets/star.png";
-	param.w = 5.0f;
-	param.h = 5.0f;
+	param.w = 0.5f;
+	param.h = 0.5f;
 	param.intervalTime = 0.2f;
-	param.initSpeed = D3DXVECTOR3(0.0f, 10.0f, 0.0f);
+	param.initSpeed = D3DXVECTOR3(0.0f, 5.0f, 0.0f);
 	param.life = 0.5f;
 	particleEmitter.Init(param);
 	//•¨—ƒ[ƒ‹ƒh‚ğ‰Šú‰»B
@@ -100,6 +100,7 @@ void Game::Render()
 		light.GetDLColor(),
 		light.Getamb(),
 		LIGHT_NUM);
+
 	for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		min[i].Render(g_pd3dDevice,
@@ -127,7 +128,11 @@ void Game::Render()
 		light.GetDLColor(),
 		light.Getamb(),
 		LIGHT_NUM);
-	particleEmitter.Render(GetCamera().GetViewMatrix(), GetCamera().GetProjectionMatrix());
+
+	particleEmitter.Render(
+		GetCamera().GetViewMatrix(),
+		GetCamera().GetProjectionMatrix());
+
 	enemy.Render(g_pd3dDevice,
 		GetCamera().GetViewMatrix(),
 		GetCamera().GetProjectionMatrix(),
@@ -135,6 +140,7 @@ void Game::Render()
 		light.GetDLColor(),
 		light.Getamb(),
 		LIGHT_NUM);
+
 }
 void Game::Terminate()
 {

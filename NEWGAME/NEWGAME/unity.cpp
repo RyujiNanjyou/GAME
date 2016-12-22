@@ -83,7 +83,7 @@ void Unity::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& ro
 }
 
 //更新。
-void Unity::Update()
+bool Unity::Update()
 {
 
 	D3DXVECTOR3 MoveSpeed = characterController.GetMoveSpeed();
@@ -124,12 +124,6 @@ void Unity::Update()
 		D3DXQuaternionRotationAxis(&rotation, &axis, angle);
 	}
 	
-	D3DXVECTOR3 pos = position;
-	pos.y += 0.6f;
-	//ワールド行列の更新。
-	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(3.0f, 3.0f,3.0f));
-
-
 	for (int i = 0; i < SEAT_NUM; i++)
 	{
 		seat[i].Update();
@@ -147,11 +141,12 @@ void Unity::Update()
 		for (int i = 0; i < PIKUMIN_NUM; i++)
 		{
 			D3DXVECTOR3 to = position - min[i].Getpos();
-			float	toLength = D3DXVec3LengthSq(&to);
+			float	toLength = D3DXVec3Length(&to);
 			if (toLength < len&&min[i].GatseatNo() != -1)
 			{
 				OK = i;
 				len = toLength;
+				
 			}
 			
 		}
@@ -162,9 +157,9 @@ void Unity::Update()
 		{
 			seat[min[OK].GatseatNo()].Setflag(false);
 		}
+		
 	}
 	//ピクミン投げ処理。
-
 	if (OK != -1)
 	{
 		//投げれる状態。
@@ -183,8 +178,11 @@ void Unity::Update()
 		min[OK].SetNowStatus(PikuminStatus::THROW);
 	
 	}
-	
+	D3DXVECTOR3 pos = position;
+	pos.y += 0.6f;
+	//ワールド行列の更新。
+	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));
 
-	
+	return true;
 }
 
