@@ -7,7 +7,6 @@ Enemy::Enemy()
 	//初期化。
 	D3DXMatrixIdentity(&mWorld);
 	D3DXMatrixIdentity(&mRot);
-	Num = 0;
 	Radian = 0.0f;
 }
 
@@ -22,7 +21,7 @@ void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* Eff
 	GameObject::Init(pd3dDevice, Name, EffectName);
 	model.Setshadowflag(false);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-	position = D3DXVECTOR3(-10.0f, 1.0f, 0.0f);
+	
 	nowEnemyStatus = EnemyStatus::IDOL;
 	float angleBase = 2.0f * PI / ENEMY_SEAT;
 	for (int i = 0; i < ENEMY_SEAT; i++)
@@ -33,7 +32,7 @@ void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* Eff
 		eseat[i].localPosition.y = 0.0f;
 		eseat[i].localPosition.z = cosf(angleBase * i) * 1.5f;
 		D3DXVec3Add(&eseat[i].position, &position, &eseat[i].localPosition);
-		Num = i;
+	
 	
 	}
 	Drowflag = false;
@@ -57,7 +56,7 @@ bool Enemy::Update()
 	bool flag = true;
 
 	//ピクミン追尾テスト操作
-	if (GetAsyncKeyState('W'))
+	/*if (GetAsyncKeyState('W'))
 	{
 		position.z -= 0.05  ;
 	}
@@ -72,17 +71,29 @@ bool Enemy::Update()
 	if (GetAsyncKeyState('D'))
 	{
 		position.x -= 0.05;
-	}
+	}*/
 
 	for (auto& Eseat : eseat)
 	{
 		D3DXVec3Add(&Eseat.position, &position, &Eseat.localPosition);
 	}
-
-	if (eseat[Num].ESeatflag == true)
+	if (attackPikumin != nullptr && nowEnemyStatus == EnemyStatus::IDOL)
 	{
+		attackPikumin->SetThisEnemy(this);
 		nowEnemyStatus = EnemyStatus::DAMAGE;
 	}
+	/*for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		if (eseat[i].ESeatflag == true)
+		{
+			//攻撃される敵をセット
+			attackPikumin->
+			Pikumin* piku = game->Getpikumin();
+			piku[].SetThisEnemy(this);
+			//ダメージレンジ突入！！
+		
+		}
+	}*/
 	if (nowEnemyStatus == EnemyStatus::DAMAGE )
 	{
 		life -= 1;
@@ -100,17 +111,20 @@ bool Enemy::Update()
 		{
 			nowEnemyStatus = EnemyStatus::DEATH;
 		}
-		if (attackPikumin != NULL 
+	}
+	if (nowEnemyStatus == EnemyStatus::DEATH)
+	{
+		if (attackPikumin != NULL
 			&& attackPikumin->GetStatus() == PikuminStatus::GOHOME)
 		{
 			//敵を運ぶピクミンのポジションを代入
 			position = attackPikumin->Getpos();
 			D3DXVECTOR3 Goolto = D3DXVECTOR3(0.0f, 0.0f, 0.0f) - position;
 			position.y += 2.5f;
-		
+
 
 			float LeN = D3DXVec3Length(&Goolto);
-		if (LeN < 0.5f)
+			if (LeN < 0.5f)
 			{
 				nowEnemyStatus = EnemyStatus::FOOD;
 			}
@@ -118,14 +132,16 @@ bool Enemy::Update()
 
 		if (nowEnemyStatus == EnemyStatus::FOOD)
 		{
+
 			flag = false;
 			Drowflag = true;
+			game->Getpikumin()->SetNowStatus(PikuminStatus::STAND);
+
 		}
 	}
 	UpdateWorldMatrix(position, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));
 	
 	return flag;
-
 }
 Enemy::EnemySeat* Enemy::FindUnuseSeat(const D3DXVECTOR3& pos)
 {
@@ -137,9 +153,9 @@ Enemy::EnemySeat* Enemy::FindUnuseSeat(const D3DXVECTOR3& pos)
 		if (!Eseat.ESeatflag) {
 			//未使用。
 			D3DXVECTOR3 diff;
-			D3DXVec3Subtract(&diff, &Eseat.position, &position);
+			D3DXVec3Subtract(&diff, &Eseat.position, &pos);
 			distTmp = D3DXVec3Length(&diff);
-			if (distTmp < dist) {
+			if (distTmp < dist && distTmp < ATTACKRANGE) {
 				dist = distTmp;
 				result = &Eseat;
 			}

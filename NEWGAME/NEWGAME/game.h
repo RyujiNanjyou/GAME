@@ -18,7 +18,9 @@
 #include "Physics.h"
 #include "ParticleEmitter.h"
 #include  "Enemy.h"
-#define  PIKUMIN_NUM 10
+#define  PIKUMIN_NUM 1
+#define ENEMY_NUM 5
+#define ATTACKRANGE 2.0f
 
 class Game{
 public:
@@ -68,7 +70,7 @@ public:
 	Pikumin* Getpikumin(){ return min; }
 	ShadowMap* Getshadow(){ return &shadow; }
 	pointer* Getpointer(){ return &ter; }
-	Enemy* GetEnemy(){ return &enemy; }
+	Enemy* GetEnemy(){ return enemy; }
 	//物理ワールドの取得。
 	CPhysicsWorld* GetPhysicsWorld()
 	{
@@ -87,7 +89,7 @@ private:
 	pointer ter;
 	CPhysicsWorld physicsWorld;
 	CParticleEmitter		particleEmitter;	//パーティクルエミッター
-	Enemy enemy;
+	Enemy enemy[ENEMY_NUM];
 };
 
 extern Game* game;

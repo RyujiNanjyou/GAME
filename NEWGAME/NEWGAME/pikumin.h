@@ -52,6 +52,10 @@ public:
 		return characterController;
 	}
 	D3DXVECTOR3 PikuminHoming(D3DXVECTOR3 SeatPos);
+	void SetThisEnemy(Enemy* enemy)
+	{
+		ThisEnemy = enemy;
+	}
 private:
 	int						m_seatNo;		//座っているシートの番号。
 	bool					flag_pikumin;  
@@ -61,4 +65,6 @@ private:
 	PikuminStatus			nowStatus;
 	CharacterController     characterController;	//キャラクタコントローラ。
 	Enemy::EnemySeat*		ESeat;
+
+	Enemy* ThisEnemy = NULL;
 };

@@ -7,6 +7,7 @@
 namespace {
 	/*const float PI = 3.14159265358979323846f;*/
 	const float MoveSpeed = 0.08f*60.0f;
+
 }
 
 //コンストラクタ
@@ -94,6 +95,7 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 //更新。
 bool Pikumin::Update()
 {
+	int OK;
 	D3DXVECTOR3 origin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 Move = characterController.GetMoveSpeed();
 	Move.x = 0.0f;
@@ -137,7 +139,17 @@ bool Pikumin::Update()
 			nowStatus = PikuminStatus::STAND;
 			//敵Attack
 			D3DXVECTOR3 moveDirTmp;
-			ESeat = game->GetEnemy()->FindUnuseSeat(position);
+			Enemy* enemy = game->GetEnemy();
+			for (int i = 0; i < ENEMY_NUM; i++)
+			{
+				ESeat = enemy[i].FindUnuseSeat(position);
+				if (ESeat != nullptr)
+				{
+					//シートが見つかった。
+					OK = i;
+					break;
+				}
+			}
 			if (ESeat != nullptr)
 			{
 				//シートが見つかった。
@@ -153,10 +165,11 @@ bool Pikumin::Update()
 				//バトルシートが見つかった。攻撃準備おｋ。
 				D3DXVec3Subtract(&moveDirTmp, &ESeat->position, &position);
 				moveDirTmp.y = 0.0f;
-				if (D3DXVec3LengthSq(&moveDirTmp) < Size) {
+				if (D3DXVec3LengthSq(&moveDirTmp) < ATTACKRANGE * ATTACKRANGE) {
 					
 					//攻撃しているピクミンをセット
-					game->GetEnemy()->SetAttackPikumin(this);
+					Enemy* enemy = game->GetEnemy();
+					enemy[OK].SetAttackPikumin(this);
 					//攻撃レンジに入った。
 					nowStatus = PikuminStatus::ATTACK;
 				}
@@ -177,7 +190,6 @@ bool Pikumin::Update()
 	{
 		if (m_seatNo == -1)
 		{
-			 
 			Seat* seat = game->GETunity()->Getseat();
 			for (int i = 0; i < SEAT_NUM; i++)
 			{
@@ -203,20 +215,18 @@ bool Pikumin::Update()
 		Move = PikuminHoming(ESeat->position);
 		
 
-		if (D3DXVec3LengthSq(&dist) > Size)
+		if (D3DXVec3LengthSq(&dist) > ATTACKRANGE * ATTACKRANGE)
 		{
-			
 			ESeat->ESeatflag = false;
 			ESeat = nullptr;
 			nowStatus = PikuminStatus::STAND;
 		}
-		if (game->GetEnemy()->GetStatus() == EnemyStatus::DEATH)
+		if (ThisEnemy != NULL&&ThisEnemy->GetStatus() == EnemyStatus::DEATH)
 		{
-			//nowStatus = PikuminStatus::STAND;
 			nowStatus = PikuminStatus::GOHOME;
 		}
 	}
-	if (D3DXVec3LengthSq(&toSeat) > 0.01f) {
+	if (D3DXVec3Length(&toSeat) > 0.01f) {
 		D3DXVec3Normalize(&toSeat,&toSeat);
 		moveDir = toSeat;
 	}

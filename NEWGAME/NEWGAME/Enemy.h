@@ -35,7 +35,7 @@ public:
 private:
 	EnemySeat eseat[ENEMY_SEAT];
 	int life = 500;
-	int Num;
+	
 	float Radian; 
 	EnemyStatus nowEnemyStatus;
 	Pikumin* attackPikumin = NULL;

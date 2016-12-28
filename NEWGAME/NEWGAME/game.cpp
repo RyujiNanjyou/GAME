@@ -47,8 +47,17 @@ void Game::Start()
 	}
 
 	ter.Init(g_pd3dDevice, "Assets/pointer", "Assets/basic.fx");
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		int z = i % 10;
 
-	enemy.Init(g_pd3dDevice, "Assets/atama", "Assets/basic.fx");
+		float p_x = ((rand() % 100) - 50) / 50.0f;
+		//	float t_y = ((rand() % 100) - 50) / 50.0f;
+		float p_z = ((rand() % 100) - 50) / 50.0f;
+		enemy[i].Setpos(D3DXVECTOR3(p_x * 10.0f, 1.0f, p_z * 10.0f));
+		enemy[i].Init(g_pd3dDevice, "Assets/atama", "Assets/basic.fx");
+	}
+	
 	
 	shadow.Create(1280, 720);
 	map.Start();
@@ -77,7 +86,10 @@ void Game::Update()
 	pad.Update();
 	map.Update();
 	particleEmitter.Update();
-	enemy.Update();
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		enemy[i].Update();
+	}
 }
 
 /*!
@@ -132,14 +144,16 @@ void Game::Render()
 	particleEmitter.Render(
 		GetCamera().GetViewMatrix(),
 		GetCamera().GetProjectionMatrix());
-
-	enemy.Render(g_pd3dDevice,
-		GetCamera().GetViewMatrix(),
-		GetCamera().GetProjectionMatrix(),
-		light.GetDLDirecton(),
-		light.GetDLColor(),
-		light.Getamb(),
-		LIGHT_NUM);
+	for (int i = 0; i < ENEMY_NUM; i++)
+	{
+		enemy[i].Render(g_pd3dDevice,
+			GetCamera().GetViewMatrix(),
+			GetCamera().GetProjectionMatrix(),
+			light.GetDLDirecton(),
+			light.GetDLColor(),
+			light.Getamb(),
+			LIGHT_NUM);
+	}
 
 }
 void Game::Terminate()
