@@ -35,8 +35,9 @@ public:
 	{
 		return mRot;
 	}
-	void Setpos(D3DXVECTOR3 pos)
+	virtual	void Setpos(D3DXVECTOR3 pos)
 	{
+		
 		position = pos;
 	}
 	const D3DXVECTOR3& Getpos() const

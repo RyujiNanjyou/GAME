@@ -8,7 +8,7 @@
 #define GRVITY 15.8f
 #define POWER 10.0f
 
-enum PikuminStatus { STAND = 0, HOMING, THROW, ATTACK, GOHOME };
+enum PikuminStatus { STAND = 0, HOMING, THROW, ATTACK, GOHOME, STAND_BY };
 
 
 class Pikumin : public GameObject {
@@ -51,10 +51,14 @@ public:
 	{
 		return characterController;
 	}
-	D3DXVECTOR3 PikuminHoming(D3DXVECTOR3 SeatPos);
+	D3DXVECTOR3 PikuminHoming(D3DXVECTOR3 SeatPos,float MoveSpeed);
 	void SetThisEnemy(Enemy* enemy)
 	{
 		ThisEnemy = enemy;
+	}
+	void Setpos(D3DXVECTOR3 pos){
+		characterController.SetPosition(pos);
+		GameObject::Setpos(pos);
 	}
 private:
 	int						m_seatNo;		//座っているシートの番号。

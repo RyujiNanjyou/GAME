@@ -130,53 +130,32 @@ bool Unity::Update()
 	}
 
 	int	OK = -1;
+	const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
 	if (game->GETPad()->IsTrigger(enButtonX))
 	{
-		//投げられない状態。
-		Pikumin* min = game->Getpikumin();
-			
-		
+		//投げられない状態。		
 		float len = 100000000.0f;
-		
-		for (int i = 0; i < PIKUMIN_NUM; i++)
+		for (int i = 0; i < pikuminList.size(); i++)
 		{
-			D3DXVECTOR3 to = position - min[i].Getpos();
-			float	toLength = D3DXVec3Length(&to);
-			if (toLength < len&&min[i].GatseatNo() != -1)
+			D3DXVECTOR3 to = position - pikuminList[i]->Getpos();
+			float toLength = D3DXVec3Length(&to);
+			if (toLength < len && pikuminList[i]->GatseatNo() != -1)
 			{
 				OK = i;
 				len = toLength;
-				
 			}
-			
 		}
-		/*if (OK == -1){
-			printf("hoge\n");
-		}*/
 		if (OK != -1)
 		{
-			seat[min[OK].GatseatNo()].Setflag(false);
+			seat[pikuminList[OK]->GatseatNo()].Setflag(false);
 		}
-		
 	}
 	//ピクミン投げ処理。
 	if (OK != -1)
 	{
 		//投げれる状態。
-		Pikumin* min = game->Getpikumin();
-		min[OK].Setpos(position);
-		D3DXVECTOR3 pointerpos = game->Getpointer()->Getpos();
-		D3DXVECTOR3 topos = pointerpos - position;
-		float len;
-		len = D3DXVec3Length(&topos);
-		float time = len / POWER;
-		topos.y = 0;
-		D3DXVec3Normalize(&topos, &topos);
-		topos *= POWER;
-		topos.y = (-0.5*-GRVITY*time*time) / time;
-		min[OK].setspeed(topos);
-		min[OK].SetNowStatus(PikuminStatus::THROW);
-	
+		pikuminList[OK]->SetNowStatus(PikuminStatus::STAND_BY);
+		//pikuminList[OK]->Setpos(position);
 	}
 	D3DXVECTOR3 pos = position;
 	pos.y += 0.6f;

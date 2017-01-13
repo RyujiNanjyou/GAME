@@ -98,22 +98,25 @@ void ShadowMap::Render(
 		numDiffuseLight,
 		true
 		);
-	Pikumin* min = game->Getpikumin();
-	for (int i = 0; i < PIKUMIN_NUM; i++)
+	const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
+	for (auto pikumin : pikuminList)
 	{
-		model[1].Render(pd3dDevice,
-			viewMatrix,
-			min[i].Getworld(),			//ワールド行列。
-			min[i].GetRot(),		//回転行列。
-			projMatrix,
-			diffuseLightDirection,
-			diffuseLightColor,
-			ambientLight,
-			numDiffuseLight,
-			true
-			);
+		
+		for (int i = 0; i < PIKUMIN_NUM; i++)
+		{
+			model[1].Render(pd3dDevice,
+				viewMatrix,
+				pikumin->Getworld(),			//ワールド行列。
+				pikumin->GetRot(),		//回転行列。
+				projMatrix,
+				diffuseLightDirection,
+				diffuseLightColor,
+				ambientLight,
+				numDiffuseLight,
+				true
+				);
+		}
 	}
-	
 
 	//game->GETunity()->Render
 	//	(

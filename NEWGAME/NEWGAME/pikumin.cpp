@@ -6,8 +6,8 @@
 
 namespace {
 	/*const float PI = 3.14159265358979323846f;*/
-	const float MoveSpeed = 0.08f*60.0f;
-
+	//const float MoveSpeed = 0.08f*60.0f;
+	D3DXVECTOR3 scale = D3DXVECTOR3(5.0, 5.0, 5.0);
 }
 
 //コンストラクタ
@@ -55,7 +55,7 @@ void Pikumin::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& 
 	mWorld = mScale * mRot * mTrans;
 }
 //ピクミン追尾
-D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
+D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos, float MoveSpeed)
 {
 	D3DXVECTOR3 Move = characterController.GetMoveSpeed();
 	Move.x = 0.0f;
@@ -70,17 +70,15 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos)
 	D3DXVec3Normalize(&moveDir, &moveDir);
 	D3DXVec3Cross(&direction_x, &direction_z, &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 
-	if (nowStatus == PikuminStatus::HOMING || nowStatus == PikuminStatus::ATTACK || nowStatus==PikuminStatus::GOHOME)
+	if (nowStatus == PikuminStatus::HOMING || nowStatus == PikuminStatus::ATTACK || nowStatus == PikuminStatus::GOHOME || nowStatus == PikuminStatus::STAND_BY)
 	{
 		if (L < MoveSpeed * (1.0f / 60.0f))
 		{
 			position = SeatPos;
-
 		}
 		else
 		{
 			Move = to * MoveSpeed;
-
 		}
 		if (nowStatus == PikuminStatus::HOMING && D3DXVec3Length(&moveDir) > 0.0f){
 			D3DXVECTOR3 forward = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
@@ -115,7 +113,7 @@ bool Pikumin::Update()
 	D3DXVECTOR3 topikumin;
 	topikumin = game->Getpointer()->Getpos() - position;
 	float len = D3DXVec3Length(&topikumin);
-	D3DXVECTOR3 toEnemy = game->GetEnemy()->Getpos() - position  ;
+	D3DXVECTOR3 toEnemy = game->GetEnemy()->Getpos() - position;
 	float eneLen = D3DXVec3Length(&toEnemy);
 	D3DXVECTOR3 toSeat;
 	D3DXVec3Subtract(&toSeat, &game->GetEnemy()->Getpos(), &position);
@@ -124,16 +122,37 @@ bool Pikumin::Update()
 	{
 		//座っているときの処理。
 		Seat* seat = game->GETunity()->Getseat();
-		Move = PikuminHoming(seat[m_seatNo].GetSeatPos());
+		Move = PikuminHoming(seat[m_seatNo].GetSeatPos(),0.08f * 60.0f);
+	}
+	//オリマにセット
+	if (nowStatus == PikuminStatus::STAND_BY)
+	{
+		Move = PikuminHoming(game->GETunity()->Getpos(),0.08f * 60.0f);
 		
 	}
-	//投げ投げ
+	if (Move == game->GETunity()->Getpos())
+	{
+		D3DXVECTOR3 pointerpos = game->Getpointer()->Getpos();
+		D3DXVECTOR3 topos = pointerpos - position;
+		float len;
+		len = D3DXVec3Length(&topos);
+		float time = len / POWER;
+		topos.y = 0;
+		D3DXVec3Normalize(&topos, &topos);
+		topos *= POWER;
+		topos.y = (-0.5*-GRVITY*time*time) / time;
+		//pikuminList[OK]->setspeed(topos);
+		Speed = topos;
+		nowStatus = PikuminStatus::THROW;
+	}
+	//投げ投げ状態
 	if (nowStatus == PikuminStatus::THROW)
 	{
 		characterController.SetMoveSpeed(Speed);
 		characterController.Execute();
 		position = characterController.GetPosition();
 		Speed = characterController.GetMoveSpeed();
+		
 		if (characterController.IsOnGround())
 		{
 			nowStatus = PikuminStatus::STAND;
@@ -207,12 +226,11 @@ bool Pikumin::Update()
 	//攻撃
 	if (nowStatus == PikuminStatus::ATTACK)
 	{
-
 		D3DXVECTOR3 dist;
 		D3DXVec3Subtract(&dist, &ESeat->position, &position);
 		dist.y = 0.0f;
 
-		Move = PikuminHoming(ESeat->position);
+		Move = PikuminHoming(ESeat->position, 0.08f*60.0f);
 		
 
 		if (D3DXVec3LengthSq(&dist) > ATTACKRANGE * ATTACKRANGE)
@@ -233,12 +251,9 @@ bool Pikumin::Update()
 	
 	if (nowStatus == PikuminStatus::GOHOME)
 	{
-		Move = PikuminHoming(origin);
+		Move = PikuminHoming(origin, 0.08f*60.0f);
 	}
 	
-	
-		
-
 	characterController.SetMoveSpeed(Move);
 	//キャラクタコントローラーを実行。
 	characterController.Execute();
@@ -246,7 +261,7 @@ bool Pikumin::Update()
 	D3DXVECTOR3 pos = position;
 	pos.y += 0.6f;
 	//ワールド行列の更新。
-	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(5.0f, 5.0f, 5.0f));
+	UpdateWorldMatrix(pos, rotation, scale);
 	return true;
 }
 

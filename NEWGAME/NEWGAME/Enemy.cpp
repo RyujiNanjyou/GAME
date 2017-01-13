@@ -82,18 +82,6 @@ bool Enemy::Update()
 		attackPikumin->SetThisEnemy(this);
 		nowEnemyStatus = EnemyStatus::DAMAGE;
 	}
-	/*for (int i = 0; i < ENEMY_NUM; i++)
-	{
-		if (eseat[i].ESeatflag == true)
-		{
-			//攻撃される敵をセット
-			attackPikumin->
-			Pikumin* piku = game->Getpikumin();
-			piku[].SetThisEnemy(this);
-			//ダメージレンジ突入！！
-		
-		}
-	}*/
 	if (nowEnemyStatus == EnemyStatus::DAMAGE )
 	{
 		life -= 1;
@@ -121,10 +109,8 @@ bool Enemy::Update()
 			position = attackPikumin->Getpos();
 			D3DXVECTOR3 Goolto = D3DXVECTOR3(0.0f, 0.0f, 0.0f) - position;
 			position.y += 2.5f;
-
-
 			float LeN = D3DXVec3Length(&Goolto);
-			if (LeN < 0.5f)
+			if (LeN < 0.8f)
 			{
 				nowEnemyStatus = EnemyStatus::FOOD;
 			}
@@ -135,8 +121,16 @@ bool Enemy::Update()
 
 			flag = false;
 			Drowflag = true;
-			game->Getpikumin()->SetNowStatus(PikuminStatus::STAND);
-
+			const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
+			Pikumin* pikumin = new Pikumin;
+			D3DXVECTOR3 pikuminpos = D3DXVECTOR3(0.0, 0.0, 0.0);
+			pikumin->Init(g_pd3dDevice, "Assets/pikumin", "Assets/basic.fx");
+			game->AddPikumin(pikumin);
+			attackPikumin->SetNowStatus(PikuminStatus::STAND);
+			/*for (auto pikumin : pikuminList)
+			{
+				pikumin->SetNowStatus(PikuminStatus::STAND);
+			}*/
 		}
 	}
 	UpdateWorldMatrix(position, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));

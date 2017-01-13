@@ -4,9 +4,15 @@
 #include "shadow.h"
 #include "model.h"
 
-
-
-
+Game::Game()
+{
+}
+Game::~Game()
+{
+	for (auto pikumin : pikuminList) {
+		delete pikumin;
+	}
+}
 
 void Game::UpdateLight()
 {
@@ -32,19 +38,26 @@ void Game::Start()
 	//lightcam.Start(&light);
 	uni.Init(g_pd3dDevice,"Assets/orima","Assets/basic.fx");
 	
-	for (int i = 0; i < PIKUMIN_NUM; i++)
-	{
-		int z = i % 10;
-		
-		float p_x = ((rand() % 100) - 50) / 50.0f;
-		//	float t_y = ((rand() % 100) - 50) / 50.0f;
-		float p_z = ((rand() % 100) - 50) / 50.0f;
-		min[i].Setpos(D3DXVECTOR3(p_x * 30.0f, 0.60f, p_z * 30.0f));
+	//for (int i = 0; i < PIKUMIN_NUM; i++)
+	//{
+	//	
+	//	
+	//	float p_x = ((rand() % 100) - 50) / 50.0f;
+	//	//	float t_y = ((rand() % 100) - 50) / 50.0f;
+	//	float p_z = ((rand() % 100) - 50) / 50.0f;
+	//	min[i].Setpos(D3DXVECTOR3(p_x * 30.0f, 0.60f, p_z * 30.0f));
 
-		min[i].Init(g_pd3dDevice,"Assets/pikumin","Assets/basic.fx");
-	
-		
-	}
+	//	min[i].Init(g_pd3dDevice,"Assets/pikumin","Assets/basic.fx");
+	//
+	//	
+	//}
+	Pikumin* pikumin = new Pikumin;
+	float p_x = ((rand() % 100) - 50) / 50.0f;
+	//	float t_y = ((rand() % 100) - 50) / 50.0f;
+	float p_z = ((rand() % 100) - 50) / 50.0f;
+	pikumin->Setpos(D3DXVECTOR3(p_x * 30.0f, 0.60f, p_z * 30.0f));
+	pikumin->Init(g_pd3dDevice, "Assets/pikumin", "Assets/basic.fx");
+	pikuminList.push_back(pikumin);
 
 	ter.Init(g_pd3dDevice, "Assets/pointer", "Assets/basic.fx");
 	for (int i = 0; i < ENEMY_NUM; i++)
@@ -72,11 +85,19 @@ void Game::Update()
 	uni.Update();
 	playCamera.Update();
 	//lightcam.Update();
-	for (int i = 0; i < PIKUMIN_NUM; i++)
+	/*for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		min[i].Update();
+	}*/
+	for (auto pikuminIt = pikuminList.begin(); pikuminIt != pikuminList.end();) {
+		if (!(*pikuminIt)->Update()) {
+			delete *pikuminIt;
+			pikuminIt = pikuminList.erase(pikuminIt);
+		}
+		else {
+			pikuminIt++;
+		}
 	}
-
 	D3DXVECTOR3 lightposition = uni.Getpos() + D3DXVECTOR3(0.0f,30.0f,0.0f);
 	shadow.SetLightPosition(lightposition);
 	D3DXVECTOR3 lightDir = uni.Getpos() - lightposition; 
@@ -113,7 +134,7 @@ void Game::Render()
 		light.Getamb(),
 		LIGHT_NUM);
 
-	for (int i = 0; i < PIKUMIN_NUM; i++)
+	/*for (int i = 0; i < PIKUMIN_NUM; i++)
 	{
 		min[i].Render(g_pd3dDevice,
 		GetCamera().GetViewMatrix(),
@@ -123,6 +144,16 @@ void Game::Render()
 		light.Getamb(),
 		LIGHT_NUM);
 
+	}*/
+	for (auto pikumin : pikuminList)
+	{
+		pikumin->Render(g_pd3dDevice,
+			GetCamera().GetViewMatrix(),
+			GetCamera().GetProjectionMatrix(),
+			light.GetDLDirecton(),
+			light.GetDLColor(),
+			light.Getamb(),
+			LIGHT_NUM);
 	}
 	
 	map.Render(g_pd3dDevice,
@@ -159,9 +190,9 @@ void Game::Render()
 void Game::Terminate()
 {
 	uni.Release();
-	for (int i = 0; i < PIKUMIN_NUM; i++)
+	for (auto pikumin : pikuminList)
 	{
-		min[i].Release();
+		pikumin->Release();
 
 	}
 	

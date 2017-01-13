@@ -7,7 +7,6 @@
 #include "stage.h"
 #include "unity.h"
 #include "PlayerCamera.h"
-#include "pikumin.h"
 #include "seat.h"
 #include "Pad.h"
 #include "Map.h"
@@ -18,20 +17,21 @@
 #include "Physics.h"
 #include "ParticleEmitter.h"
 #include  "Enemy.h"
-#define  PIKUMIN_NUM 1
+#define  PIKUMIN_NUM 100
 #define ENEMY_NUM 5
 #define ATTACKRANGE 2.0f
 
+class Pikumin;
 class Game{
 public:
 	/*!
 	* @brief	コンストラクタ。
 	*/
-	//Game();
+	Game();
 	/*!
 	* @brief	デストラクタ。
 	*/
-	//~Game();
+	~Game();
 	/*!
 	* @brief	ゲームが起動してから一度だけ呼ばれる関数。
 	*/
@@ -67,7 +67,18 @@ public:
 	Unity* GETunity(){ return &uni; }
 	CPad* GETPad(){ return &pad; }
 	Light* GETlight(){ return &light; }
-	Pikumin* Getpikumin(){ return min; }
+	/*Pikumin* Getpikumin(){ return min; }*/
+	/*!
+	* @brief	ピクミンを追加。。
+	*/
+	void AddPikumin(Pikumin* pikumin)
+	{
+		pikuminList.push_back(pikumin);
+	}
+	const std::vector<Pikumin*>& GetPikumin()
+	{
+		return pikuminList;
+	}
 	ShadowMap* Getshadow(){ return &shadow; }
 	pointer* Getpointer(){ return &ter; }
 	Enemy* GetEnemy(){ return enemy; }
@@ -81,7 +92,8 @@ private:
 	PlayerCamera playCamera;			//ゲームカメラ。
 	Unity uni;
 	Stage stg;
-	Pikumin min[PIKUMIN_NUM];
+	/*Pikumin min[PIKUMIN_NUM];*/
+	std::vector<Pikumin*> pikuminList;
 	Map map;
 	Light light;
 	LightCamera lightcam;
