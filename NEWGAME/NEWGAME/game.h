@@ -17,6 +17,9 @@
 #include "Physics.h"
 #include "ParticleEmitter.h"
 #include  "Enemy.h"
+#include "EffectManager.h"
+
+
 #define  PIKUMIN_NUM 100
 #define ENEMY_NUM 5
 #define ATTACKRANGE 2.0f
@@ -49,7 +52,7 @@ public:
 	/*!
 	* @brief	カメラを取得。
 	*/
-	const Camera& GetCamera() const
+	 Camera& GetCamera()
 	{
 		return playCamera.GetCamera();
 	}
@@ -87,6 +90,7 @@ public:
 	{
 		return &physicsWorld;
 	}
+	EffectManager* GetEffectmanager(){ return &effectmanager; }
 private:
 	CPad pad;
 	PlayerCamera playCamera;			//ゲームカメラ。
@@ -102,6 +106,8 @@ private:
 	CPhysicsWorld physicsWorld;
 	CParticleEmitter		particleEmitter;	//パーティクルエミッター
 	Enemy enemy[ENEMY_NUM];
+	EffectManager effectmanager;
+
 };
 
 extern Game* game;

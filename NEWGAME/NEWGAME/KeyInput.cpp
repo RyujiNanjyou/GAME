@@ -1,7 +1,7 @@
 /*!
 * @brief	ƒL[“ü—Í
 */
-
+#include "stdafx.h"
 #include "tkEnginePreCompile.h"
 #include "KeyInput.h"
 

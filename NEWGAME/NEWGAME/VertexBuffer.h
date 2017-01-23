@@ -5,8 +5,6 @@
 #ifndef _TKRENDERBUFFER_H_
 #define _TKRENDERBUFFER_H_
 
-#include "stdafx.h"
-
 enum EVertexFormat {
 	eVertexFormat_xyz = D3DFVF_XYZ,
 	eVertexFormat_wyzrhw = D3DFVF_XYZRHW,

@@ -16,12 +16,13 @@ Enemy::~Enemy()
 	Release();
 }
 
-void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)
+void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 {
-	GameObject::Init(pd3dDevice, Name, EffectName);
-	model.Setshadowflag(false);
+	GameObject::Init(pd3dDevice, Name);
+	skinmodel.SetDrawToShadowMap(false);
+	//model.Setshadowflag(false);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-	
+	scale = D3DXVECTOR3(3.0, 3.0, 3.0);
 	nowEnemyStatus = EnemyStatus::IDOL;
 	float angleBase = 2.0f * PI / ENEMY_SEAT;
 	for (int i = 0; i < ENEMY_SEAT; i++)
@@ -38,22 +39,12 @@ void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* Eff
 	Drowflag = false;
 }
 
-void Enemy::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
-{
-	D3DXMATRIX mTrans, mScale;
-	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
-	D3DXMatrixTranslation(&mTrans, trans.x, trans.y, trans.z);
-	D3DXMatrixRotationQuaternion(&mRot, &rot);
-	D3DXMATRIX mAddRot;
-	D3DXMatrixRotationX(&mAddRot, D3DXToRadian(Radian));
-	mRot = mRot * mAddRot;
-	mWorld = mScale * mRot * mTrans;
-}
+
 
 bool Enemy::Update()
 {
 
-	bool flag = true;
+	bool  flag = true;
 
 	//ピクミン追尾テスト操作
 	/*if (GetAsyncKeyState('W'))
@@ -124,7 +115,7 @@ bool Enemy::Update()
 			const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
 			Pikumin* pikumin = new Pikumin;
 			D3DXVECTOR3 pikuminpos = D3DXVECTOR3(0.0, 0.0, 0.0);
-			pikumin->Init(g_pd3dDevice, "Assets/pikumin", "Assets/basic.fx");
+			pikumin->Init(g_pd3dDevice, "Assets/pikumin");
 			game->AddPikumin(pikumin);
 			attackPikumin->SetNowStatus(PikuminStatus::STAND);
 			/*for (auto pikumin : pikuminList)
@@ -133,9 +124,9 @@ bool Enemy::Update()
 			}*/
 		}
 	}
-	UpdateWorldMatrix(position, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));
-	
+	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	return flag;
+	
 }
 Enemy::EnemySeat* Enemy::FindUnuseSeat(const D3DXVECTOR3& pos)
 {

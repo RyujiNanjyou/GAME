@@ -2,6 +2,9 @@
 
 #include "RenderTarget.h"
 #include "model.h"
+#include "SkinModel.h"
+#include "SkinModelData.h"
+
 
 class ShadowMap
 {
@@ -11,6 +14,8 @@ class ShadowMap
 	int					w, h;
 	CRenderTarget		rendertarget;
 	Model				model[2];
+	SkinModel			skinmodel;
+	SkinModelData		modeldata;
 	D3DXVECTOR3			lightpos;
 	D3DXVECTOR3			lightdir;
 	D3DXMATRIX			rot;
@@ -71,3 +76,4 @@ public:
 		return Far;
 	}
 };
+extern LPDIRECT3DTEXTURE9 shadow;

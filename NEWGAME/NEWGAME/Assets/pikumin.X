@@ -998,7 +998,7 @@ Frame pikumin {
     0.000000;0.000000;0.000000;;
 
     TextureFilename Diffuse {
-     "Assets/pikumin.png";
+     "pikumin.png";
     }
    }
   }

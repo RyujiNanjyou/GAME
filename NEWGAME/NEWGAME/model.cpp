@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "model.h"
+#include "SkinModelData.h"
 #include "game.h"
+#include "SkinModel.h"
 
-LPDIRECT3DTEXTURE9 shadow = NULL;
 
 Model::Model()
 {
@@ -58,9 +59,6 @@ void Model::Init(LPDIRECT3DDEVICE9 pd3dDevice, char* fileNama)
 void Model::Update()
 {
 }
-
-
-
 void Model::Render(
 	LPDIRECT3DDEVICE9 pd3dDevice,
 	D3DXMATRIX viewMatrix,
@@ -72,7 +70,6 @@ void Model::Render(
 	D3DXVECTOR4	 ambientLight,
 	int numDiffuseLight,
 	bool shadowflag
-
 	)
 {
 
@@ -170,10 +167,12 @@ void Model::Release()
 		effect = NULL;
 	}
 }
+
 LPD3DXMESH Model::GetOrgMeshFirst()
 {
 	return mesh;
 }
+
 LPD3DXMESH Model::GetOrgMesh(LPD3DXFRAME frame)
 {
 	D3DXMESHCONTAINER_DERIVED* pMeshContainer = (D3DXMESHCONTAINER_DERIVED*)(frame->pMeshContainer);

@@ -10,10 +10,12 @@
 #include "System.h"
 
 #include "model.h"
+#include "SkinModel.h"
+#include "SkinModelData.h"
 
 #include <list>
 #include <map>
-#include<memory>
+#include <memory>
 #include "tkEnginePreCompile.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"

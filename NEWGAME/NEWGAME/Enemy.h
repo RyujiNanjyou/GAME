@@ -17,9 +17,9 @@ public:
 	};
 	Enemy();
 	~Enemy();
-	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)override;
+	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)override;
 	bool Update()override;
-	void UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale);
+	
 	/*!
 	* @brief	未使用のシートを検索。
 	*@param[in]	pos		未使用のシートの中からこの座標に一番近いシートを返します。

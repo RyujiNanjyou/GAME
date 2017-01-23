@@ -33,13 +33,15 @@ void Map::Start()
 		MapChip* mapChip = new MapChip;
 		mapChip->Setpos(mapChipLocInfoTable[i].pos);
 		mapChip->Setrot(mapChipLocInfoTable[i].rotation);
-		mapChip->Init(g_pd3dDevice, mapChipLocInfoTable[i].modelName,"Assets/basic.fx");
+		mapChip->Setscale(mapChipLocInfoTable[i].scale);
+		mapChip->Init(g_pd3dDevice, mapChipLocInfoTable[i].modelName);
 		mapChipList.push_back(mapChip);
 	}
 }
 void Map::Update()
 {
 	for (auto& mapChip : mapChipList){
+		
 		mapChip->Update();
 	}
 }
@@ -54,14 +56,6 @@ void Map::Render(
 {
 	for (auto& mapChip : mapChipList)
 	{
-		mapChip->Render(
-			pd3dDevice,
-			viewMatrix,
-			projMatrix,
-			diffuseLightDirection,
-			diffuseLightColor,
-			ambientLight,
-			numDiffuseLight
-			);
+		mapChip->Render();
 	}
 }

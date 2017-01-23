@@ -18,11 +18,11 @@ public:
 	//デストラクタ
 	~Pikumin();
 	//初期化。
-	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)override;
+	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)override;
 	//更新。
 	bool Update()override;
 	//座標を設定。
-	void UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale);
+	
 	bool Getpikuflag() { return flag_pikumin; }
 	void Setpikuflag(bool f) 
 	{ 

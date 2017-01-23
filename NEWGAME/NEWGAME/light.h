@@ -27,6 +27,7 @@ public:
 	}
 	~Light()
 	{
+
 	}
 	
 	D3DXVECTOR4 *GetDLDirecton() { return diffuseLightDirection; }

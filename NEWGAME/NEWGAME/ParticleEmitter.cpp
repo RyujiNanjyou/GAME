@@ -1,6 +1,7 @@
 /*!
 * @brief	パーティクル生成機
 */
+#include "stdafx.h"
 
 #include "ParticleEmitter.h"
 #include "Particle.h"

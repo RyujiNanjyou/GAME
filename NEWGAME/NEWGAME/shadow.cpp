@@ -2,7 +2,7 @@
 #include "shadow.h"
 #include "game.h"
 
-extern LPDIRECT3DTEXTURE9 shadow;
+
 
 ShadowMap::ShadowMap()
 {
@@ -18,6 +18,8 @@ void ShadowMap::Create(int w, int h)
 	D3DXMatrixIdentity(&rot);
 	model[0].Init(g_pd3dDevice, "Assets/orima.x");
 	model[1].Init(g_pd3dDevice, "Assets/pikumin.X");
+	/*modeldata.LoadModelData("Assets/orima.x", NULL);
+	skinmodel.Init(&modeldata);*/
 	rendertarget.Create(w, h, 1, D3DFMT_A8R8G8B8, D3DFMT_D16, D3DMULTISAMPLE_NONE, 0);
 	this->h = h;
 	this->w = w;
@@ -117,19 +119,6 @@ void ShadowMap::Render(
 				);
 		}
 	}
-
-	//game->GETunity()->Render
-	//	(
-	//	pd3dDevice,
-	//	viewMatrix,
-	//	projMatrix,
-	//	diffuseLightDirection,
-	//	diffuseLightColor,
-	//	ambientLight,
-	//	numDiffuseLight,
-	//	true
-	//	); 
-
 	model[0].Seteffect(backup[0]);
 	model[1].Seteffect(backup[1]);
 	g_pd3dDevice->SetRenderTarget(0, BackBuffer);

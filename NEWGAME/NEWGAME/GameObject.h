@@ -1,14 +1,18 @@
 #pragma once
-#include "stdafx.h"
 #include "model.h"
-
+#include "SkinModel.h"
+#include "SkinModelData.h"
+#include "Animation.h"
 class GameObject
 {
 protected:
 	ID3DXEffect* effect;			//エフェクト。
 	Model model;
+	SkinModel skinmodel;
+	SkinModelData skinmodeldata;
 	D3DXVECTOR3	position;			//座標。
 	D3DXQUATERNION	rotation;		//回転。
+	D3DXVECTOR3 scale;
 	D3DXMATRIX	mRot;
 	D3DXMATRIX	mWorld;			//ワールド行列
 	D3DXVECTOR3	moveDir;
@@ -16,28 +20,22 @@ protected:
 public:
 	GameObject();
 	~GameObject();
-	virtual void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name,const char* EffectName);
+	virtual void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name);
 	virtual bool Update() = 0;
-	void Render(LPDIRECT3DDEVICE9 pd3dDevice,
-		D3DXMATRIX viewMatrix,
-		D3DXMATRIX projMatrix,
-		D3DXVECTOR4* diffuseLightDirection,
-		D3DXVECTOR4* diffuseLightColor,
-		D3DXVECTOR4	 ambientLight,
-		int numDiffuseLight
-		);
+	void Render();
 
 	void Setrot(D3DXQUATERNION rot){
 		rotation = rot; 
 	};
-
+	void Setscale(D3DXVECTOR3 scale){
+		this->scale = scale;
+	};
 	const D3DXMATRIX& GetRot() const
 	{
 		return mRot;
 	}
 	virtual	void Setpos(D3DXVECTOR3 pos)
 	{
-		
 		position = pos;
 	}
 	const D3DXVECTOR3& Getpos() const
@@ -53,6 +51,5 @@ public:
 		return moveDir;
 	}
 	virtual void Release();
-	
 };
 

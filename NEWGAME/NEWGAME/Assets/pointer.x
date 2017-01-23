@@ -1205,7 +1205,7 @@ Frame Cylinder001 {
     0.000000;0.000000;0.000000;;
 
     TextureFilename Diffuse {
-     "Assets/aka.png";
+     "aka.png";
     }
    }
   }

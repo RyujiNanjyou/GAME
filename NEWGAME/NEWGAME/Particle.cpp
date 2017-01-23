@@ -1,6 +1,7 @@
 /*!
 * @brief	パーティクル。
 */
+#include "stdafx.h"
 #include "ParticleEmitter.h"
 #include "Particle.h"
 

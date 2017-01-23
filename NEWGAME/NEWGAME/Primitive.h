@@ -7,7 +7,7 @@
 
 #include "IndexBuffer.h"
 #include "VertexBuffer.h"
-#include "stdafx.h"
+
 /*!
 * @brief	プリミティブ。
 */

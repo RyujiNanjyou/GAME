@@ -21,11 +21,11 @@ Unity::~Unity()
 {
 	Release();
 }
-void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name,const char* EffectName){
-	GameObject::Init(pd3dDevice, Name, EffectName);
+void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name){
+	GameObject::Init(pd3dDevice, Name);
 	position = D3DXVECTOR3(0.0f, 1.0f, 0.5f);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-
+	scale = D3DXVECTOR3(3.0, 3.0, 3.0);
 	//席作成
 	int gyou = 1;		//行。
 	int retu = 0;		//列。
@@ -34,14 +34,12 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name,const char* Effec
 
 	for (int i = 0; i < SEAT_NUM; i++)
 	{
-		
 		if (retu == 0) {
 			seat[i].Setseat(D3DXVECTOR3(0.0f, 0.6f, -0.5f * gyou));
 			seat[i].Init();
 			retu = 1;
 		}
 		else {
-			
 			seat[i].Setseat(D3DXVECTOR3(0.5f * retu, 0.6f, -0.5f * gyou));
 			seat[i].Init();
 			retu *= -1.0f;
@@ -50,7 +48,6 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name,const char* Effec
 				retu++;
 			}
 		}
-
 		execRetu++;
 		if (execRetu == numRetu) {
 			//この行に配置できる列は全て配置した。
@@ -59,28 +56,15 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name,const char* Effec
 			gyou++;
 			numRetu += 0;
 		}
-
-
-
 	}
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
 	characterController.SetGravity(-20.0f);	//重力強め。
-	model.Setshadowflag(false);
+	skinmodel.SetDrawToShadowMap(false);
 	Drowflag = false;
 }
 
-void Unity::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
-{
-	D3DXMATRIX mTrans, mScale;
-	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
-	D3DXMatrixTranslation(&mTrans, trans.x, trans.y, trans.z);
-	D3DXMatrixRotationQuaternion(&mRot, &rot);
-	/*D3DXMATRIX mAddRot;
-	D3DXMatrixRotationY(&mAddRot, D3DXToRadian(-90.0f));
-	mRot = mRot * mAddRot;*/
-	mWorld = mScale * mRot * mTrans;
-}
+
 
 //更新。
 bool Unity::Update()
@@ -154,14 +138,39 @@ bool Unity::Update()
 	if (OK != -1)
 	{
 		//投げれる状態。
+		D3DXVECTOR3 pointerpos = game->Getpointer()->Getpos();
+		D3DXVECTOR3 topos = pointerpos - position;
+		float len;
+		len = D3DXVec3Length(&topos);
+		float time = len / POWER;
+		topos.y = 0;
+		D3DXVec3Normalize(&topos, &topos);
+		topos *= POWER;
+		topos.y = (-0.5*-GRVITY*time*time) / time;
+		pikuminList[OK]->setspeed(topos);
 		pikuminList[OK]->SetNowStatus(PikuminStatus::STAND_BY);
+		D3DXVECTOR3 toplayer = position - pikuminList[OK]->Getpos();
+		float l = D3DXVec3Length(&toplayer);
+		if (pikuminList[OK]->GetStatus()==PikuminStatus::STAND_BY && l < 0.5)
+		{
+			pikuminList[OK]->SetNowStatus(PikuminStatus::THROW);
+		}
+		//pikuminList[OK]->SetNowStatus(PikuminStatus::THROW);
 		//pikuminList[OK]->Setpos(position);
+		
+	}
+	//増産テスト
+	if (game->GETPad()->IsTrigger(enButtonY))
+	{
+		Pikumin* pikumin = new Pikumin;
+		D3DXVECTOR3 pikuminpos = D3DXVECTOR3(0.0, 0.0, 0.0);
+		pikumin->Init(g_pd3dDevice, "Assets/pikumin");
+		game->AddPikumin(pikumin);
 	}
 	D3DXVECTOR3 pos = position;
 	pos.y += 0.6f;
-	//ワールド行列の更新。
-	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(3.0f, 3.0f, 3.0f));
-
+	
+	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	return true;
 }
 

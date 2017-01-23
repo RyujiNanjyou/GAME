@@ -1,7 +1,7 @@
 /*!
 * @brief	頂点バッファ
 */
-
+#include "stdafx.h"
 #include "VertexBuffer.h"
 
 

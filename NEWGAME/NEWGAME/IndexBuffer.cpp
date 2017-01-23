@@ -1,7 +1,7 @@
 /*!
 *@brief	インデックスバッファ
 */
-
+#include "stdafx.h"
 #include "IndexBuffer.h"
 
 extern LPDIRECT3DDEVICE9 g_pd3dDevice;

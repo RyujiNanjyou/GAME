@@ -74,10 +74,10 @@ public:
 	{
 		vLookatPt = pt;
 	}
-
 	/*!
 	*@brief	注視点の取得。
 	*/
+
 	D3DXVECTOR3 GetLookatPt()
 	{
 		return vLookatPt;
@@ -132,7 +132,7 @@ public:
 	*@brief	カメラの初期化。
 	*/
 	void Init();
-
+	
 	
 private:
 	D3DXMATRIX				viewMatrix;			//!<ビュー行列。カメラ行列とも言う。

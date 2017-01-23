@@ -1,6 +1,7 @@
 /*!
 * @brief	プリコンパイルヘッダー作成。
 */
+#include "stdafx.h"
 #include "tkEnginePreCompile.h"
 
 

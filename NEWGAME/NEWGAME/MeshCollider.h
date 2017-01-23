@@ -17,7 +17,7 @@ public:
 	* @brief	CSkinModelからメッシュコライダーを生成。
 	*@param[in]	model		スキンモデル。
 	*/
-	void CreateFromSkinModel(Model* model, const D3DXMATRIX* offsetMatrix);
+	void CreateFromSkinModel(SkinModel* model, const D3DXMATRIX* offsetMatrix);
 	btCollisionShape* GetBody() override
 	{
 		return meshShape;

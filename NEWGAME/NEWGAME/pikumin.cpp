@@ -7,7 +7,7 @@
 namespace {
 	/*const float PI = 3.14159265358979323846f;*/
 	//const float MoveSpeed = 0.08f*60.0f;
-	D3DXVECTOR3 scale = D3DXVECTOR3(5.0, 5.0, 5.0);
+	
 }
 
 //コンストラクタ
@@ -30,30 +30,20 @@ Pikumin::~Pikumin()
 	Release();
 }
 //Init
-void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name, const char* EffectName)
+void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name)
 {
-	GameObject::Init(pd3dDevice, Name, EffectName);
-	model.Setshadowflag(false);	
+	GameObject::Init(pd3dDevice, Name);
+	skinmodel.SetDrawToShadowMap(false);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-	
+	scale = D3DXVECTOR3(5.0, 5.0, 5.0);
 	nowStatus = PikuminStatus::STAND;
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
 	//characterController.SetGravity(-GRVITY);	//重力
 	Drowflag = false;
 }
-//UpdateWorld
-void Pikumin::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
-{
-	D3DXMATRIX mTrans, mScale;
-	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
-	D3DXMatrixTranslation(&mTrans, trans.x, trans.y, trans.z);
-	D3DXMatrixRotationQuaternion(&mRot, &rot);
-	/*D3DXMATRIX mAddRot;
-	D3DXMatrixRotationY(&mAddRot, D3DXToRadian(-90.0f));
-	mRot = mRot * mAddRot;*/
-	mWorld = mScale * mRot * mTrans;
-}
+
+
 //ピクミン追尾
 D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos, float MoveSpeed)
 {
@@ -99,6 +89,7 @@ bool Pikumin::Update()
 	Move.x = 0.0f;
 	Move.z = 0.0f;
 	float Size = 10.0f;
+	
 	//立つ
 	if (nowStatus == PikuminStatus::STAND)
 	{
@@ -127,24 +118,10 @@ bool Pikumin::Update()
 	//オリマにセット
 	if (nowStatus == PikuminStatus::STAND_BY)
 	{
-		Move = PikuminHoming(game->GETunity()->Getpos(),0.08f * 60.0f);
-		
+		Move = PikuminHoming(game->GETunity()->Getpos(), 0.08f * 60.0f);
 	}
-	if (Move == game->GETunity()->Getpos())
-	{
-		D3DXVECTOR3 pointerpos = game->Getpointer()->Getpos();
-		D3DXVECTOR3 topos = pointerpos - position;
-		float len;
-		len = D3DXVec3Length(&topos);
-		float time = len / POWER;
-		topos.y = 0;
-		D3DXVec3Normalize(&topos, &topos);
-		topos *= POWER;
-		topos.y = (-0.5*-GRVITY*time*time) / time;
-		//pikuminList[OK]->setspeed(topos);
-		Speed = topos;
-		nowStatus = PikuminStatus::THROW;
-	}
+	
+
 	//投げ投げ状態
 	if (nowStatus == PikuminStatus::THROW)
 	{
@@ -260,8 +237,7 @@ bool Pikumin::Update()
 	position = characterController.GetPosition();
 	D3DXVECTOR3 pos = position;
 	pos.y += 0.6f;
-	//ワールド行列の更新。
-	UpdateWorldMatrix(pos, rotation, scale);
+	skinmodel.UpdateWorldMatrix(position,rotation,scale);
 	return true;
 }
 

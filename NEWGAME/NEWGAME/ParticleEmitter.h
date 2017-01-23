@@ -5,7 +5,6 @@
 #ifndef _TKPARTICLEEMITTER_H_
 #define _TKPARTICLEEMITTER_H_
 
-#include "stdafx.h"
 
 class CParticle;
 /*!

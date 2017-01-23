@@ -5,7 +5,6 @@
 #define _TKPARTICLE_H_
 
 #include "Primitive.h"
-#include "stdafx.h"
 
 struct SParicleEmitParameter;
 /*!

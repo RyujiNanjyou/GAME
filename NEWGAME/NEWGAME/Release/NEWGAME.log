@@ -1,0 +1,72 @@
+﻿2017/01/23 21:16:24 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CharacterController.cpp Enemy.cpp GAMEmain.cpp GameObject.cpp Map.cpp MapChip.cpp PlayerCamera.cpp SkinModel.cpp game.cpp model.cpp pikumin.cpp pointer.cpp seat.cpp shadow.cpp unity.cpp
+         CharacterController.cpp
+         Enemy.cpp
+         GAMEmain.cpp
+         GameObject.cpp
+     1>GameObject.cpp(17): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(356) : 'sprintf' の宣言を確認してください。
+         Map.cpp
+         MapChip.cpp
+         PlayerCamera.cpp
+         SkinModel.cpp
+         game.cpp
+         model.cpp
+     1>model.cpp(47): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 'strcat' の宣言を確認してください。
+         pikumin.cpp
+         pointer.cpp
+         seat.cpp
+         shadow.cpp
+         unity.cpp
+     1>unity.cpp(45): warning C4244: '*=' : 'float' から 'int' への変換です。データが失われる可能性があります。
+     1>unity.cpp(122): warning C4018: '<' : signed と unsigned の数値を比較しようとしました。
+     1>unity.cpp(149): warning C4244: '=' : 'double' から 'float' への変換です。データが失われる可能性があります。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Release\NEWGAME.exe" /INCREMENTAL:NO /NOLOGO d3d9.lib d3dx9.lib BulletCollision.lib BulletDynamics.lib LinearMath.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Release\NEWGAME.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Release\NEWGAME.lib" /MACHINE:X86 /SAFESEH Release\Animation.obj
+         Release\camera.obj
+         Release\CapsuleCollider.obj
+         Release\CharacterController.obj
+         Release\EffectManager.obj
+         Release\Enemy.obj
+         Release\game.obj
+         Release\GAMEmain.obj
+         Release\GameObject.obj
+         Release\IndexBuffer.obj
+         Release\Input.obj
+         Release\KeyInput.obj
+         Release\lightcamera.obj
+         Release\Map.obj
+         Release\MapChip.obj
+         Release\MeshCollider.obj
+         Release\model.obj
+         Release\Pad.obj
+         Release\Particle.obj
+         Release\ParticleEmitter.obj
+         Release\Physics.obj
+         Release\pikumin.obj
+         Release\PlayerCamera.obj
+         Release\pointer.obj
+         Release\Primitive.obj
+         Release\RenderTarget.obj
+         Release\RigidBody.obj
+         Release\seat.obj
+         Release\shadow.obj
+         Release\SkinModel.obj
+         Release\SkinModelData.obj
+         Release\stage.obj
+         Release\stdafx.obj
+         Release\System.obj
+         Release\tkEnginePreCompile.obj
+         Release\unity.obj
+         Release\VertexBuffer.obj
+         コード生成しています。
+         コード生成が終了しました。
+         NEWGAME.vcxproj -> E:\_Users\buram_000\Desktop\GAME\NEWGAME\Release\NEWGAME.exe
+     1>プロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:01:06.06

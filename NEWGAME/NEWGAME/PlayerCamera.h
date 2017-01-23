@@ -13,7 +13,7 @@ public:
 	void PreUpdate();
 	void Update();
 	//カメラを取得。
-	const Camera& GetCamera() const
+	 Camera& GetCamera() 
 	{
 		return camera;
 	}
@@ -22,7 +22,6 @@ public:
 	{
 		return cameraDir;
 	}
-
 private:
 	//カメラを更新。
 	void UpdateCamera();

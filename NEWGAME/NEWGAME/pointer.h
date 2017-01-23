@@ -12,9 +12,8 @@ public:
 	pointer();
 	~pointer();
 	//初期化。
-	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)override;
+	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)override;
 	//更新。
 	bool Update()override;
-	void UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale);
 };
 

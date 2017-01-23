@@ -16,28 +16,16 @@ pointer::~pointer()
 	Release();
 }
 
-void pointer::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name, const char* EffectName)
+void pointer::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 {
-	GameObject::Init(pd3dDevice, Name, EffectName);
+	GameObject::Init(pd3dDevice, Name);
 	position = D3DXVECTOR3(0.0f, 0.01f, 0.0f);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-
+	scale = D3DXVECTOR3(3.0, 3.0, 3.0);
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
 	characterController.SetGravity(-20.0f);	//重力強め。
 	Drowflag = false;
-}
-
-void pointer::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)
-{
-	D3DXMATRIX mTrans, mScale;
-	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
-	D3DXMatrixTranslation(&mTrans, trans.x, trans.y, trans.z);
-	D3DXMatrixRotationQuaternion(&mRot, &rot);
-	/*D3DXMATRIX mAddRot;
-	D3DXMatrixRotationY(&mAddRot, D3DXToRadian(-90.0f));
-	mRotation = mRotation * mAddRot;*/
-	mWorld = mScale * mRot * mTrans;
 }
 
 bool pointer::Update()
@@ -79,7 +67,7 @@ bool pointer::Update()
 	}
 	D3DXVECTOR3 pos = position;
 	pos.y += 0.2f;
-	//ワールド行列の更新。
-	UpdateWorldMatrix(pos, rotation, D3DXVECTOR3(3.0f, 0.0f, 3.0f));
+	
+	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	return true;
 }

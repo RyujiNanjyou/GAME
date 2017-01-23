@@ -25474,7 +25474,7 @@ Frame Character1_Head {
      0.000000;0.000000;0.000000;;
 
      TextureFilename Diffuse {
-      "Assets//utc_all2.tga";
+      "utc_all2.tga";
      }
     }
    }

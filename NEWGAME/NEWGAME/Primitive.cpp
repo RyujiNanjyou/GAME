@@ -1,7 +1,7 @@
 /*!
 * @brief	プリミティブ。
 */
-
+#include "stdafx.h"
 #include "Primitive.h"
 
 

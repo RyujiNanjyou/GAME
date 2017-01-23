@@ -26,7 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -87,9 +87,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
     <ClCompile Include="CharacterController.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GAMEmain.cpp" />
@@ -114,6 +116,8 @@
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="seat.cpp" />
     <ClCompile Include="shadow.cpp" />
+    <ClCompile Include="SkinModel.cpp" />
+    <ClCompile Include="SkinModelData.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="System.cpp" />
@@ -122,10 +126,12 @@
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="CapsuleCollider.h" />
     <ClInclude Include="CharacterController.h" />
     <ClInclude Include="CollisionAttr.h" />
+    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
@@ -152,6 +158,8 @@
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="seat.h" />
     <ClInclude Include="shadow.h" />
+    <ClInclude Include="SkinModel.h" />
+    <ClInclude Include="SkinModelData.h" />
     <ClInclude Include="stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="System.h" />
