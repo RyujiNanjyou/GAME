@@ -15,11 +15,20 @@
 
 	CPhysicsWorld::~CPhysicsWorld()
 	{
+		Release();
+	}
+	void CPhysicsWorld::Release()
+	{
 		delete dynamicWorld;
 		delete constraintSolver;
 		delete overlappingPairCache;
 		delete collisionDispatcher;
 		delete collisionConfig;
+		dynamicWorld = NULL;
+		constraintSolver = NULL;
+		overlappingPairCache = NULL;
+		collisionDispatcher = NULL;
+		collisionConfig = NULL;
 	}
 	void CPhysicsWorld::Init()
 	{
@@ -47,13 +56,18 @@
 	}
 	void CPhysicsWorld::Update()
 	{
-		dynamicWorld->stepSimulation(1.0f/60.0f);
+		if (!NULL){dynamicWorld->stepSimulation(1.0f/60.0f);}
+		
 	}
 	void CPhysicsWorld::AddRigidBody(RigidBody* rb)
 	{
-		dynamicWorld->addRigidBody(rb->GetBody());
+		if (!NULL){
+			dynamicWorld->addRigidBody(rb->GetBody());
+		}
 	}
 	void CPhysicsWorld::RemoveRigidBody(RigidBody* rb)
 	{
-		dynamicWorld->removeRigidBody(rb->GetBody());
+		if (!NULL){
+			dynamicWorld->removeRigidBody(rb->GetBody());
+		}
 	}

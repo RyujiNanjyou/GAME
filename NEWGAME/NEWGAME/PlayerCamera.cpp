@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "camera.h"
 #include "PlayerCamera.h"
-#include "unity.h"
 #include "Input.h"
 #include "game.h"
 

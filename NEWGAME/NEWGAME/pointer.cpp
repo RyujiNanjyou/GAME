@@ -65,9 +65,7 @@ bool pointer::Update()
 		D3DXVec3Cross(&axis, &forward, &moveDir);
 		D3DXQuaternionRotationAxis(&rotation, &axis, angle);
 	}
-	D3DXVECTOR3 pos = position;
-	pos.y += 0.2f;
+	position.y += 0.2f;
 	
-	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	return true;
 }

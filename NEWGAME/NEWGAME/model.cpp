@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "model.h"
-#include "SkinModelData.h"
+
 #include "game.h"
-#include "SkinModel.h"
+
 
 
 Model::Model()

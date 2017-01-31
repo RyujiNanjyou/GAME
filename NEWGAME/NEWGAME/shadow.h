@@ -1,7 +1,6 @@
 #pragma once
 
 #include "RenderTarget.h"
-#include "model.h"
 #include "SkinModel.h"
 #include "SkinModelData.h"
 
@@ -13,7 +12,6 @@ class ShadowMap
 	LPDIRECT3DSURFACE9	BackZ;
 	int					w, h;
 	CRenderTarget		rendertarget;
-	Model				model[2];
 	SkinModel			skinmodel;
 	SkinModelData		modeldata;
 	D3DXVECTOR3			lightpos;
@@ -36,15 +34,11 @@ public:
 
 	void CreateLight(D3DXMATRIX);
 
-	void Render(
-		LPDIRECT3DDEVICE9 pd3dDevice,
-		D3DXMATRIX viewMatrix,
-		D3DXMATRIX projMatrix,
-		D3DXVECTOR4* diffuseLightDirection,
-		D3DXVECTOR4* diffuseLightColor,
-		D3DXVECTOR4	 ambientLight,
-		int numDiffuseLight
+	void Draw(
+		D3DXMATRIX* viewMatrix,
+		D3DXMATRIX* projMatrix
 		);
+
 	void Release();
 
 	CRenderTarget* GetRenderTarget(){

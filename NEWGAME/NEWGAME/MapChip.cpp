@@ -16,25 +16,18 @@ MapChip::~MapChip()
 void MapChip::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 {
 	GameObject::Init(pd3dDevice, Name);
-	SMapChipLocInfo map;
-	
-	D3DXVECTOR3 trans, scale;
-	
-	D3DXMatrixRotationQuaternion(&mRot, &rotation);
-	//ロードしたモデルデータを使ってSkinModelを初期化。
-	D3DXMATRIX mTrans, mScale;
-	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
-	D3DXMatrixTranslation(&mTrans, trans.x, trans.y, trans.z);
-	D3DXMatrixRotationQuaternion(&mRot, &rotation);
-	mWorld = mScale * mRot * mTrans;
-	D3DXMatrixTranslation(&mWorld, position.x, position.y, position.z);
-	skinmodel.SetDrawToShadowMap(true);
-	skinmodel.UpdateWorldMatrix(position, rotation, D3DXVECTOR3(1.0, 1.0, 1.0));
+
+	skinmodel.SetShadowReceiverFlag(true);
+	position = D3DXVECTOR3(0.0,-3.0,0.0);
+	rotation = D3DXQUATERNION(0.0,0.0,0.0,1.0);
+	scale = D3DXVECTOR3(1.0,1.0,1.0);
 	//ここから衝突判定絡みの初期化。
+	Update();
 	//スキンモデルからメッシュコライダーを作成する。
 	D3DXMATRIX* rootBoneMatrix = skinmodeldata.GetRootBoneWorldMatrix();
-	meshCollider.CreateFromSkinModel(&skinmodel, rootBoneMatrix);
+	meshCollider.CreateFromSkinModel(&skinmodel,rootBoneMatrix);
 	//続いて剛体を作成する。
+
 	//まずは剛体を作成するための情報を設定。
 	RigidBodyInfo rbInfo;
 	rbInfo.collider = &meshCollider;	//剛体のコリジョンを設定する。
@@ -50,7 +43,6 @@ void MapChip::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 bool MapChip::Update()
 {
 	game->UpdateLight();
-	
 	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	return true;
 }

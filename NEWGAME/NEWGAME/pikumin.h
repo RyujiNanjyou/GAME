@@ -1,6 +1,5 @@
 #pragma once
 
-#include "model.h"
 #include "GameObject.h"
 #include "CharacterController.h"
 #include "Enemy.h"
@@ -24,9 +23,9 @@ public:
 	//À•W‚ğİ’èB
 	
 	bool Getpikuflag() { return flag_pikumin; }
-	void Setpikuflag(bool f) 
-	{ 
-		flag_pikumin = f; 
+	void Setpikuflag(bool f)
+	{
+		flag_pikumin = f;
 		if (f == true){
 			m_seatNo = -1;
 		}

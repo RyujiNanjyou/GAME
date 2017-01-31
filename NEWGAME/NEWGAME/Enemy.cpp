@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
+#include "pikumin.h"
 #include "game.h"
 
 Enemy::Enemy()
@@ -19,7 +20,7 @@ Enemy::~Enemy()
 void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 {
 	GameObject::Init(pd3dDevice, Name);
-	skinmodel.SetDrawToShadowMap(false);
+	skinmodel.SetShadowReceiverFlag(false);
 	//model.Setshadowflag(false);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
 	scale = D3DXVECTOR3(3.0, 3.0, 3.0);
@@ -113,18 +114,17 @@ bool Enemy::Update()
 			flag = false;
 			Drowflag = true;
 			const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
-			Pikumin* pikumin = new Pikumin;
+			/*Pikumin* pikumin = new Pikumin;
 			D3DXVECTOR3 pikuminpos = D3DXVECTOR3(0.0, 0.0, 0.0);
 			pikumin->Init(g_pd3dDevice, "Assets/pikumin");
-			game->AddPikumin(pikumin);
+			game->AddPikumin(pikumin);*/
 			attackPikumin->SetNowStatus(PikuminStatus::STAND);
 			/*for (auto pikumin : pikuminList)
 			{
-				pikumin->SetNowStatus(PikuminStatus::STAND);
+			pikumin->SetNowStatus(PikuminStatus::STAND);
 			}*/
 		}
 	}
-	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	return flag;
 	
 }

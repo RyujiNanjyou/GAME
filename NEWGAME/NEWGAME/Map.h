@@ -1,7 +1,6 @@
 #pragma once
-
-class MapChip;
 #include "MapChip.h"
+
 /*!
 * @brief	マップクラス。
 */

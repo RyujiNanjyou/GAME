@@ -56,6 +56,6 @@ void Map::Render(
 {
 	for (auto& mapChip : mapChipList)
 	{
-		mapChip->Render();
+		mapChip->Render(false);
 	}
 }

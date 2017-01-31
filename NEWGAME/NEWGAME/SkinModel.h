@@ -2,6 +2,7 @@
 *@brief	スキンモデル
 */
 #pragma once
+
 #include "Animation.h"
 
 
@@ -12,7 +13,8 @@ class Light;
 /*!
 *@brief	スキンモデル
 */
-class SkinModel {
+class SkinModel 
+{
 public:
 	SkinModel();
 	~SkinModel();
@@ -46,7 +48,8 @@ public:
 		Light* light,
 		LPDIRECT3DTEXTURE9	normalMap,
 		LPDIRECT3DTEXTURE9 specularMap,
-		bool isDrawToShadowMap);
+		bool isDrawToShadowMap
+		);
 
 	void DrawFrame(
 		IDirect3DDevice9* pd3dDevice,
@@ -128,4 +131,3 @@ private:
 	LPDIRECT3DTEXTURE9	normalMap;				//<!ノーマルマップ。
 	LPDIRECT3DTEXTURE9  specularMap;				//<!スペキュラマップ。
 };
-

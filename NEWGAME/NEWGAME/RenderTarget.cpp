@@ -6,7 +6,7 @@ CRenderTarget::CRenderTarget()
 	m_depthSurface = NULL;
 	m_texture = NULL;
 	m_surface = NULL;
-	m_texture = NULL;
+	//m_texture = NULL;
 }
 CRenderTarget::~CRenderTarget()
 {

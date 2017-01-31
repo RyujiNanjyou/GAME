@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "game.h"
-#include "SkinModel.h"
 #include "SkinModelData.h"
 #include "Light.h"
 #include "shadow.h"
@@ -62,7 +61,6 @@ void SkinModel::DrawMeshContainer(
 		}
 	}
 
-
 	//ライトビュープロジェクション行列の計算。
 	D3DXMATRIX LVP;
 	LVP = game->Getshadow()->Getlvpmatrix();
@@ -94,7 +92,7 @@ void SkinModel::DrawMeshContainer(
 	pEffect->SetVector("vEyePos", &(D3DXVECTOR4)game->GetCamera().GetEyePt());
 	//影を描画しているレンダーターゲットのテクスチャを取得。
 
-	if (ShadowReceiverFlag == TRUE)
+	if (ShadowReceiverFlag == TRUE && shadow != NULL)
 	{
 		pEffect->SetTexture("g_shadowTexture",shadow);
 	}
@@ -208,7 +206,9 @@ void SkinModel::DrawMeshContainer(
 			pEffect->EndPass();
 			pEffect->End();
 		}
+
 	}
+
 }
 void SkinModel::DrawFrame(
 	IDirect3DDevice9* pd3dDevice,

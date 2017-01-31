@@ -70,7 +70,7 @@ public:
 	Unity* GETunity(){ return &uni; }
 	CPad* GETPad(){ return &pad; }
 	Light* GETlight(){ return &light; }
-	/*Pikumin* Getpikumin(){ return min; }*/
+	
 	/*!
 	* @brief	ピクミンを追加。。
 	*/
@@ -92,21 +92,21 @@ public:
 	}
 	EffectManager* GetEffectmanager(){ return &effectmanager; }
 private:
-	CPad pad;
-	PlayerCamera playCamera;			//ゲームカメラ。
-	Unity uni;
-	Stage stg;
-	/*Pikumin min[PIKUMIN_NUM];*/
+	CPad				pad;
+	PlayerCamera		playCamera;			//ゲームカメラ。
+	Unity				uni;
+	Stage				stg;
+
 	std::vector<Pikumin*> pikuminList;
-	Map map;
-	Light light;
-	LightCamera lightcam;
-	ShadowMap shadow;
-	pointer ter;
-	CPhysicsWorld physicsWorld;
-	CParticleEmitter		particleEmitter;	//パーティクルエミッター
-	Enemy enemy[ENEMY_NUM];
-	EffectManager effectmanager;
+	Map					map;
+	Light				light;
+	LightCamera			lightcam;
+	ShadowMap			shadow;
+	pointer				ter;
+	CPhysicsWorld		physicsWorld;
+	CParticleEmitter	particleEmitter;	//パーティクルエミッター
+	Enemy				enemy[ENEMY_NUM];
+	EffectManager		effectmanager;
 
 };
 

@@ -1,15 +1,13 @@
 #pragma once
 
-#include "model.h"
-#include "seat.h"
-#include "pikumin.h"
 #include "GameObject.h"
 #include "CharacterController.h"
+#include "seat.h"
 
 #define SEAT_NUM 100
 
 
-
+class Seat;
 //unity‚¿‚á‚ñƒNƒ‰ƒXB
 class Unity : public GameObject {
 public:

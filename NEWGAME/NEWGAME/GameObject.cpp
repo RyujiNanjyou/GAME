@@ -26,19 +26,17 @@ void GameObject::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name){
 	Drowflag = false;
 }
 
-void GameObject::Render(){
+void GameObject::Render(bool ShadowFlag){
 	skinmodel.UpdateWorldMatrix(position, rotation, scale);
 	if (Drowflag == false)
 	{
 		skinmodel.Draw(
 			&game->GetCamera().GetViewMatrix(),
 			&game->GetCamera().GetProjectionMatrix(),
-			false
+			ShadowFlag
 			);
 	}
 }
 void GameObject::Release()
 {
-	//model.Release();
-	
 }

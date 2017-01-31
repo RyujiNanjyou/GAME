@@ -7,12 +7,9 @@
 #include <cstdlib>
 #include <vector>
 #include <Math.h>
+#include <limits.h>
 #include "System.h"
-
-#include "model.h"
 #include "SkinModel.h"
-#include "SkinModelData.h"
-
 #include <list>
 #include <map>
 #include <memory>

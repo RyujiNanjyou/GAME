@@ -16,43 +16,21 @@ ShadowMap::~ShadowMap()
 void ShadowMap::Create(int w, int h)
 {
 	D3DXMatrixIdentity(&rot);
-	model[0].Init(g_pd3dDevice, "Assets/orima.x");
-	model[1].Init(g_pd3dDevice, "Assets/pikumin.X");
-	/*modeldata.LoadModelData("Assets/orima.x", NULL);
-	skinmodel.Init(&modeldata);*/
+
+	modeldata.LoadModelData("Assets/orima.x", NULL);
+	skinmodel.Init(&modeldata);
 	rendertarget.Create(w, h, 1, D3DFMT_A8R8G8B8, D3DFMT_D16, D3DMULTISAMPLE_NONE, 0);
 	this->h = h;
 	this->w = w;
-
 	Near = 1.0f;
 	Far = 1000.0f;
-
-
 	LPD3DXBUFFER  compileErrorBuffer = NULL;
-	HRESULT hr = D3DXCreateEffectFromFile(
-		g_pd3dDevice,
-		"Assets/shadowmap.fx",
-		NULL,
-		NULL,
-		D3DXSHADER_DEBUG,
-		NULL,
-		&pEffect,
-		&compileErrorBuffer
-		);
-	if (FAILED(hr)) {
-		MessageBox(NULL, (char*)(compileErrorBuffer->GetBufferPointer()), "error", MB_OK);
-		abort();
-	}
 }
 
-void ShadowMap::Render(
-	LPDIRECT3DDEVICE9 pd3dDevice,
-	D3DXMATRIX viewMatrix,
-	D3DXMATRIX projMatrix,
-	D3DXVECTOR4* diffuseLightDirection,
-	D3DXVECTOR4* diffuseLightColor,
-	D3DXVECTOR4	 ambientLight,
-	int numDiffuseLight
+
+void ShadowMap::Draw(
+	D3DXMATRIX* viewMatrix,
+	D3DXMATRIX* projMatrix
 	)
 {
 
@@ -78,49 +56,18 @@ void ShadowMap::Render(
 	aspect = (float)viewport.Width / (float)viewport.Height;
 	D3DXMatrixPerspectiveFovLH(&ProjMatrix, D3DXToRadian(45.0f), aspect, Near, Far);
 	CreateLight(ProjMatrix);
-	ID3DXEffect* backup[2];
-	for (int i = 0; i < 2; i++)
-	{
-		backup[i] = model[i].Geteffect();
-		model[i].Seteffect(pEffect);
-
-
-	}
+	ID3DXEffect* backup;
+	backup = skinmodel.GetEffect();
+	skinmodel.SetEffect(pEffect);
 	
-	
+	game->GETunity()->Render(true);
 
-	model[0].Render(pd3dDevice,
-		viewMatrix,
-		game->GETunity()->Getworld(),			//ワールド行列。
-		game->GETunity()->GetRot(),		//回転行列。
-		projMatrix,
-		diffuseLightDirection,
-		diffuseLightColor,
-		ambientLight,
-		numDiffuseLight,
-		true
-		);
-	const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
-	for (auto pikumin : pikuminList)
+	//const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
+	/*for (auto pikumin : pikuminList)
 	{
-		
-		for (int i = 0; i < PIKUMIN_NUM; i++)
-		{
-			model[1].Render(pd3dDevice,
-				viewMatrix,
-				pikumin->Getworld(),			//ワールド行列。
-				pikumin->GetRot(),		//回転行列。
-				projMatrix,
-				diffuseLightDirection,
-				diffuseLightColor,
-				ambientLight,
-				numDiffuseLight,
-				true
-				);
-		}
-	}
-	model[0].Seteffect(backup[0]);
-	model[1].Seteffect(backup[1]);
+
+	}*/
+	skinmodel.SetEffect(backup);
 	g_pd3dDevice->SetRenderTarget(0, BackBuffer);
 	g_pd3dDevice->SetDepthStencilSurface(BackZ);
 	g_pd3dDevice->SetViewport(&viewport);

@@ -2,7 +2,7 @@
 #include "camera.h"
 #include "game.h"
 #include "shadow.h"
-#include "model.h"
+#include "pikumin.h"
 
 
 
@@ -11,6 +11,7 @@ Game::Game()
 }
 Game::~Game()
 {
+	physicsWorld.Release();
 	for (auto pikumin : pikuminList) {
 		delete pikumin;
 	}
@@ -104,18 +105,22 @@ void Game::Update()
 */
 void Game::Render()
 {
-	shadow.Render(g_pd3dDevice,
+	/*shadow.Render(g_pd3dDevice,
 		GetCamera().GetViewMatrix(),
 		GetCamera().GetProjectionMatrix(),
 		light.GetDLDirecton(),
 		light.GetDLColor(),
 		light.Getamb(),
-		LIGHT_NUM);
+		LIGHT_NUM);*/
+	shadow.Draw(
+		&GetCamera().GetViewMatrix(),
+		&GetCamera().GetProjectionMatrix()
+		);
 
-	uni.Render();
+	uni.Render(false);
 	for (auto pikumin : pikuminList)
 	{
-		pikumin->Render();
+		pikumin->Render(false);
 	}
 	
 	map.Render(g_pd3dDevice,
@@ -126,14 +131,14 @@ void Game::Render()
 		light.Getamb(),
 		LIGHT_NUM);
 
-	ter.Render();
+	ter.Render(false);
 
 	particleEmitter.Render(
 		GetCamera().GetViewMatrix(),
 		GetCamera().GetProjectionMatrix());
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		enemy[i].Render();
+		enemy[i].Render(false);
 	}
 
 }

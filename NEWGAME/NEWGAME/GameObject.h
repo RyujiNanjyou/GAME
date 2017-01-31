@@ -22,7 +22,7 @@ public:
 	~GameObject();
 	virtual void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name);
 	virtual bool Update() = 0;
-	void Render();
+	void Render(bool ShadowFlag);
 
 	void Setrot(D3DXQUATERNION rot){
 		rotation = rot; 
@@ -30,7 +30,7 @@ public:
 	void Setscale(D3DXVECTOR3 scale){
 		this->scale = scale;
 	};
-	const D3DXMATRIX& GetRot() const
+	 D3DXMATRIX& GetRot() 
 	{
 		return mRot;
 	}
@@ -38,7 +38,7 @@ public:
 	{
 		position = pos;
 	}
-	const D3DXVECTOR3& Getpos() const
+	 D3DXVECTOR3& Getpos()
 	{
 		return position;
 	}

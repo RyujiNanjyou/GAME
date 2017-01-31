@@ -1,12 +1,12 @@
 #pragma once
 
 #include "GameObject.h"
-#include "model.h"
 #include "MeshCollider.h"
 #include "RigidBody.h"
 
 
 //マップチップの配置情報。
+
 struct SMapChipLocInfo {
 	const char* modelName;		//モデル。
 	D3DXVECTOR3	pos;			//座標。

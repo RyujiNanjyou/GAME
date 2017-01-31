@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "model.h"
 #include "game.h"
 #include "unity.h"
 #include "seat.h"
@@ -60,7 +59,7 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name){
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
 	characterController.SetGravity(-20.0f);	//重力強め。
-	skinmodel.SetDrawToShadowMap(false);
+	skinmodel.SetShadowReceiverFlag(false);
 	Drowflag = false;
 }
 
@@ -90,7 +89,6 @@ bool Unity::Update()
 	D3DXVec3Normalize(&moveDir, &moveDir);
 	//カメラの向いている方向と、上ベクトルとの外積を計算すると横移動のベクトルが求まる。
 	D3DXVec3Cross(&direction_x, &direction_z, &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
-	//position += moveDir * moveSpeed;
 	//キャラクタが動く速度を設定。
 	MoveSpeed += moveDir * moveSpeed;
 	characterController.SetMoveSpeed(MoveSpeed);
@@ -149,28 +147,26 @@ bool Unity::Update()
 		topos.y = (-0.5*-GRVITY*time*time) / time;
 		pikuminList[OK]->setspeed(topos);
 		pikuminList[OK]->SetNowStatus(PikuminStatus::STAND_BY);
+
 		D3DXVECTOR3 toplayer = position - pikuminList[OK]->Getpos();
 		float l = D3DXVec3Length(&toplayer);
-		if (pikuminList[OK]->GetStatus()==PikuminStatus::STAND_BY && l < 0.5)
+ 		if (pikuminList[OK]->GetStatus() == PikuminStatus::STAND_BY && l < 0.7)
 		{
 			pikuminList[OK]->SetNowStatus(PikuminStatus::THROW);
 		}
-		//pikuminList[OK]->SetNowStatus(PikuminStatus::THROW);
-		//pikuminList[OK]->Setpos(position);
-		
+	
 	}
 	//増産テスト
 	if (game->GETPad()->IsTrigger(enButtonY))
 	{
-		Pikumin* pikumin = new Pikumin;
+		/*Pikumin* pikumin = new Pikumin;
 		D3DXVECTOR3 pikuminpos = D3DXVECTOR3(0.0, 0.0, 0.0);
 		pikumin->Init(g_pd3dDevice, "Assets/pikumin");
-		game->AddPikumin(pikumin);
+		game->AddPikumin(pikumin);*/
 	}
-	D3DXVECTOR3 pos = position;
-	pos.y += 0.6f;
 	
-	skinmodel.UpdateWorldMatrix(position, rotation, scale);
+	position.y += 0.6f;
+	
 	return true;
 }
 

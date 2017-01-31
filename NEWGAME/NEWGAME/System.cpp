@@ -90,7 +90,7 @@ INT  WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
 	UpdateWindow(hWnd);
-	ShowCursor(FALSE);
+	ShowCursor(TRUE);
 	//‚±‚±‚©‚çƒQ[ƒ€ŠÖŒW‚Ì‰Šú‰»B
 	Init();
 

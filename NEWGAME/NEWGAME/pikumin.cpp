@@ -1,8 +1,9 @@
 #include "stdafx.h"
-#include "model.h"
 #include "pikumin.h"
+#include "Enemy.h"
 #include "Input.h"
 #include "game.h"
+
 
 namespace {
 	/*const float PI = 3.14159265358979323846f;*/
@@ -33,7 +34,7 @@ Pikumin::~Pikumin()
 void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name)
 {
 	GameObject::Init(pd3dDevice, Name);
-	skinmodel.SetDrawToShadowMap(false);
+	skinmodel.SetShadowReceiverFlag(false);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
 	scale = D3DXVECTOR3(5.0, 5.0, 5.0);
 	nowStatus = PikuminStatus::STAND;
@@ -120,8 +121,6 @@ bool Pikumin::Update()
 	{
 		Move = PikuminHoming(game->GETunity()->Getpos(), 0.08f * 60.0f);
 	}
-	
-
 	//投げ投げ状態
 	if (nowStatus == PikuminStatus::THROW)
 	{
@@ -129,7 +128,6 @@ bool Pikumin::Update()
 		characterController.Execute();
 		position = characterController.GetPosition();
 		Speed = characterController.GetMoveSpeed();
-		
 		if (characterController.IsOnGround())
 		{
 			nowStatus = PikuminStatus::STAND;
@@ -216,7 +214,7 @@ bool Pikumin::Update()
 			ESeat = nullptr;
 			nowStatus = PikuminStatus::STAND;
 		}
-		if (ThisEnemy != NULL&&ThisEnemy->GetStatus() == EnemyStatus::DEATH)
+		if (ThisEnemy != NULL && ThisEnemy->GetStatus() == EnemyStatus::DEATH)
 		{
 			nowStatus = PikuminStatus::GOHOME;
 		}
@@ -235,9 +233,9 @@ bool Pikumin::Update()
 	//キャラクタコントローラーを実行。
 	characterController.Execute();
 	position = characterController.GetPosition();
-	D3DXVECTOR3 pos = position;
-	pos.y += 0.6f;
-	skinmodel.UpdateWorldMatrix(position,rotation,scale);
+
+	position.y += 0.6f;
+
 	return true;
 }
 

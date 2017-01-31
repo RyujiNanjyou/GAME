@@ -15,6 +15,7 @@
 		~CPhysicsWorld();
 		void Init();
 		void Update();
+		void Release();
 		/*!
 		* @brief	ダイナミックワールドを取得。
 		*/
