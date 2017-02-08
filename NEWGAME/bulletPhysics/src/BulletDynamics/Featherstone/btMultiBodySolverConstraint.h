@@ -57,7 +57,7 @@ ATTRIBUTE_ALIGNED16 (struct)	btMultiBodySolverConstraint
     btScalar		m_lowerLimit;
 	btScalar		m_upperLimit;
 	btScalar		m_rhsPenetration;
-    union
+	union
 	{
 		void*		m_originalContactPoint;
 		btScalar	m_unusedPadding4;

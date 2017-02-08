@@ -669,6 +669,6 @@ public:
 };
 
 
-#endif // GIM_BOXPRUNING_H_INCLUDED
+#endif // GIM_BOXPRorimaNG_H_INCLUDED
 
 

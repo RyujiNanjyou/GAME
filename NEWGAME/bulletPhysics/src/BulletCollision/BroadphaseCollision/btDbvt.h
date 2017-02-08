@@ -585,7 +585,7 @@ DBVT_INLINE int			Select(	const btDbvtAabbMm& o,
 	///@todo: the intrinsic version is 11% slower
 #if DBVT_USE_INTRINSIC_SSE
 
-	union btSSEUnion ///NOTE: if we use more intrinsics, move btSSEUnion into the LinearMath directory
+	union btSSEorimaon ///NOTE: if we use more intrinsics, move btSSEorimaon into the LinearMath directory
 	{
 	   __m128		ssereg;
 	   float		floats[4];
@@ -609,7 +609,7 @@ DBVT_INLINE int			Select(	const btDbvtAabbMm& o,
 	bmi=_mm_add_ps(bmi,t1);
 	bmi=_mm_add_ss(bmi,_mm_shuffle_ps(bmi,bmi,1));
 	
-	btSSEUnion tmp;
+	btSSEorimaon tmp;
 	tmp.ssereg = _mm_cmple_ss(bmi,ami);
 	return tmp.ints[0]&1;
 

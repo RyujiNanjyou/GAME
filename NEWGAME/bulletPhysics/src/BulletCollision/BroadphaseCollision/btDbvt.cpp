@@ -750,13 +750,13 @@ struct btDbvtBenchmark
 		btAlignedObjectArray<Node>		m_nodes;
 		btVector3						m_axis;
 	};
-	static btScalar			RandUnit()
+	static btScalar			Randorimat()
 	{
 		return(rand()/(btScalar)RAND_MAX);
 	}
 	static btVector3		RandVector3()
 	{
-		return(btVector3(RandUnit(),RandUnit(),RandUnit()));
+		return(btVector3(Randorimat(),Randorimat(),Randorimat()));
 	}
 	static btVector3		RandVector3(btScalar cs)
 	{
@@ -770,7 +770,7 @@ struct btDbvtBenchmark
 	{
 		btTransform	t;
 		t.setOrigin(RandVector3(cs));
-		t.setRotation(btQuaternion(RandUnit()*SIMD_PI*2,RandUnit()*SIMD_PI*2,RandUnit()*SIMD_PI*2).normalized());
+		t.setRotation(btQuaternion(Randorimat()*SIMD_PI*2,Randorimat()*SIMD_PI*2,Randorimat()*SIMD_PI*2).normalized());
 		return(t);
 	}
 	static void				RandTree(btScalar cs,btScalar eb,btScalar es,int leaves,btDbvt& dbvt)

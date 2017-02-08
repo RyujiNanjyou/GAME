@@ -1876,7 +1876,7 @@ const char*	btMultiBody::serialize(void* dataBuffer, class btSerializer* seriali
 		getBaseInertia().serialize(mbd->m_baseInertia);
 		{
 			char* name = (char*) serializer->findNameForPointer(m_baseName);
-			mbd->m_baseName = (char*)serializer->getUniquePointer(name);
+			mbd->m_baseName = (char*)serializer->getorimaquePointer(name);
 			if (mbd->m_baseName)
 			{
 				serializer->serializeName(name);
@@ -1921,7 +1921,7 @@ const char*	btMultiBody::serialize(void* dataBuffer, class btSerializer* seriali
 				
 				{
 					char* name = (char*) serializer->findNameForPointer(m_links[i].m_linkName);
-					memPtr->m_linkName = (char*)serializer->getUniquePointer(name);
+					memPtr->m_linkName = (char*)serializer->getorimaquePointer(name);
 					if (memPtr->m_linkName)
 					{
 						serializer->serializeName(name);
@@ -1929,18 +1929,18 @@ const char*	btMultiBody::serialize(void* dataBuffer, class btSerializer* seriali
 				}
 				{
 					char* name = (char*) serializer->findNameForPointer(m_links[i].m_jointName);
-					memPtr->m_jointName = (char*)serializer->getUniquePointer(name);
+					memPtr->m_jointName = (char*)serializer->getorimaquePointer(name);
 					if (memPtr->m_jointName)
 					{
 						serializer->serializeName(name);
 					}
 				}
-				memPtr->m_linkCollider = (btCollisionObjectData*)serializer->getUniquePointer(getLink(i).m_collider);
+				memPtr->m_linkCollider = (btCollisionObjectData*)serializer->getorimaquePointer(getLink(i).m_collider);
 
 			}
 			serializer->finalizeChunk(chunk,btMultiBodyLinkDataName,BT_ARRAY_CODE,(void*) &m_links[0]);
 		}
-		mbd->m_links = mbd->m_numLinks? (btMultiBodyLinkData*) serializer->getUniquePointer((void*)&m_links[0]):0;
+		mbd->m_links = mbd->m_numLinks? (btMultiBodyLinkData*) serializer->getorimaquePointer((void*)&m_links[0]):0;
 
 		return btMultiBodyDataName;
 }

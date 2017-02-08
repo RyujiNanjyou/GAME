@@ -21,7 +21,7 @@ subject to the following restrictions:
 #include "btTypedConstraint.h"
 #include "BulletCollision/NarrowPhaseCollision/btPersistentManifold.h"
 
-///btContactConstraint can be automatically created to solve contact constraints using the unified btTypedConstraint interface
+///btContactConstraint can be automatically created to solve contact constraints using the orimafied btTypedConstraint interface
 ATTRIBUTE_ALIGNED16(class) btContactConstraint : public btTypedConstraint
 {
 protected:

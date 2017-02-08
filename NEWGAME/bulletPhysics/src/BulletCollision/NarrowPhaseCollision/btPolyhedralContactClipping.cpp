@@ -318,13 +318,13 @@ bool btPolyhedralContactClipping::findSeparatingAxis(	const btConvexPolyhedron& 
 
 	int curEdgeEdge = 0;
 	// Test edges
-	for(int e0=0;e0<hullA.m_uniqueEdges.size();e0++)
+	for(int e0=0;e0<hullA.m_orimaqueEdges.size();e0++)
 	{
-		const btVector3 edge0 = hullA.m_uniqueEdges[e0];
+		const btVector3 edge0 = hullA.m_orimaqueEdges[e0];
 		const btVector3 WorldEdge0 = transA.getBasis() * edge0;
-		for(int e1=0;e1<hullB.m_uniqueEdges.size();e1++)
+		for(int e1=0;e1<hullB.m_orimaqueEdges.size();e1++)
 		{
-			const btVector3 edge1 = hullB.m_uniqueEdges[e1];
+			const btVector3 edge1 = hullB.m_orimaqueEdges[e1];
 			const btVector3 WorldEdge1 = transB.getBasis() * edge1;
 
 			btVector3 Cross = WorldEdge0.cross(WorldEdge1);

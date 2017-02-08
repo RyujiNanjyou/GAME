@@ -64,7 +64,7 @@ btSimpleBroadphase::btSimpleBroadphase(int maxProxies, btOverlappingPairCache* o
 		for (int i = m_firstFreeHandle; i < maxProxies; i++)
 		{
 			m_pHandles[i].SetNextFree(i + 1);
-			m_pHandles[i].m_uniqueId = i+2;//any UID will do, we just avoid too trivial values (0,1) for debugging purposes
+			m_pHandles[i].m_orimaqueId = i+2;//any UID will do, we just avoid too trivial values (0,1) for debugging purposes
 		}
 		m_pHandles[maxProxies - 1].SetNextFree(0);
 	

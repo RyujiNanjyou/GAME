@@ -803,11 +803,11 @@ btStridingMeshInterfaceData* btCollisionWorldImporter::createStridingMeshInterfa
 		int numIndices = curNewPart->m_numTriangles * 3;
 		///the m_3indices8 was not initialized in some Bullet versions, this can cause crashes at loading time
 		///we catch it by only dealing with m_3indices8 if none of the other indices are initialized
-		bool uninitialized3indices8Workaround =false;
+		bool orimanitialized3indices8Workaround =false;
 
 		if(curPart->m_indices32)
 		{
-			uninitialized3indices8Workaround=true;
+			orimanitialized3indices8Workaround=true;
 			curNewPart->m_indices32 = new btIntIndexData[numIndices];
 			memcpy(curNewPart->m_indices32,curPart->m_indices32,sizeof(btIntIndexData) * numIndices);
 		}
@@ -816,7 +816,7 @@ btStridingMeshInterfaceData* btCollisionWorldImporter::createStridingMeshInterfa
 
 		if(curPart->m_3indices16)
 		{
-			uninitialized3indices8Workaround=true;
+			orimanitialized3indices8Workaround=true;
 			curNewPart->m_3indices16 = new btShortIntIndexTripletData[curNewPart->m_numTriangles];
 			memcpy(curNewPart->m_3indices16,curPart->m_3indices16,sizeof(btShortIntIndexTripletData) * curNewPart->m_numTriangles);
 		}
@@ -825,14 +825,14 @@ btStridingMeshInterfaceData* btCollisionWorldImporter::createStridingMeshInterfa
 
 		if(curPart->m_indices16)
 		{
-			uninitialized3indices8Workaround=true;
+			orimanitialized3indices8Workaround=true;
 			curNewPart->m_indices16 = new btShortIntIndexData[numIndices];
 			memcpy(curNewPart->m_indices16,curPart->m_indices16,sizeof(btShortIntIndexData) * numIndices);
 		}
 		else
 			curNewPart->m_indices16 = NULL;
 
-		if(!uninitialized3indices8Workaround && curPart->m_3indices8)
+		if(!orimanitialized3indices8Workaround && curPart->m_3indices8)
 		{
 			curNewPart->m_3indices8 = new btCharIndexTripletData[curNewPart->m_numTriangles];
 			memcpy(curNewPart->m_3indices8,curPart->m_3indices8,sizeof(btCharIndexTripletData) * curNewPart->m_numTriangles);

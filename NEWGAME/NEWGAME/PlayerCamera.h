@@ -1,7 +1,7 @@
 #pragma once
 #include "camera.h"
 
-class Unity;
+class Orima;
 
 //ゲームカメラ
 class PlayerCamera
@@ -9,7 +9,7 @@ class PlayerCamera
 public:
 	PlayerCamera();
 	~PlayerCamera();
-	void Start(Unity* uni);
+	void Start(Orima* orima);
 	void PreUpdate();
 	void Update();
 	//カメラを取得。
@@ -26,7 +26,7 @@ private:
 	//カメラを更新。
 	void UpdateCamera();
 	Camera		camera;
-	Unity*		uni;			//追従するプレイヤー。
+	Orima*		orima;			//追従するプレイヤー。
 	D3DXVECTOR4 targetOffset;	//注視点のオフセット。
 	D3DXVECTOR4 toEyePos;		//注視点から視点までのベクトル。	
 	D3DXVECTOR3 cameraDir;		//カメラの方向。

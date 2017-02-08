@@ -325,7 +325,7 @@ email: projectileman@yahoo.com
 }\
 
 
-/*! Vector perp -- assumes that n is of unit length
+/*! Vector perp -- assumes that n is of orimat length
  * accepts vector v, subtracts out any component parallel to n */
 #define VEC_PERPENDICULAR(vp,v,n)			\
 {						\
@@ -336,7 +336,7 @@ email: projectileman@yahoo.com
 }\
 
 
-/*! Vector parallel -- assumes that n is of unit length */
+/*! Vector parallel -- assumes that n is of orimat length */
 #define VEC_PARALLEL(vp,v,n)			\
 {						\
    GREAL dot = VEC_DOT(v, n);			\
@@ -368,7 +368,7 @@ email: projectileman@yahoo.com
 }\
 
 
-/*! Vector reflection -- assumes n is of unit length
+/*! Vector reflection -- assumes n is of orimat length
  Takes vector v, reflects it against reflector n, and returns vr */
 #define VEC_REFLECT(vr,v,n)			\
 {						\

@@ -17,28 +17,28 @@ subject to the following restrictions:
 
 
 
-btUnionFind::~btUnionFind()
+btorimaonFind::~btorimaonFind()
 {
 	Free();
 
 }
 
-btUnionFind::btUnionFind()
+btorimaonFind::btorimaonFind()
 { 
 
 }
 
-void	btUnionFind::allocate(int N)
+void	btorimaonFind::allocate(int N)
 {
 	m_elements.resize(N);
 }
-void	btUnionFind::Free()
+void	btorimaonFind::Free()
 {
 	m_elements.clear();
 }
 
 
-void	btUnionFind::reset(int N)
+void	btorimaonFind::reset(int N)
 {
 	allocate(N);
 
@@ -49,7 +49,7 @@ void	btUnionFind::reset(int N)
 }
 
 
-class btUnionFindElementSortPredicate
+class btorimaonFindElementSortPredicate
 {
 	public:
 
@@ -59,9 +59,9 @@ class btUnionFindElementSortPredicate
 		}
 };
 
-///this is a special operation, destroying the content of btUnionFind.
+///this is a special operation, destroying the content of btorimaonFind.
 ///it sorts the elements, based on island id, in order to make it easy to iterate over islands
-void	btUnionFind::sortIslands()
+void	btorimaonFind::sortIslands()
 {
 
 	//first store the original body index, and islandId
@@ -76,7 +76,7 @@ void	btUnionFind::sortIslands()
 	}
 	
 	 // Sort the vector using predicate and std::sort
-	  //std::sort(m_elements.begin(), m_elements.end(), btUnionFindElementSortPredicate);
-	  m_elements.quickSort(btUnionFindElementSortPredicate());
+	  //std::sort(m_elements.begin(), m_elements.end(), btorimaonFindElementSortPredicate);
+	  m_elements.quickSort(btorimaonFindElementSortPredicate());
 
 }

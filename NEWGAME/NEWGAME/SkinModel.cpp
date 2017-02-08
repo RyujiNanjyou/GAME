@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "game.h"
+#include "TestScene.h"
 #include "SkinModelData.h"
 #include "Light.h"
 #include "shadow.h"
@@ -92,7 +93,7 @@ void SkinModel::DrawMeshContainer(
 	pEffect->SetVector("vEyePos", &(D3DXVECTOR4)game->GetCamera().GetEyePt());
 	//影を描画しているレンダーターゲットのテクスチャを取得。
 
-	if (ShadowReceiverFlag == TRUE && shadow != NULL)
+	if (ShadowReceiverFlag == TRUE)
 	{
 		pEffect->SetTexture("g_shadowTexture",shadow);
 	}
@@ -289,7 +290,7 @@ pEffect(nullptr)
 }
 SkinModel::~SkinModel()
 {
-
+	
 }
 
 void SkinModel::Init(SkinModelData* modelData)
@@ -298,7 +299,6 @@ void SkinModel::Init(SkinModelData* modelData)
 	isDrawToShadowMap = false;
 	isNormalMap = false;
 	isSpecularMap = false;
-	pEffect = game->GetEffectmanager()->LoadEffect("Assets/Model.fx");
 	skinModelData = modelData;
 }
 void SkinModel::UpdateWorldMatrix(const D3DXVECTOR3& trans, const D3DXQUATERNION& rot, const D3DXVECTOR3& scale)

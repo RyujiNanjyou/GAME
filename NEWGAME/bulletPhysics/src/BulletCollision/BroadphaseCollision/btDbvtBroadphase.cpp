@@ -101,7 +101,7 @@ struct	btDbvtTreeCollider : btDbvt::ICollide
 			btDbvtProxy*	pa=(btDbvtProxy*)na->data;
 			btDbvtProxy*	pb=(btDbvtProxy*)nb->data;
 #if DBVT_BP_SORTPAIRS
-			if(pa->m_uniqueId>pb->m_uniqueId) 
+			if(pa->m_orimaqueId>pb->m_orimaqueId) 
 				btSwap(pa,pb);
 #endif
 			pbp->m_paircache->addOverlappingPair(pa,pb);
@@ -175,7 +175,7 @@ btBroadphaseProxy*				btDbvtBroadphase::createProxy(	const btVector3& aabbMin,
 
 	//bproxy->aabb			=	btDbvtVolume::FromMM(aabbMin,aabbMax);
 	proxy->stage		=	m_stageCurrent;
-	proxy->m_uniqueId	=	++m_gid;
+	proxy->m_orimaqueId	=	++m_gid;
 	proxy->leaf			=	m_sets[0].insert(aabb,proxy);
 	listappend(proxy,m_stageRoots[m_stageCurrent]);
 	if(!m_deferedcollide)
@@ -571,7 +571,7 @@ void							btDbvtBroadphase::collide(btDispatcher* dispatcher)
 				if(!Intersect(pa->leaf->volume,pb->leaf->volume))
 				{
 #if DBVT_BP_SORTPAIRS
-					if(pa->m_uniqueId>pb->m_uniqueId) 
+					if(pa->m_orimaqueId>pb->m_orimaqueId) 
 						btSwap(pa,pb);
 #endif
 					m_paircache->removeOverlappingPair(pa,pb,dispatcher);
@@ -698,7 +698,7 @@ struct	btBroadphaseBenchmark
 		}
 	};
 	static int		UnsignedRand(int range=RAND_MAX-1)	{ return(rand()%(range+1)); }
-	static btScalar	UnitRand()							{ return(UnsignedRand(16384)/(btScalar)16384); }
+	static btScalar	orimatRand()							{ return(UnsignedRand(16384)/(btScalar)16384); }
 	static void		OutputTime(const char* name,btClock& c,unsigned count=0)
 	{
 		const unsigned long	us=c.getTimeMicroseconds();
@@ -744,13 +744,13 @@ void							btDbvtBroadphase::benchmark(btBroadphaseInterface* pbi)
 		for(int i=0;i<object_count;++i)
 		{
 			btBroadphaseBenchmark::Object*	po=new btBroadphaseBenchmark::Object();
-			po->center[0]=btBroadphaseBenchmark::UnitRand()*50;
-			po->center[1]=btBroadphaseBenchmark::UnitRand()*50;
-			po->center[2]=btBroadphaseBenchmark::UnitRand()*50;
-			po->extents[0]=btBroadphaseBenchmark::UnitRand()*2+2;
-			po->extents[1]=btBroadphaseBenchmark::UnitRand()*2+2;
-			po->extents[2]=btBroadphaseBenchmark::UnitRand()*2+2;
-			po->time=btBroadphaseBenchmark::UnitRand()*2000;
+			po->center[0]=btBroadphaseBenchmark::orimatRand()*50;
+			po->center[1]=btBroadphaseBenchmark::orimatRand()*50;
+			po->center[2]=btBroadphaseBenchmark::orimatRand()*50;
+			po->extents[0]=btBroadphaseBenchmark::orimatRand()*2+2;
+			po->extents[1]=btBroadphaseBenchmark::orimatRand()*2+2;
+			po->extents[2]=btBroadphaseBenchmark::orimatRand()*2+2;
+			po->time=btBroadphaseBenchmark::orimatRand()*2000;
 			po->proxy=pbi->createProxy(po->center-po->extents,po->center+po->extents,0,po,1,1,0,0);
 			objects.push_back(po);
 		}

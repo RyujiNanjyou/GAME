@@ -32,7 +32,7 @@ btRigidBody& btActionInterface::getFixedBody()
 	return s_fixed;
 }
 
-btRaycastVehicle::btRaycastVehicle(const btVehicleTuning& tuning,btRigidBody* chassis,	btVehicleRaycaster* raycaster )
+btRaycastVehicle::btRaycastVehicle(const btVehicleTorimang& torimang,btRigidBody* chassis,	btVehicleRaycaster* raycaster )
 :m_vehicleRaycaster(raycaster),
 m_pitchControl(btScalar(0.))
 {
@@ -40,13 +40,13 @@ m_pitchControl(btScalar(0.))
 	m_indexRightAxis = 0;
 	m_indexUpAxis = 2;
 	m_indexForwardAxis = 1;
-	defaultInit(tuning);
+	defaultInit(torimang);
 }
 
 
-void btRaycastVehicle::defaultInit(const btVehicleTuning& tuning)
+void btRaycastVehicle::defaultInit(const btVehicleTorimang& torimang)
 {
-	(void)tuning;
+	(void)torimang;
 	m_currentVehicleSpeedKmHour = btScalar(0.);
 	m_steeringValue = btScalar(0.);
 	
@@ -62,7 +62,7 @@ btRaycastVehicle::~btRaycastVehicle()
 //
 // basically most of the code is general for 2 or 4 wheel vehicles, but some of it needs to be reviewed
 //
-btWheelInfo&	btRaycastVehicle::addWheel( const btVector3& connectionPointCS, const btVector3& wheelDirectionCS0,const btVector3& wheelAxleCS, btScalar suspensionRestLength, btScalar wheelRadius,const btVehicleTuning& tuning, bool isFrontWheel)
+btWheelInfo&	btRaycastVehicle::addWheel( const btVector3& connectionPointCS, const btVector3& wheelDirectionCS0,const btVector3& wheelAxleCS, btScalar suspensionRestLength, btScalar wheelRadius,const btVehicleTorimang& torimang, bool isFrontWheel)
 {
 
 	btWheelInfoConstructionInfo ci;
@@ -72,13 +72,13 @@ btWheelInfo&	btRaycastVehicle::addWheel( const btVector3& connectionPointCS, con
 	ci.m_wheelAxleCS = wheelAxleCS;
 	ci.m_suspensionRestLength = suspensionRestLength;
 	ci.m_wheelRadius = wheelRadius;
-	ci.m_suspensionStiffness = tuning.m_suspensionStiffness;
-	ci.m_wheelsDampingCompression = tuning.m_suspensionCompression;
-	ci.m_wheelsDampingRelaxation = tuning.m_suspensionDamping;
-	ci.m_frictionSlip = tuning.m_frictionSlip;
+	ci.m_suspensionStiffness = torimang.m_suspensionStiffness;
+	ci.m_wheelsDampingCompression = torimang.m_suspensionCompression;
+	ci.m_wheelsDampingRelaxation = torimang.m_suspensionDamping;
+	ci.m_frictionSlip = torimang.m_frictionSlip;
 	ci.m_bIsFrontWheel = isFrontWheel;
-	ci.m_maxSuspensionTravelCm = tuning.m_maxSuspensionTravelCm;
-	ci.m_maxSuspensionForce = tuning.m_maxSuspensionForce;
+	ci.m_maxSuspensionTravelCm = torimang.m_maxSuspensionTravelCm;
+	ci.m_maxSuspensionForce = torimang.m_maxSuspensionForce;
 
 	m_wheelInfo.push_back( btWheelInfo(ci));
 	

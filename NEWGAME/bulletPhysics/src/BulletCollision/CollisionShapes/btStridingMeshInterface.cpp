@@ -220,7 +220,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 
 	trimeshData->m_numMeshParts = getNumSubParts();
 
-	//void* uniquePtr = 0;
+	//void* orimaquePtr = 0;
 
 	trimeshData->m_meshPartsPtr = 0;
 
@@ -228,7 +228,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 	{
 		btChunk* chunk = serializer->allocate(sizeof(btMeshPartData),trimeshData->m_numMeshParts);
 		btMeshPartData* memPtr = (btMeshPartData*)chunk->m_oldPtr;
-		trimeshData->m_meshPartsPtr = (btMeshPartData *)serializer->getUniquePointer(memPtr);
+		trimeshData->m_meshPartsPtr = (btMeshPartData *)serializer->getorimaquePointer(memPtr);
 
 
 	//	int numtotalphysicsverts = 0;
@@ -268,7 +268,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 					{
 						btChunk* chunk = serializer->allocate(sizeof(btIntIndexData),numindices);
 						btIntIndexData* tmpIndices = (btIntIndexData*)chunk->m_oldPtr;
-						memPtr->m_indices32 = (btIntIndexData*)serializer->getUniquePointer(tmpIndices);
+						memPtr->m_indices32 = (btIntIndexData*)serializer->getorimaquePointer(tmpIndices);
 						for (gfxindex=0;gfxindex<numtriangles;gfxindex++)
 						{
 							unsigned int* tri_indices= (unsigned int*)(indexbase+gfxindex*indexstride);
@@ -286,7 +286,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 					{
 						btChunk* chunk = serializer->allocate(sizeof(btShortIntIndexTripletData),numtriangles);
 						btShortIntIndexTripletData* tmpIndices = (btShortIntIndexTripletData*)chunk->m_oldPtr;
-						memPtr->m_3indices16 = (btShortIntIndexTripletData*) serializer->getUniquePointer(tmpIndices);
+						memPtr->m_3indices16 = (btShortIntIndexTripletData*) serializer->getorimaquePointer(tmpIndices);
 						for (gfxindex=0;gfxindex<numtriangles;gfxindex++)
 						{
 							unsigned short int* tri_indices= (unsigned short int*)(indexbase+gfxindex*indexstride);
@@ -304,7 +304,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 					{
 						btChunk* chunk = serializer->allocate(sizeof(btCharIndexTripletData),numtriangles);
 						btCharIndexTripletData* tmpIndices = (btCharIndexTripletData*)chunk->m_oldPtr;
-						memPtr->m_3indices8 = (btCharIndexTripletData*) serializer->getUniquePointer(tmpIndices);
+						memPtr->m_3indices8 = (btCharIndexTripletData*) serializer->getorimaquePointer(tmpIndices);
 						for (gfxindex=0;gfxindex<numtriangles;gfxindex++)
 						{
 							unsigned char* tri_indices= (unsigned char*)(indexbase+gfxindex*indexstride);
@@ -333,7 +333,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 				 {
 					 btChunk* chunk = serializer->allocate(sizeof(btVector3FloatData),numverts);
 					 btVector3FloatData* tmpVertices = (btVector3FloatData*) chunk->m_oldPtr;
-					 memPtr->m_vertices3f = (btVector3FloatData *)serializer->getUniquePointer(tmpVertices);
+					 memPtr->m_vertices3f = (btVector3FloatData *)serializer->getorimaquePointer(tmpVertices);
 					 for (int i=0;i<numverts;i++)
 					 {
 						 graphicsbase = (float*)(vertexbase+i*stride);
@@ -352,7 +352,7 @@ const char*	btStridingMeshInterface::serialize(void* dataBuffer, btSerializer* s
 					{
 						btChunk* chunk = serializer->allocate(sizeof(btVector3DoubleData),numverts);
 						btVector3DoubleData* tmpVertices = (btVector3DoubleData*) chunk->m_oldPtr;
-						memPtr->m_vertices3d = (btVector3DoubleData *) serializer->getUniquePointer(tmpVertices);
+						memPtr->m_vertices3d = (btVector3DoubleData *) serializer->getorimaquePointer(tmpVertices);
 						for (int i=0;i<numverts;i++)
 					 {
 						 double* graphicsbase = (double*)(vertexbase+i*stride);//for now convert to float, might leave it at double

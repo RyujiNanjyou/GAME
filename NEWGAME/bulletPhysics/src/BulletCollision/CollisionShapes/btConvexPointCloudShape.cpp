@@ -52,7 +52,7 @@ btVector3	btConvexPointCloudShape::localGetSupportingVertexWithoutMargin(const b
 	return supVec;
 }
 
-void	btConvexPointCloudShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btConvexPointCloudShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
     for( int j = 0; j < numVectors; j++ )
     {

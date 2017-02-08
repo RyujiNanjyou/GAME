@@ -32,9 +32,9 @@ btVector3	btConvex2dShape::localGetSupportingVertexWithoutMargin(const btVector3
 	return m_childConvexShape->localGetSupportingVertexWithoutMargin(vec);
 }
 
-void	btConvex2dShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btConvex2dShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
-	m_childConvexShape->batchedUnitVectorGetSupportingVertexWithoutMargin(vectors,supportVerticesOut,numVectors);
+	m_childConvexShape->batchedorimatVectorGetSupportingVertexWithoutMargin(vectors,supportVerticesOut,numVectors);
 }
 
 

@@ -2,6 +2,7 @@
 #include "System.h"
 #include "Input.h"
 #include "RenderTarget.h"
+#include "light.h"
 
 #include <windowsx.h>
 
@@ -9,6 +10,8 @@
 LPDIRECT3D9				g_pD3D = NULL;
 LPDIRECT3DDEVICE9		g_pd3dDevice = NULL;
 HWND					g_hwnd = NULL;
+EffectManager*			effectmanager = NULL;
+
 
 extern void Init();
 extern void Render();
@@ -33,6 +36,8 @@ void InitD3D(HWND hWnd)
 	g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
 		D3DCREATE_HARDWARE_VERTEXPROCESSING,
 		&d3dpp, &g_pd3dDevice);
+
+	effectmanager = new EffectManager;
 
 }
 //メッセージプロシージャ

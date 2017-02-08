@@ -497,7 +497,7 @@ void btHingeConstraint::getInfo2Internal(btConstraintInfo2* info, const btTransf
 	// the hinge axis should be equal. thus the constraint equations are
 	//    p*w1 - p*w2 = 0
 	//    q*w1 - q*w2 = 0
-	// where p and q are unit vectors normal to the hinge axis, and w1 and w2
+	// where p and q are orimat vectors normal to the hinge axis, and w1 and w2
 	// are the angular velocity vectors of the two bodies.
 	// get hinge axis (Z)
 	btVector3 ax1 = trA.getBasis().getColumn(2);
@@ -523,7 +523,7 @@ void btHingeConstraint::getInfo2Internal(btConstraintInfo2* info, const btTransf
 	info->m_J2angularAxis[s4 + 2] = -q[2];
     // compute the right hand side of the constraint equation. set relative
     // body velocities along p and q to bring the hinge back into alignment.
-    // if ax1,ax2 are the unit length hinge axes as computed from body1 and
+    // if ax1,ax2 are the orimat length hinge axes as computed from body1 and
     // body2, we need to rotate both bodies along the axis u = (ax1 x ax2).
     // if `theta' is the angle between ax1 and ax2, we need an angular velocity
     // along u to cover angle erp*theta in one step :
@@ -531,7 +531,7 @@ void btHingeConstraint::getInfo2Internal(btConstraintInfo2* info, const btTransf
     //                      = (erp*fps) * theta
     //    angular_velocity  = |angular_velocity| * (ax1 x ax2) / |ax1 x ax2|
     //                      = (erp*fps) * theta * (ax1 x ax2) / sin(theta)
-    // ...as ax1 and ax2 are unit length. if theta is smallish,
+    // ...as ax1 and ax2 are orimat length. if theta is smallish,
     // theta ~= sin(theta), so
     //    angular_velocity  = (erp*fps) * (ax1 x ax2)
     // ax1 x ax2 is in the plane space of ax1, so we project the angular
@@ -897,7 +897,7 @@ void btHingeConstraint::getInfo2InternalUsingFrameOffset(btConstraintInfo2* info
 	// the hinge axis should be equal. thus the constraint equations are
 	//    p*w1 - p*w2 = 0
 	//    q*w1 - q*w2 = 0
-	// where p and q are unit vectors normal to the hinge axis, and w1 and w2
+	// where p and q are orimat vectors normal to the hinge axis, and w1 and w2
 	// are the angular velocity vectors of the two bodies.
 	int s3 = 3 * s;
 	int s4 = 4 * s;
@@ -916,7 +916,7 @@ void btHingeConstraint::getInfo2InternalUsingFrameOffset(btConstraintInfo2* info
 	info->m_J2angularAxis[s4 + 2] = -q[2];
 	// compute the right hand side of the constraint equation. set relative
 	// body velocities along p and q to bring the hinge back into alignment.
-	// if ax1A,ax1B are the unit length hinge axes as computed from bodyA and
+	// if ax1A,ax1B are the orimat length hinge axes as computed from bodyA and
 	// bodyB, we need to rotate both bodies along the axis u = (ax1 x ax2).
 	// if "theta" is the angle between ax1 and ax2, we need an angular velocity
 	// along u to cover angle erp*theta in one step :
@@ -924,7 +924,7 @@ void btHingeConstraint::getInfo2InternalUsingFrameOffset(btConstraintInfo2* info
 	//                      = (erp*fps) * theta
 	//    angular_velocity  = |angular_velocity| * (ax1 x ax2) / |ax1 x ax2|
 	//                      = (erp*fps) * theta * (ax1 x ax2) / sin(theta)
-	// ...as ax1 and ax2 are unit length. if theta is smallish,
+	// ...as ax1 and ax2 are orimat length. if theta is smallish,
 	// theta ~= sin(theta), so
 	//    angular_velocity  = (erp*fps) * (ax1 x ax2)
 	// ax1 x ax2 is in the plane space of ax1, so we project the angular

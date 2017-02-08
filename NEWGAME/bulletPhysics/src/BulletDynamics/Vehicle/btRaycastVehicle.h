@@ -19,7 +19,7 @@ class btDynamicsWorld;
 #include "btWheelInfo.h"
 #include "BulletDynamics/Dynamics/btActionInterface.h"
 
-class btVehicleTuning;
+class btVehicleTorimang;
 
 ///rayCast vehicle, very special constraint that turn a rigidbody into a vehicle.
 class btRaycastVehicle : public btActionInterface
@@ -35,11 +35,11 @@ class btRaycastVehicle : public btActionInterface
 		int	m_userConstraintId;
 
 public:
-	class btVehicleTuning
+	class btVehicleTorimang
 		{
 			public:
 
-			btVehicleTuning()
+			btVehicleTorimang()
 				:m_suspensionStiffness(btScalar(5.88)),
 				m_suspensionCompression(btScalar(0.83)),
 				m_suspensionDamping(btScalar(0.88)),
@@ -69,12 +69,12 @@ private:
 	int m_indexUpAxis;
 	int	m_indexForwardAxis;
 
-	void defaultInit(const btVehicleTuning& tuning);
+	void defaultInit(const btVehicleTorimang& torimang);
 
 public:
 
 	//constructor to create a car from an existing rigidbody
-	btRaycastVehicle(const btVehicleTuning& tuning,btRigidBody* chassis,	btVehicleRaycaster* raycaster );
+	btRaycastVehicle(const btVehicleTorimang& torimang,btRigidBody* chassis,	btVehicleRaycaster* raycaster );
 
 	virtual ~btRaycastVehicle() ;
 
@@ -112,7 +112,7 @@ public:
 	
 //	void	setRaycastWheelInfo( int wheelIndex , bool isInContact, const btVector3& hitPoint, const btVector3& hitNormal,btScalar depth);
 
-	btWheelInfo&	addWheel( const btVector3& connectionPointCS0, const btVector3& wheelDirectionCS0,const btVector3& wheelAxleCS,btScalar suspensionRestLength,btScalar wheelRadius,const btVehicleTuning& tuning, bool isFrontWheel);
+	btWheelInfo&	addWheel( const btVector3& connectionPointCS0, const btVector3& wheelDirectionCS0,const btVector3& wheelAxleCS,btScalar suspensionRestLength,btScalar wheelRadius,const btVehicleTorimang& torimang, bool isFrontWheel);
 
 	inline int		getNumWheels() const {
 		return int (m_wheelInfo.size());

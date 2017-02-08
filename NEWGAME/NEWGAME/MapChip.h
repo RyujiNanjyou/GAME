@@ -24,6 +24,6 @@ public:
 private:
 	RigidBody rigidBody;		//剛体。
 	MeshCollider meshCollider;	//メッシュコライダー。
-	//std::unique_ptr<D3DXMATRIX[]>		worldMatrixBuffer;	//ワールド行列のバッファ
+	//std::orimaque_ptr<D3DXMATRIX[]>		worldMatrixBuffer;	//ワールド行列のバッファ
 };
 

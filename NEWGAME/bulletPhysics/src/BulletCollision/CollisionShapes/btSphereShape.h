@@ -35,8 +35,8 @@ public:
 	
 	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
-	//notice that the vectors should be unit length
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	//notice that the vectors should be orimat length
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 
 
 	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
@@ -62,7 +62,7 @@ public:
 	virtual btScalar	getMargin() const
 	{
 		//to improve gjk behaviour, use radius+margin as the full margin, so never get into the penetration case
-		//this means, non-uniform scaling is not supported anymore
+		//this means, non-orimaform scaling is not supported anymore
 		return getRadius();
 	}
 

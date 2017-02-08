@@ -1,9 +1,44 @@
-﻿2017/01/23 21:19:43 にビルドを開始しました。
+﻿2017/02/06 10:01:21 にビルドを開始しました。
      1>ノード 3 上のプロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\bulletPhysics\src\BulletDynamics\BulletDynamics.vcxproj" (Build ターゲット)。
-     1>Lib:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IE:\_Users\buram_000\Desktop\GAME\NEWGAME\\BulletPhysics\src /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _DEBUG /D _DEBUG /D USE_GRAPHICAL_BENCHMARK /D _CRT_SECURE_NO_WARNINGS /D _CRT_SECURE_NO_DEPRECATE /D _SCL_SECURE_NO_WARNINGS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MTd /GS /arch:SSE /fp:fast /Zc:wchar_t /Zc:forScope /GR /Fo"BulletDynamics.dir\Debug\\" /Fd"BulletDynamics.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ConstraintSolver\btUniversalConstraint.cpp
+         btUniversalConstraint.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\\bulletPhysics\lib\Debug\BulletDynamics_Debug.lib" /NOLOGO  /machine:X86 BulletDynamics.dir\Debug\btKinematicCharacterController.obj
+         BulletDynamics.dir\Debug\btConeTwistConstraint.obj
+         BulletDynamics.dir\Debug\btContactConstraint.obj
+         BulletDynamics.dir\Debug\btFixedConstraint.obj
+         BulletDynamics.dir\Debug\btGearConstraint.obj
+         BulletDynamics.dir\Debug\btGeneric6DofConstraint.obj
+         BulletDynamics.dir\Debug\btGeneric6DofSpring2Constraint.obj
+         BulletDynamics.dir\Debug\btGeneric6DofSpringConstraint.obj
+         BulletDynamics.dir\Debug\btHinge2Constraint.obj
+         BulletDynamics.dir\Debug\btHingeConstraint.obj
+         BulletDynamics.dir\Debug\btNNCGConstraintSolver.obj
+         BulletDynamics.dir\Debug\btPoint2PointConstraint.obj
+         BulletDynamics.dir\Debug\btSequentialImpulseConstraintSolver.obj
+         BulletDynamics.dir\Debug\btSliderConstraint.obj
+         BulletDynamics.dir\Debug\btSolve2LinearConstraint.obj
+         BulletDynamics.dir\Debug\btTypedConstraint.obj
+         BulletDynamics.dir\Debug\btUniversalConstraint.obj
+         BulletDynamics.dir\Debug\btDiscreteDynamicsWorld.obj
+         BulletDynamics.dir\Debug\btRigidBody.obj
+         BulletDynamics.dir\Debug\btSimpleDynamicsWorld.obj
+         BulletDynamics.dir\Debug\btMultiBody.obj
+         BulletDynamics.dir\Debug\btMultiBodyConstraint.obj
+         BulletDynamics.dir\Debug\btMultiBodyConstraintSolver.obj
+         BulletDynamics.dir\Debug\btMultiBodyDynamicsWorld.obj
+         BulletDynamics.dir\Debug\btMultiBodyJointLimitConstraint.obj
+         BulletDynamics.dir\Debug\btMultiBodyJointMotor.obj
+         BulletDynamics.dir\Debug\btMultiBodyPoint2Point.obj
+         BulletDynamics.dir\Debug\btDantzigLCP.obj
+         BulletDynamics.dir\Debug\btLemkeAlgorithm.obj
+         BulletDynamics.dir\Debug\btMLCPSolver.obj
+         BulletDynamics.dir\Debug\btRaycastVehicle.obj
+         BulletDynamics.dir\Debug\btWheelInfo.obj
          BulletDynamics.vcxproj -> E:\_Users\buram_000\Desktop\GAME\NEWGAME\\bulletPhysics\lib\Debug\BulletDynamics_Debug.lib
      1>プロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\bulletPhysics\src\BulletDynamics\BulletDynamics.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:00.68
+経過時間 00:00:01.14

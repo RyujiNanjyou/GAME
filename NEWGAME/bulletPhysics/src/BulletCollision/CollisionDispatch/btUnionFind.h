@@ -13,8 +13,8 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef BT_UNION_FIND_H
-#define BT_UNION_FIND_H
+#ifndef BT_orimaON_FIND_H
+#define BT_orimaON_FIND_H
 
 #include "LinearMath/btAlignedObjectArray.h"
 
@@ -29,21 +29,21 @@ struct	btElement
 	int	m_sz;
 };
 
-///UnionFind calculates connected subsets
-// Implements weighted Quick Union with path compression
+///orimaonFind calculates connected subsets
+// Implements weighted Quick orimaon with path compression
 // optimization: could use short ints instead of ints (halving memory, would limit the number of rigid bodies to 64k, sounds reasonable)
-class btUnionFind
+class btorimaonFind
   {
     private:
 		btAlignedObjectArray<btElement>	m_elements;
 
     public:
 	  
-		btUnionFind();
-		~btUnionFind();
+		btorimaonFind();
+		~btorimaonFind();
 
 	
-		//this is a special operation, destroying the content of btUnionFind.
+		//this is a special operation, destroying the content of btorimaonFind.
 		//it sorts the elements, based on island id, in order to make it easy to iterate over islands
 		void	sortIslands();
 
@@ -78,14 +78,14 @@ class btUnionFind
 			return (find(p) == find(q)); 
 		}
 
-		void unite(int p, int q)
+		void orimate(int p, int q)
 		{
 			int i = find(p), j = find(q);
 			if (i == j) 
 				return;
 
 #ifndef USE_PATH_COMPRESSION
-			//weighted quick union, this keeps the 'trees' balanced, and keeps performance of unite O( log(n) )
+			//weighted quick orimaon, this keeps the 'trees' balanced, and keeps performance of orimate O( log(n) )
 			if (m_elements[i].m_sz < m_elements[j].m_sz)
 			{ 
 				m_elements[i].m_id = j; m_elements[j].m_sz += m_elements[i].m_sz; 
@@ -126,4 +126,4 @@ class btUnionFind
   };
 
 
-#endif //BT_UNION_FIND_H
+#endif //BT_orimaON_FIND_H

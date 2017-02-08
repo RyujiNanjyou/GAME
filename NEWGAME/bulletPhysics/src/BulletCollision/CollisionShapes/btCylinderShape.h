@@ -54,7 +54,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 
 	virtual void setMargin(btScalar collisionMargin)
 	{
@@ -142,7 +142,7 @@ public:
 	btCylinderShapeX (const btVector3& halfExtents);
 
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 	
 		//debugging
 	virtual const char*	getName()const
@@ -165,7 +165,7 @@ public:
 	btCylinderShapeZ (const btVector3& halfExtents);
 
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 
 		//debugging
 	virtual const char*	getName()const

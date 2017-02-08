@@ -352,7 +352,7 @@ inline __m128 operator * (const __m128 A, const __m128 B)
 	#ifndef BT_INFINITY
 		struct btInfMaskConverter
 		{
-		        union {
+		        orimaon {
 		                float mask;
 		                int intmask;
 		        };
@@ -614,7 +614,7 @@ SIMD_FORCE_INLINE unsigned short btSwapEndian(short val)
 ///btSwapFloat uses using char pointers to swap the endianness
 ////btSwapFloat/btSwapDouble will NOT return a float, because the machine might 'correct' invalid floating point values
 ///Not all values of sign/exponent/mantissa are valid floating point numbers according to IEEE 754. 
-///When a floating point unit is faced with an invalid value, it may actually change the value, or worse, throw an exception. 
+///When a floating point orimat is faced with an invalid value, it may actually change the value, or worse, throw an exception. 
 ///In most systems, running user mode code, you wouldn't get an exception, but instead the hardware/os/runtime will 'fix' the number for you. 
 ///so instead of returning a float/double, we return integer/long long integer
 SIMD_FORCE_INLINE unsigned int  btSwapEndianFloat(float d)
@@ -762,7 +762,7 @@ template <typename T>T* btAlignPointer(T* unalignedPtr, size_t alignment)
 		
 	struct btConvertPointerSizeT
 	{
-		union 
+		union
 		{
 				T* ptr;
 				size_t integer;

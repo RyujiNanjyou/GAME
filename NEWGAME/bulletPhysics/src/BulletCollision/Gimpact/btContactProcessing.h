@@ -138,7 +138,7 @@ public:
 
 	void merge_contacts(const btContactArray & contacts, bool normal_contact_average = true);
 
-	void merge_contacts_unique(const btContactArray & contacts);
+	void merge_contacts_orimaque(const btContactArray & contacts);
 };
 
 

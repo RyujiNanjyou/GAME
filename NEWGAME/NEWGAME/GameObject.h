@@ -16,13 +16,15 @@ protected:
 	D3DXMATRIX	mRot;
 	D3DXMATRIX	mWorld;			//ÉèÅ[ÉãÉhçsóÒ
 	D3DXVECTOR3	moveDir;
+	
 	bool Drowflag;
+	Animation anim;
 public:
 	GameObject();
 	~GameObject();
 	virtual void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name);
 	virtual bool Update() = 0;
-	void Render(bool ShadowFlag);
+	void Render(D3DXMATRIX viwe, D3DXMATRIX porj, bool ShadowFlag);
 
 	void Setrot(D3DXQUATERNION rot){
 		rotation = rot; 

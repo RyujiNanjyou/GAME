@@ -13,39 +13,39 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef BT_UNIFORM_SCALING_SHAPE_H
-#define BT_UNIFORM_SCALING_SHAPE_H
+#ifndef BT_orimaFORM_SCALING_SHAPE_H
+#define BT_orimaFORM_SCALING_SHAPE_H
 
 #include "btConvexShape.h"
 #include "BulletCollision/BroadphaseCollision/btBroadphaseProxy.h" // for the types
 
-///The btUniformScalingShape allows to re-use uniform scaled instances of btConvexShape in a memory efficient way.
-///Istead of using btUniformScalingShape, it is better to use the non-uniform setLocalScaling method on convex shapes that implement it.
-ATTRIBUTE_ALIGNED16(class) btUniformScalingShape : public btConvexShape
+///The btorimaformScalingShape allows to re-use orimaform scaled instances of btConvexShape in a memory efficient way.
+///Istead of using btorimaformScalingShape, it is better to use the non-orimaform setLocalScaling method on convex shapes that implement it.
+ATTRIBUTE_ALIGNED16(class) btorimaformScalingShape : public btConvexShape
 {
 	btConvexShape*	m_childConvexShape;
 
-	btScalar	m_uniformScalingFactor;
+	btScalar	m_orimaformScalingFactor;
 	
 	public:
 	
 	BT_DECLARE_ALIGNED_ALLOCATOR();
 	
-	btUniformScalingShape(	btConvexShape* convexChildShape, btScalar uniformScalingFactor);
+	btorimaformScalingShape(	btConvexShape* convexChildShape, btScalar orimaformScalingFactor);
 	
-	virtual ~btUniformScalingShape();
+	virtual ~btorimaformScalingShape();
 	
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
 
 	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 
 	virtual void	calculateLocalInertia(btScalar mass,btVector3& inertia) const;
 
-	btScalar	getUniformScalingFactor() const
+	btScalar	getorimaformScalingFactor() const
 	{
-		return m_uniformScalingFactor;
+		return m_orimaformScalingFactor;
 	}
 
 	btConvexShape*	getChildShape() 
@@ -60,7 +60,7 @@ ATTRIBUTE_ALIGNED16(class) btUniformScalingShape : public btConvexShape
 
 	virtual const char*	getName()const 
 	{
-		return "UniformScalingShape";
+		return "orimaformScalingShape";
 	}
 	
 
@@ -86,4 +86,4 @@ ATTRIBUTE_ALIGNED16(class) btUniformScalingShape : public btConvexShape
 
 };
 
-#endif //BT_UNIFORM_SCALING_SHAPE_H
+#endif //BT_orimaFORM_SCALING_SHAPE_H

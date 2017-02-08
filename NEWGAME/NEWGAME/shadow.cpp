@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "shadow.h"
 #include "game.h"
-
+#include "pikumin.h"
 
 
 ShadowMap::ShadowMap()
@@ -18,6 +18,7 @@ void ShadowMap::Create(int w, int h)
 	D3DXMatrixIdentity(&rot);
 
 	modeldata.LoadModelData("Assets/orima.x", NULL);
+	modeldata.LoadModelData("Assets/pikumin.x", NULL);
 	skinmodel.Init(&modeldata);
 	rendertarget.Create(w, h, 1, D3DFMT_A8R8G8B8, D3DFMT_D16, D3DMULTISAMPLE_NONE, 0);
 	this->h = h;
@@ -33,6 +34,7 @@ void ShadowMap::Draw(
 	D3DXMATRIX* projMatrix
 	)
 {
+	
 
 	g_pd3dDevice->GetViewport(&viewport);
 	g_pd3dDevice->GetRenderTarget(0, &BackBuffer);
@@ -49,25 +51,26 @@ void ShadowMap::Draw(
 		1.0f,
 		0);
 
-	D3DVIEWPORT9 viewport = { 0, 0, w, h, 0.0f, 1.0f };
-	g_pd3dDevice->SetViewport(&viewport);
+	/*D3DVIEWPORT9 viewport = { 0, 0, w, h, 0.0f, 1.0f };
+	g_pd3dDevice->SetViewport(&viewport);*/
 	g_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	float aspect;
-	aspect = (float)viewport.Width / (float)viewport.Height;
-	D3DXMatrixPerspectiveFovLH(&ProjMatrix, D3DXToRadian(45.0f), aspect, Near, Far);
+	/*float aspect;
+	aspect = (float)viewport.Width / (float)viewport.Height;*/
+	D3DXMatrixOrthoLH(&ProjMatrix, 20,20, Near, Far);
 	CreateLight(ProjMatrix);
 	ID3DXEffect* backup;
-	backup = skinmodel.GetEffect();
-	skinmodel.SetEffect(pEffect);
-	
-	game->GETunity()->Render(true);
+	//backup = skinmodel.GetEffect();
+	//skinmodel.SetEffect(pEffect);
 
-	//const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
-	/*for (auto pikumin : pikuminList)
+	game->GETOrima()->Render(lvMatrix, ProjMatrix, true);
+
+
+	const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
+	for (auto pikumin : pikuminList)
 	{
-
-	}*/
-	skinmodel.SetEffect(backup);
+		pikumin->Render(lvMatrix, ProjMatrix, true);
+	}
+	//skinmodel.SetEffect(backup);
 	g_pd3dDevice->SetRenderTarget(0, BackBuffer);
 	g_pd3dDevice->SetDepthStencilSurface(BackZ);
 	g_pd3dDevice->SetViewport(&viewport);

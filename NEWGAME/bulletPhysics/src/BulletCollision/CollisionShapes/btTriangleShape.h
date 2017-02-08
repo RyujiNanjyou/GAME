@@ -73,7 +73,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 
 	}
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 	{
 		for (int i=0;i<numVectors;i++)
 		{

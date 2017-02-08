@@ -100,7 +100,7 @@ const char*	btCollisionShape::serialize(void* dataBuffer, btSerializer* serializ
 {
 	btCollisionShapeData* shapeData = (btCollisionShapeData*) dataBuffer;
 	char* name = (char*) serializer->findNameForPointer(this);
-	shapeData->m_name = (char*)serializer->getUniquePointer(name);
+	shapeData->m_name = (char*)serializer->getorimaquePointer(name);
 	if (shapeData->m_name)
 	{
 		serializer->serializeName(name);

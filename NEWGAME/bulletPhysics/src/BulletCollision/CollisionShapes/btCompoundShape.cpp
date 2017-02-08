@@ -335,12 +335,12 @@ const char*	btCompoundShape::serialize(void* dataBuffer, btSerializer* serialize
 	{
 		btChunk* chunk = serializer->allocate(sizeof(btCompoundShapeChildData),shapeData->m_numChildShapes);
 		btCompoundShapeChildData* memPtr = (btCompoundShapeChildData*)chunk->m_oldPtr;
-		shapeData->m_childShapePtr = (btCompoundShapeChildData*)serializer->getUniquePointer(memPtr);
+		shapeData->m_childShapePtr = (btCompoundShapeChildData*)serializer->getorimaquePointer(memPtr);
 
 		for (int i=0;i<shapeData->m_numChildShapes;i++,memPtr++)
 		{
 			memPtr->m_childMargin = float(m_children[i].m_childMargin);
-			memPtr->m_childShape = (btCollisionShapeData*)serializer->getUniquePointer(m_children[i].m_childShape);
+			memPtr->m_childShape = (btCollisionShapeData*)serializer->getorimaquePointer(m_children[i].m_childShape);
 			//don't serialize shapes that already have been serialized
 			if (!serializer->findPointer(m_children[i].m_childShape))
 			{

@@ -40,13 +40,13 @@ subject to the following restrictions:
  * make
  * 
  * An alternative to premake is cmake. You can download cmake from http://www.cmake.org
- * cmake can autogenerate projectfiles for Microsoft Visual Studio, Apple Xcode, KDevelop and Unix Makefiles.
+ * cmake can autogenerate projectfiles for Microsoft Visual Studio, Apple Xcode, KDevelop and orimax Makefiles.
  * The easiest is to run the CMake cmake-gui graphical user interface and choose the options and generate projectfiles.
  * You can also use cmake in the command-line. Here are some examples for various platforms:
  * cmake . -G "Visual Studio 9 2008"
  * cmake . -G Xcode
- * cmake . -G "Unix Makefiles"
- * Although cmake is recommended, you can also use autotools for UNIX: ./autogen.sh ./configure to create a Makefile and then run make.
+ * cmake . -G "orimax Makefiles"
+ * Although cmake is recommended, you can also use autotools for orimaX: ./autogen.sh ./configure to create a Makefile and then run make.
  * 
  * @subsection step3 Step 3: Testing demos
  * Try to run and experiment with BasicDemo executable as a starting point.

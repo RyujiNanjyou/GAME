@@ -1,11 +1,11 @@
-﻿2017/01/31 21:38:32 にビルドを開始しました。
+﻿2017/02/08 18:59:21 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SkinModel.cpp
-         SkinModel.cpp
-     1>cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GAMEmain.cpp
+         GAMEmain.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib BulletCollision_Debug.lib BulletDynamics_Debug.lib LinearMath_Debug.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.lib" /MACHINE:X86 Debug\Animation.obj
+         Debug\bloom.obj
          Debug\camera.obj
          Debug\CapsuleCollider.obj
          Debug\CharacterController.obj
@@ -32,19 +32,23 @@
          Debug\Primitive.obj
          Debug\RenderTarget.obj
          Debug\RigidBody.obj
+         Debug\SceneManager.obj
          Debug\seat.obj
          Debug\shadow.obj
          Debug\SkinModel.obj
          Debug\SkinModelData.obj
+         Debug\Sprite.obj
          Debug\stage.obj
          Debug\stdafx.obj
          Debug\System.obj
+         Debug\TestScene.obj
+         Debug\TitleScene.obj
          Debug\tkEnginePreCompile.obj
-         Debug\unity.obj
+         Debug\orima.obj
          Debug\VertexBuffer.obj
          NEWGAME.vcxproj -> E:\_Users\buram_000\Desktop\GAME\NEWGAME\Debug\NEWGAME.exe
      1>プロジェクト "E:\_Users\buram_000\Desktop\GAME\NEWGAME\NEWGAME\NEWGAME.vcxproj" (Build ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:02.88
+経過時間 00:00:02.26

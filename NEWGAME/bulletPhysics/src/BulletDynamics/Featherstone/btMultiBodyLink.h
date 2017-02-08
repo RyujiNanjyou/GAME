@@ -82,17 +82,17 @@ struct btMultibodyLink
 
 	// "axis" = spatial joint axis (Mirtich Defn 9 p104). (expressed in local frame.) constant.
     // for prismatic: m_axesTop[0] = zero;
-    //                m_axesBottom[0] = unit vector along the joint axis.
-    // for revolute: m_axesTop[0] = unit vector along the rotation axis (u);
+    //                m_axesBottom[0] = orimat vector along the joint axis.
+    // for revolute: m_axesTop[0] = orimat vector along the rotation axis (u);
     //               m_axesBottom[0] = u cross m_dVector (i.e. COM linear motion due to the rotation at the joint)
 	//
 	// for spherical: m_axesTop[0][1][2] (u1,u2,u3) form a 3x3 identity matrix (3 rotation axes)
 	//				  m_axesBottom[0][1][2] cross u1,u2,u3 (i.e. COM linear motion due to the rotation at the joint)
 	//
-	// for planar: m_axesTop[0] = unit vector along the rotation axis (u); defines the plane of motion
+	// for planar: m_axesTop[0] = orimat vector along the rotation axis (u); defines the plane of motion
 	//			   m_axesTop[1][2] = zero
 	//			   m_axesBottom[0] = zero
-	//			   m_axesBottom[1][2] = unit vectors along the translational axes on that plane		
+	//			   m_axesBottom[1][2] = orimat vectors along the translational axes on that plane		
 	btSpatialMotionVector m_axes[6];
 	void setAxisTop(int dof, const btVector3 &axis) { m_axes[dof].m_topVec = axis; }
 	void setAxisBottom(int dof, const btVector3 &axis) { m_axes[dof].m_bottomVec = axis; }

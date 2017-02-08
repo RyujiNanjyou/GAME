@@ -8,13 +8,13 @@
 
 
 class Seat;
-//unityちゃんクラス。
-class Unity : public GameObject {
+//Orimaちゃんクラス。
+class Orima : public GameObject {
 public:
 	//コンストラクタ
-	Unity();
+	Orima();
 	//デストラクタ
-	~Unity();
+	~Orima();
 	//初期化。
 	void Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)override;
 	//更新。

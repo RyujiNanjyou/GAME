@@ -317,7 +317,7 @@ void btSliderConstraint::getInfo2NonVirtual(btConstraintInfo2* info, const btTra
 	// the slider axis should be equal. thus the constraint equations are
 	//    p*w1 - p*w2 = 0
 	//    q*w1 - q*w2 = 0
-	// where p and q are unit vectors normal to the slider axis, and w1 and w2
+	// where p and q are orimat vectors normal to the slider axis, and w1 and w2
 	// are the angular velocity vectors of the two bodies.
 	info->m_J1angularAxis[0] = p[0];
 	info->m_J1angularAxis[1] = p[1];
@@ -334,7 +334,7 @@ void btSliderConstraint::getInfo2NonVirtual(btConstraintInfo2* info, const btTra
 	info->m_J2angularAxis[s+2] = -q[2];
 	// compute the right hand side of the constraint equation. set relative
 	// body velocities along p and q to bring the slider back into alignment.
-	// if ax1A,ax1B are the unit length slider axes as computed from bodyA and
+	// if ax1A,ax1B are the orimat length slider axes as computed from bodyA and
 	// bodyB, we need to rotate both bodies along the axis u = (ax1 x ax2).
 	// if "theta" is the angle between ax1 and ax2, we need an angular velocity
 	// along u to cover angle erp*theta in one step :
@@ -342,7 +342,7 @@ void btSliderConstraint::getInfo2NonVirtual(btConstraintInfo2* info, const btTra
 	//                      = (erp*fps) * theta
 	//    angular_velocity  = |angular_velocity| * (ax1 x ax2) / |ax1 x ax2|
 	//                      = (erp*fps) * theta * (ax1 x ax2) / sin(theta)
-	// ...as ax1 and ax2 are unit length. if theta is smallish,
+	// ...as ax1 and ax2 are orimat length. if theta is smallish,
 	// theta ~= sin(theta), so
 	//    angular_velocity  = (erp*fps) * (ax1 x ax2)
 	// ax1 x ax2 is in the plane space of ax1, so we project the angular

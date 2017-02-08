@@ -88,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="bloom.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CapsuleCollider.cpp" />
     <ClCompile Include="CharacterController.cpp" />
@@ -114,19 +115,24 @@
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="seat.cpp" />
     <ClCompile Include="shadow.cpp" />
     <ClCompile Include="SkinModel.cpp" />
     <ClCompile Include="SkinModelData.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="tkEnginePreCompile.cpp" />
-    <ClCompile Include="unity.cpp" />
+    <ClCompile Include="orima.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="bloom.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="CapsuleCollider.h" />
     <ClInclude Include="CharacterController.h" />
@@ -156,18 +162,23 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="seat.h" />
     <ClInclude Include="shadow.h" />
     <ClInclude Include="SkinModel.h" />
     <ClInclude Include="SkinModelData.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TitleScene.h" />
     <ClInclude Include="tkAssert.h" />
     <ClInclude Include="tkEnginePreCompile.h" />
     <ClInclude Include="tkNoncopyable.h" />
     <ClInclude Include="typedef.h" />
-    <ClInclude Include="unity.h" />
+    <ClInclude Include="orima.h" />
     <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

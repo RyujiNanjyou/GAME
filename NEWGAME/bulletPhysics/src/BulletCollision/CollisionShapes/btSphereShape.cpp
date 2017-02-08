@@ -24,7 +24,7 @@ btVector3	btSphereShape::localGetSupportingVertexWithoutMargin(const btVector3& 
 	return btVector3(btScalar(0.),btScalar(0.),btScalar(0.));
 }
 
-void	btSphereShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btSphereShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	(void)vectors;
 

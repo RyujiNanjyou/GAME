@@ -23,7 +23,7 @@ public:
 		diffuseLightColor[3] = D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f);
 
 		//ŠÂ‹«ŒõB
-		ambientLight = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
+		ambientLight = D3DXVECTOR4(30.0f, 1.0f, 1.0f, 1.0f);
 	}
 	~Light()
 	{

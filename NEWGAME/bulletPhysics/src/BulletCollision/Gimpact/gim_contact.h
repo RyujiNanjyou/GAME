@@ -158,7 +158,7 @@ public:
 	}
 
 	void merge_contacts(const gim_contact_array & contacts, bool normal_contact_average = true);
-	void merge_contacts_unique(const gim_contact_array & contacts);
+	void merge_contacts_orimaque(const gim_contact_array & contacts);
 };
 
 #endif // GIM_CONTACT_H_INCLUDED

@@ -22,7 +22,7 @@ subject to the following restrictions:
 #include "btJacobianEntry.h"
 
 
-void btSolve2LinearConstraint::resolveUnilateralPairConstraint(
+void btSolve2LinearConstraint::resolveorimalateralPairConstraint(
 												   btRigidBody* body1,
 		btRigidBody* body2,
 

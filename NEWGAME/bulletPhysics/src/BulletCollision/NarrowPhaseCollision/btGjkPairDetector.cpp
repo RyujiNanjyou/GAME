@@ -235,7 +235,7 @@ void btGjkPairDetector::getClosestPointsNonVirtual(const ClosestPointInput& inpu
 
 			m_cachedSeparatingAxis = newCachedSeparatingAxis;
 
-			  //degeneracy, this is typically due to invalid/uninitialized worldtransforms for a btCollisionObject   
+			  //degeneracy, this is typically due to invalid/orimanitialized worldtransforms for a btCollisionObject   
               if (m_curIter++ > gGjkMaxIter)   
               {   
                       #if defined(DEBUG) || defined (_DEBUG)

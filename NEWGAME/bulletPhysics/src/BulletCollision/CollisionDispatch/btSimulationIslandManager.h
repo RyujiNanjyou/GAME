@@ -27,10 +27,10 @@ class btDispatcher;
 class btPersistentManifold;
 
 
-///SimulationIslandManager creates and handles simulation islands, using btUnionFind
+///SimulationIslandManager creates and handles simulation islands, using btorimaonFind
 class btSimulationIslandManager
 {
-	btUnionFind m_unionFind;
+	btorimaonFind m_orimaonFind;
 
 	btAlignedObjectArray<btPersistentManifold*>  m_islandmanifold;
 	btAlignedObjectArray<btCollisionObject* >  m_islandBodies;
@@ -42,16 +42,16 @@ public:
 	virtual ~btSimulationIslandManager();
 
 
-	void initUnionFind(int n);	
+	void initorimaonFind(int n);	
 	
 		
-	btUnionFind& getUnionFind() { return m_unionFind;}
+	btorimaonFind& getorimaonFind() { return m_orimaonFind;}
 
 	virtual	void	updateActivationState(btCollisionWorld* colWorld,btDispatcher* dispatcher);
 	virtual	void	storeIslandActivationState(btCollisionWorld* world);
 
 
-	void	findUnions(btDispatcher* dispatcher,btCollisionWorld* colWorld);
+	void	findorimaons(btDispatcher* dispatcher,btCollisionWorld* colWorld);
 
 	
 

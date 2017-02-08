@@ -45,7 +45,7 @@ ATTRIBUTE_ALIGNED16(class) btConvexPolyhedron
 
 	btAlignedObjectArray<btVector3>	m_vertices;
 	btAlignedObjectArray<btFace>	m_faces;
-	btAlignedObjectArray<btVector3> m_uniqueEdges;
+	btAlignedObjectArray<btVector3> m_orimaqueEdges;
 
 	btVector3		m_localCenter;
 	btVector3		m_extents;

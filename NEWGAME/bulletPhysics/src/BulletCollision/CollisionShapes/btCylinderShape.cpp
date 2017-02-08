@@ -251,7 +251,7 @@ btVector3	btCylinderShape::localGetSupportingVertexWithoutMargin(const btVector3
 	return CylinderLocalSupportY(getHalfExtentsWithoutMargin(),vec);
 }
 
-void	btCylinderShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btCylinderShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	for (int i=0;i<numVectors;i++)
 	{
@@ -259,7 +259,7 @@ void	btCylinderShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const bt
 	}
 }
 
-void	btCylinderShapeZ::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btCylinderShapeZ::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	for (int i=0;i<numVectors;i++)
 	{
@@ -270,7 +270,7 @@ void	btCylinderShapeZ::batchedUnitVectorGetSupportingVertexWithoutMargin(const b
 
 
 
-void	btCylinderShapeX::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btCylinderShapeX::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	for (int i=0;i<numVectors;i++)
 	{

@@ -4,7 +4,7 @@
 
 
 
-btMultiBodyConstraint::btMultiBodyConstraint(btMultiBody* bodyA,btMultiBody* bodyB,int linkA, int linkB, int numRows, bool isUnilateral)
+btMultiBodyConstraint::btMultiBodyConstraint(btMultiBody* bodyA,btMultiBody* bodyB,int linkA, int linkB, int numRows, bool isorimalateral)
 	:m_bodyA(bodyA),
 	m_bodyB(bodyB),
 	m_linkA(linkA),
@@ -12,7 +12,7 @@ btMultiBodyConstraint::btMultiBodyConstraint(btMultiBody* bodyA,btMultiBody* bod
 	m_numRows(numRows),
 	m_jacSizeA(0),
 	m_jacSizeBoth(0),
-	m_isUnilateral(isUnilateral),
+	m_isorimalateral(isorimalateral),
 	m_numDofsFinalized(-1),
 	m_maxAppliedImpulse(100)
 {
@@ -127,9 +127,9 @@ btScalar btMultiBodyConstraint::fillMultiBodyConstraint(	btMultiBodySolverConstr
 
 		//determine the velocity response of multibodyA to reaction impulses of this constraint (i.e. A[i,i] for i=1,...n_con: multibody's inverse inertia with respect to this 1D constraint)
 		//resize..
-		data.m_deltaVelocitiesUnitImpulse.resize(data.m_deltaVelocitiesUnitImpulse.size()+ndofA);		//=> each constraint row has the constrained tree dofs allocated in m_deltaVelocitiesUnitImpulse
-		btAssert(data.m_jacobians.size() == data.m_deltaVelocitiesUnitImpulse.size());
-		btScalar* delta = &data.m_deltaVelocitiesUnitImpulse[solverConstraint.m_jacAindex];
+		data.m_deltaVelocitiesorimatImpulse.resize(data.m_deltaVelocitiesorimatImpulse.size()+ndofA);		//=> each constraint row has the constrained tree dofs allocated in m_deltaVelocitiesorimatImpulse
+		btAssert(data.m_jacobians.size() == data.m_deltaVelocitiesorimatImpulse.size());
+		btScalar* delta = &data.m_deltaVelocitiesorimatImpulse[solverConstraint.m_jacAindex];
 		//determine..
 		multiBodyA->calcAccelerationDeltasMultiDof(&data.m_jacobians[solverConstraint.m_jacAindex],delta,data.scratch_r, data.scratch_v);
 
@@ -182,9 +182,9 @@ btScalar btMultiBodyConstraint::fillMultiBodyConstraint(	btMultiBodySolverConstr
 
 		//determine velocity response of multibodyB to reaction impulses of this constraint (i.e. A[i,i] for i=1,...n_con: multibody's inverse inertia with respect to this 1D constraint)
 		//resize..
-		data.m_deltaVelocitiesUnitImpulse.resize(data.m_deltaVelocitiesUnitImpulse.size()+ndofB);
-		btAssert(data.m_jacobians.size() == data.m_deltaVelocitiesUnitImpulse.size());
-		btScalar* delta = &data.m_deltaVelocitiesUnitImpulse[solverConstraint.m_jacBindex];
+		data.m_deltaVelocitiesorimatImpulse.resize(data.m_deltaVelocitiesorimatImpulse.size()+ndofB);
+		btAssert(data.m_jacobians.size() == data.m_deltaVelocitiesorimatImpulse.size());
+		btScalar* delta = &data.m_deltaVelocitiesorimatImpulse[solverConstraint.m_jacBindex];
 		//determine..
 		multiBodyB->calcAccelerationDeltasMultiDof(&data.m_jacobians[solverConstraint.m_jacBindex],delta,data.scratch_r, data.scratch_v);
 
@@ -215,7 +215,7 @@ btScalar btMultiBodyConstraint::fillMultiBodyConstraint(	btMultiBodySolverConstr
 		{
 			ndofA = multiBodyA->getNumDofs() + 6;
 			jacA = &data.m_jacobians[solverConstraint.m_jacAindex];
-			deltaVelA = &data.m_deltaVelocitiesUnitImpulse[solverConstraint.m_jacAindex];
+			deltaVelA = &data.m_deltaVelocitiesorimatImpulse[solverConstraint.m_jacAindex];
 			for (int i = 0; i < ndofA; ++i)
 			{
 				btScalar j = jacA[i] ;
@@ -233,7 +233,7 @@ btScalar btMultiBodyConstraint::fillMultiBodyConstraint(	btMultiBodySolverConstr
 		{
 			const int ndofB = multiBodyB->getNumDofs() + 6;
 			jacB = &data.m_jacobians[solverConstraint.m_jacBindex];
-			deltaVelB = &data.m_deltaVelocitiesUnitImpulse[solverConstraint.m_jacBindex];
+			deltaVelB = &data.m_deltaVelocitiesorimatImpulse[solverConstraint.m_jacBindex];
 			for (int i = 0; i < ndofB; ++i)
 			{
 				btScalar j = jacB[i] ;
@@ -309,7 +309,7 @@ btScalar btMultiBodyConstraint::fillMultiBodyConstraint(	btMultiBodySolverConstr
 			if (multiBodyA)
 			{
 				btScalar impulse = solverConstraint.m_appliedImpulse;
-				btScalar* deltaV = &data.m_deltaVelocitiesUnitImpulse[solverConstraint.m_jacAindex];
+				btScalar* deltaV = &data.m_deltaVelocitiesorimatImpulse[solverConstraint.m_jacAindex];
 				multiBodyA->applyDeltaVee(deltaV,impulse);
 				applyDeltaVee(data,deltaV,impulse,solverConstraint.m_deltaVelAindex,ndofA);
 			} else
@@ -320,7 +320,7 @@ btScalar btMultiBodyConstraint::fillMultiBodyConstraint(	btMultiBodySolverConstr
 			if (multiBodyB)
 			{
 				btScalar impulse = solverConstraint.m_appliedImpulse;
-				btScalar* deltaV = &data.m_deltaVelocitiesUnitImpulse[solverConstraint.m_jacBindex];
+				btScalar* deltaV = &data.m_deltaVelocitiesorimatImpulse[solverConstraint.m_jacBindex];
 				multiBodyB->applyDeltaVee(deltaV,impulse);
 				applyDeltaVee(data,deltaV,impulse,solverConstraint.m_deltaVelBindex,ndofB);
 			} else

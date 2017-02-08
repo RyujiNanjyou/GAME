@@ -99,7 +99,7 @@ btVector3	btConvexTriangleMeshShape::localGetSupportingVertexWithoutMargin(const
 	return supVec;
 }
 
-void	btConvexTriangleMeshShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btConvexTriangleMeshShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	//use 'w' component of supportVerticesOut?
 	{

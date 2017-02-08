@@ -3,21 +3,16 @@
 */
 #pragma once
 
+#include "Scene.h"
 #include "camera.h"
-#include "stage.h"
-#include "unity.h"
 #include "PlayerCamera.h"
+#include "orima.h"
 #include "seat.h"
-#include "Pad.h"
 #include "Map.h"
-#include "light.h"
 #include "lightcamera.h"
-#include "shadow.h"
 #include "pointer.h"
-#include "Physics.h"
-#include "ParticleEmitter.h"
-#include  "Enemy.h"
-#include "EffectManager.h"
+#include "Enemy.h"
+#include "bloom.h"
 
 
 #define  PIKUMIN_NUM 100
@@ -25,7 +20,7 @@
 #define ATTACKRANGE 2.0f
 
 class Pikumin;
-class Game{
+class Game : public Scene{
 public:
 	/*!
 	* @brief	コンストラクタ。
@@ -38,27 +33,23 @@ public:
 	/*!
 	* @brief	ゲームが起動してから一度だけ呼ばれる関数。
 	*/
-	void Start();
+	 void Init();
 	/*!
 	* @brief	更新。
 	*/
-	void Update();
+	 void Update();
 	/*!
 	* @brief	描画。
 	*/
-	void Render();
+	 void Render();
 	void UpdateLight();
 	void Terminate();
 	/*!
 	* @brief	カメラを取得。
 	*/
-	 Camera& GetCamera()
+	Camera& GetCamera()
 	{
 		return playCamera.GetCamera();
-	}
-	const Camera& GetlightCamera() const
-	{
-		return lightcam.GetCamera();
 	}
 	/*!
 	* @brief	ゲームカメラを取得。
@@ -67,10 +58,7 @@ public:
 	{
 		return playCamera;
 	}
-	Unity* GETunity(){ return &uni; }
-	CPad* GETPad(){ return &pad; }
-	Light* GETlight(){ return &light; }
-	
+	Orima* GETOrima(){ return &orima; }
 	/*!
 	* @brief	ピクミンを追加。。
 	*/
@@ -82,32 +70,19 @@ public:
 	{
 		return pikuminList;
 	}
-	ShadowMap* Getshadow(){ return &shadow; }
 	pointer* Getpointer(){ return &ter; }
 	Enemy* GetEnemy(){ return enemy; }
-	//物理ワールドの取得。
-	CPhysicsWorld* GetPhysicsWorld()
-	{
-		return &physicsWorld;
-	}
-	EffectManager* GetEffectmanager(){ return &effectmanager; }
+	
 private:
-	CPad				pad;
-	PlayerCamera		playCamera;			//ゲームカメラ。
-	Unity				uni;
-	Stage				stg;
-
+	Orima				orima;				//オリマ
 	std::vector<Pikumin*> pikuminList;
 	Map					map;
-	Light				light;
 	LightCamera			lightcam;
-	ShadowMap			shadow;
 	pointer				ter;
-	CPhysicsWorld		physicsWorld;
-	CParticleEmitter	particleEmitter;	//パーティクルエミッター
 	Enemy				enemy[ENEMY_NUM];
-	EffectManager		effectmanager;
-
+	PlayerCamera		playCamera;			//ゲームカメラ。
+	Bloom bloom;
+	
 };
 
 extern Game* game;

@@ -43,7 +43,7 @@ IMPLICIT_CONVEX_SHAPES_START_HERE,
 	CONE_SHAPE_PROXYTYPE,
 	CONVEX_SHAPE_PROXYTYPE,
 	CYLINDER_SHAPE_PROXYTYPE,
-	UNIFORM_SCALING_SHAPE_PROXYTYPE,
+	orimaFORM_SCALING_SHAPE_PROXYTYPE,
 	MINKOWSKI_SUM_SHAPE_PROXYTYPE,
 	MINKOWSKI_DIFFERENCE_SHAPE_PROXYTYPE,
 	BOX_2D_SHAPE_PROXYTYPE,
@@ -104,14 +104,14 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 	short int m_collisionFilterGroup;
 	short int m_collisionFilterMask;
 	void*	m_multiSapParentProxy;		
-	int			m_uniqueId;//m_uniqueId is introduced for paircache. could get rid of this, by calculating the address offset etc.
+	int			m_orimaqueId;//m_orimaqueId is introduced for paircache. could get rid of this, by calculating the address offset etc.
 
 	btVector3	m_aabbMin;
 	btVector3	m_aabbMax;
 
 	SIMD_FORCE_INLINE int getUid() const
 	{
-		return m_uniqueId;
+		return m_orimaqueId;
 	}
 
 	//used for memory pools
@@ -207,7 +207,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 	{
 
 		//keep them sorted, so the std::set operations work
-		if (proxy0.m_uniqueId < proxy1.m_uniqueId)
+		if (proxy0.m_orimaqueId < proxy1.m_orimaqueId)
         { 
             m_pProxy0 = &proxy0; 
             m_pProxy1 = &proxy1; 
@@ -227,7 +227,7 @@ BT_DECLARE_ALIGNED_ALLOCATOR();
 	btBroadphaseProxy* m_pProxy1;
 	
 	mutable btCollisionAlgorithm* m_algorithm;
-	union { void* m_internalInfo1; int m_internalTmpValue;};//don't use this data, it will be removed in future version.
+	union { void* m_internalInfo1; int m_internalTmpValue; };//don't use this data, it will be removed in future version.
 
 };
 
@@ -248,10 +248,10 @@ class btBroadphasePairSortPredicate
 
 		bool operator() ( const btBroadphasePair& a, const btBroadphasePair& b ) const
 		{
-			const int uidA0 = a.m_pProxy0 ? a.m_pProxy0->m_uniqueId : -1;
-			const int uidB0 = b.m_pProxy0 ? b.m_pProxy0->m_uniqueId : -1;
-			const int uidA1 = a.m_pProxy1 ? a.m_pProxy1->m_uniqueId : -1;
-			const int uidB1 = b.m_pProxy1 ? b.m_pProxy1->m_uniqueId : -1;
+			const int uidA0 = a.m_pProxy0 ? a.m_pProxy0->m_orimaqueId : -1;
+			const int uidB0 = b.m_pProxy0 ? b.m_pProxy0->m_orimaqueId : -1;
+			const int uidA1 = a.m_pProxy1 ? a.m_pProxy1->m_orimaqueId : -1;
+			const int uidB1 = b.m_pProxy1 ? b.m_pProxy1->m_orimaqueId : -1;
 
 			 return uidA0 > uidB0 || 
 				(a.m_pProxy0 == b.m_pProxy0 && uidA1 > uidB1) ||

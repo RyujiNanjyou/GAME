@@ -37,7 +37,7 @@ btHinge2Constraint::btHinge2Constraint(btRigidBody& rbA, btRigidBody& rbB, btVec
 	// new position of Y - second (allowed limits are (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number 
 	// used to prevent constraint from instability on poles;
 	// new position of X, allowed limits are (-PI,PI);
-	// So to simulate ODE Universal joint we should use parent axis as Z, child axis as Y and limit all other DOFs
+	// So to simulate ODE orimaversal joint we should use parent axis as Z, child axis as Y and limit all other DOFs
 	// Build the frame in world coordinate system first
 	btVector3 zAxis = axis1.normalize();
 	btVector3 xAxis = axis2.normalize();

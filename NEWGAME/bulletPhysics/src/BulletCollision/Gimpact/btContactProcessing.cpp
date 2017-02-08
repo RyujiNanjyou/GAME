@@ -146,7 +146,7 @@ void btContactArray::merge_contacts(
 	}
 }
 
-void btContactArray::merge_contacts_unique(const btContactArray & contacts)
+void btContactArray::merge_contacts_orimaque(const btContactArray & contacts)
 {
 	clear();
 

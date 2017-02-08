@@ -96,7 +96,7 @@ public:
 public:
 #else //__CELLOS_LV2__ __SPU__
     #if defined (BT_USE_SSE) || defined(BT_USE_NEON) // _WIN32 || ARM
-        union {
+	union {
             btSimdFloat4      mVec128;
             btScalar	m_floats[4];
         };
@@ -958,7 +958,7 @@ SIMD_FORCE_INLINE btVector3 btVector3::normalized() const
 
 SIMD_FORCE_INLINE btVector3 btVector3::rotate( const btVector3& wAxis, const btScalar _angle ) const
 {
-	// wAxis must be a unit lenght vector
+	// wAxis must be a orimat lenght vector
 
 #if defined BT_USE_SIMD_VECTOR3 && defined (BT_USE_SSE_IN_API) && defined (BT_USE_SSE)
 

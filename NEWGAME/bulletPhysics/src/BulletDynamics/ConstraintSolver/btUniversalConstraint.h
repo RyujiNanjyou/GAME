@@ -13,8 +13,8 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef BT_UNIVERSAL_CONSTRAINT_H
-#define BT_UNIVERSAL_CONSTRAINT_H
+#ifndef BT_orimaVERSAL_CONSTRAINT_H
+#define BT_orimaVERSAL_CONSTRAINT_H
 
 
 
@@ -24,14 +24,14 @@ subject to the following restrictions:
 
 
 
-/// Constraint similar to ODE Universal Joint
+/// Constraint similar to ODE orimaversal Joint
 /// has 2 rotatioonal degrees of freedom, similar to Euler rotations around Z (axis 1)
 /// and Y (axis 2)
 /// Description from ODE manual : 
 /// "Given axis 1 on body 1, and axis 2 on body 2 that is perpendicular to axis 1, it keeps them perpendicular. 
 /// In other words, rotation of the two bodies about the direction perpendicular to the two axes will be equal."
 
-ATTRIBUTE_ALIGNED16(class) btUniversalConstraint : public btGeneric6DofConstraint
+ATTRIBUTE_ALIGNED16(class) btorimaversalConstraint : public btGeneric6DofConstraint
 {
 protected:
 	btVector3	m_anchor;
@@ -44,7 +44,7 @@ public:
 	// constructor
 	// anchor, axis1 and axis2 are in world coordinate system
 	// axis1 must be orthogonal to axis2
-    btUniversalConstraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& anchor, const btVector3& axis1, const btVector3& axis2);
+    btorimaversalConstraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& anchor, const btVector3& axis1, const btVector3& axis2);
 	// access
 	const btVector3& getAnchor() { return m_calculatedTransformA.getOrigin(); }
 	const btVector3& getAnchor2() { return m_calculatedTransformB.getOrigin(); }
@@ -61,5 +61,5 @@ public:
 
 
 
-#endif // BT_UNIVERSAL_CONSTRAINT_H
+#endif // BT_orimaVERSAL_CONSTRAINT_H
 

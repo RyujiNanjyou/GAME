@@ -382,7 +382,7 @@ class	btSortedOverlappingPairCache : public btOverlappingPairCache
 
 
 
-///btNullPairCache skips add/removal of overlapping pairs. Userful for benchmarking and unit testing.
+///btNullPairCache skips add/removal of overlapping pairs. Userful for benchmarking and orimat testing.
 class btNullPairCache : public btOverlappingPairCache
 {
 

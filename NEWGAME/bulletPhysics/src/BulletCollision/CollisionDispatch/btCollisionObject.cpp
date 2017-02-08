@@ -82,7 +82,7 @@ const char* btCollisionObject::serialize(void* dataBuffer, btSerializer* seriali
 	dataOut->m_hasAnisotropicFriction = m_hasAnisotropicFriction;
 	dataOut->m_contactProcessingThreshold = m_contactProcessingThreshold;
 	dataOut->m_broadphaseHandle = 0;
-	dataOut->m_collisionShape = serializer->getUniquePointer(m_collisionShape);
+	dataOut->m_collisionShape = serializer->getorimaquePointer(m_collisionShape);
 	dataOut->m_rootCollisionShape = 0;//@todo
 	dataOut->m_collisionFlags = m_collisionFlags;
 	dataOut->m_islandTag1 = m_islandTag1;
@@ -95,7 +95,7 @@ const char* btCollisionObject::serialize(void* dataBuffer, btSerializer* seriali
 	dataOut->m_internalType = m_internalType;
 	
 	char* name = (char*) serializer->findNameForPointer(this);
-	dataOut->m_name = (char*)serializer->getUniquePointer(name);
+	dataOut->m_name = (char*)serializer->getorimaquePointer(name);
 	if (dataOut->m_name)
 	{
 		serializer->serializeName(name);

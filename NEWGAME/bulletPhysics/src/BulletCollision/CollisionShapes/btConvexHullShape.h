@@ -70,7 +70,7 @@ public:
 
 	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 	
 
 	virtual void project(const btTransform& trans, const btVector3& dir, btScalar& minProj, btScalar& maxProj, btVector3& witnesPtMin,btVector3& witnesPtMax) const;

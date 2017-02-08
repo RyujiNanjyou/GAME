@@ -34,7 +34,7 @@ protected:
 	unsigned int m_numIndices;
 	const btConvexShape* m_shape;
 
-	static btVector3* getUnitSpherePoints();
+	static btVector3* getorimatSpherePoints();
 
 public:
 	BT_DECLARE_ALIGNED_ALLOCATOR();

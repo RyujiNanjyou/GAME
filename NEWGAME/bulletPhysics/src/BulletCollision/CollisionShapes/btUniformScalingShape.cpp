@@ -15,62 +15,62 @@ subject to the following restrictions:
 
 #include "btUniformScalingShape.h"
 
-btUniformScalingShape::btUniformScalingShape(	btConvexShape* convexChildShape,btScalar uniformScalingFactor):
+btorimaformScalingShape::btorimaformScalingShape(	btConvexShape* convexChildShape,btScalar orimaformScalingFactor):
 btConvexShape (), m_childConvexShape(convexChildShape),
-m_uniformScalingFactor(uniformScalingFactor)
+m_orimaformScalingFactor(orimaformScalingFactor)
 {
-	m_shapeType = UNIFORM_SCALING_SHAPE_PROXYTYPE;
+	m_shapeType = orimaFORM_SCALING_SHAPE_PROXYTYPE;
 }
 	
-btUniformScalingShape::~btUniformScalingShape()
+btorimaformScalingShape::~btorimaformScalingShape()
 {
 }
 	
 
-btVector3	btUniformScalingShape::localGetSupportingVertexWithoutMargin(const btVector3& vec)const
+btVector3	btorimaformScalingShape::localGetSupportingVertexWithoutMargin(const btVector3& vec)const
 {
 	btVector3 tmpVertex;
 	tmpVertex = m_childConvexShape->localGetSupportingVertexWithoutMargin(vec);
-	return tmpVertex*m_uniformScalingFactor;
+	return tmpVertex*m_orimaformScalingFactor;
 }
 
-void	btUniformScalingShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btorimaformScalingShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
-	m_childConvexShape->batchedUnitVectorGetSupportingVertexWithoutMargin(vectors,supportVerticesOut,numVectors);
+	m_childConvexShape->batchedorimatVectorGetSupportingVertexWithoutMargin(vectors,supportVerticesOut,numVectors);
 	int i;
 	for (i=0;i<numVectors;i++)
 	{
-		supportVerticesOut[i] = supportVerticesOut[i] * m_uniformScalingFactor;
+		supportVerticesOut[i] = supportVerticesOut[i] * m_orimaformScalingFactor;
 	}
 }
 
 
-btVector3	btUniformScalingShape::localGetSupportingVertex(const btVector3& vec)const
+btVector3	btorimaformScalingShape::localGetSupportingVertex(const btVector3& vec)const
 {
 	btVector3 tmpVertex;
 	tmpVertex = m_childConvexShape->localGetSupportingVertex(vec);
-	return tmpVertex*m_uniformScalingFactor;
+	return tmpVertex*m_orimaformScalingFactor;
 }
 
 
-void	btUniformScalingShape::calculateLocalInertia(btScalar mass,btVector3& inertia) const
+void	btorimaformScalingShape::calculateLocalInertia(btScalar mass,btVector3& inertia) const
 {
 
 	///this linear upscaling is not realistic, but we don't deal with large mass ratios...
 	btVector3 tmpInertia;
 	m_childConvexShape->calculateLocalInertia(mass,tmpInertia);
-	inertia = tmpInertia * m_uniformScalingFactor;
+	inertia = tmpInertia * m_orimaformScalingFactor;
 }
 
 
 	///getAabb's default implementation is brute force, expected derived classes to implement a fast dedicated version
-void btUniformScalingShape::getAabb(const btTransform& trans,btVector3& aabbMin,btVector3& aabbMax) const
+void btorimaformScalingShape::getAabb(const btTransform& trans,btVector3& aabbMin,btVector3& aabbMax) const
 {
 	getAabbSlow(trans,aabbMin,aabbMax);
 
 }
 
-void btUniformScalingShape::getAabbSlow(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
+void btorimaformScalingShape::getAabbSlow(const btTransform& t,btVector3& aabbMin,btVector3& aabbMax) const
 {
 #if 1
 	btVector3 _directions[] =
@@ -98,7 +98,7 @@ void btUniformScalingShape::getAabbSlow(const btTransform& t,btVector3& aabbMin,
 		_directions[i] = _directions[i]*t.getBasis();
 	}
 	
-	batchedUnitVectorGetSupportingVertexWithoutMargin(_directions, _supporting, 6);
+	batchedorimatVectorGetSupportingVertexWithoutMargin(_directions, _supporting, 6);
 	
 	btVector3 aabbMin1(0,0,0),aabbMax1(0,0,0);
 
@@ -130,31 +130,31 @@ void btUniformScalingShape::getAabbSlow(const btTransform& t,btVector3& aabbMin,
 #endif
 }
 
-void	btUniformScalingShape::setLocalScaling(const btVector3& scaling) 
+void	btorimaformScalingShape::setLocalScaling(const btVector3& scaling) 
 {
 	m_childConvexShape->setLocalScaling(scaling);
 }
 
-const btVector3& btUniformScalingShape::getLocalScaling() const
+const btVector3& btorimaformScalingShape::getLocalScaling() const
 {
 	return m_childConvexShape->getLocalScaling();
 }
 
-void	btUniformScalingShape::setMargin(btScalar margin)
+void	btorimaformScalingShape::setMargin(btScalar margin)
 {
 	m_childConvexShape->setMargin(margin);
 }
-btScalar	btUniformScalingShape::getMargin() const
+btScalar	btorimaformScalingShape::getMargin() const
 {
-	return m_childConvexShape->getMargin() * m_uniformScalingFactor;
+	return m_childConvexShape->getMargin() * m_orimaformScalingFactor;
 }
 
-int		btUniformScalingShape::getNumPreferredPenetrationDirections() const
+int		btorimaformScalingShape::getNumPreferredPenetrationDirections() const
 {
 	return m_childConvexShape->getNumPreferredPenetrationDirections();
 }
 	
-void	btUniformScalingShape::getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const
+void	btorimaformScalingShape::getPreferredPenetrationDirection(int index, btVector3& penetrationVector) const
 {
 	m_childConvexShape->getPreferredPenetrationDirection(index,penetrationVector);
 }

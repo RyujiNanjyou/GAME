@@ -12,15 +12,15 @@ cameraDir(0.0f, 0.0f, 0.0f)
 PlayerCamera::~PlayerCamera()
 {
 }
-void PlayerCamera::Start(Unity* uni)
+void PlayerCamera::Start(Orima* orima)
 {
-	toEyePos.z = -10.0f;
-	toEyePos.y = 5.0f;
+	toEyePos.z = -5.0f;
+	toEyePos.y = 0.0f;
 	targetOffset.y = 1.0f;
 	targetOffset.x = 0.0f;
 	camera.SetAspect(1280.0f / 720.0f);
 	camera.Init();
-	this->uni = uni;
+	this->orima = orima;
 	UpdateCamera();
 }
 //カメラを更新。
@@ -28,7 +28,7 @@ void PlayerCamera::UpdateCamera()
 {
 	
 	D3DXVECTOR3 target;
-	target = uni->Getpos();
+	target = orima->Getpos();
 	target.x += targetOffset.x;
 	target.y += targetOffset.y;
 	target.z += targetOffset.z;

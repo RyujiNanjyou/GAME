@@ -8,7 +8,6 @@
 namespace {
 	/*const float PI = 3.14159265358979323846f;*/
 	//const float MoveSpeed = 0.08f*60.0f;
-	
 }
 
 //コンストラクタ
@@ -35,8 +34,9 @@ void Pikumin::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name)
 {
 	GameObject::Init(pd3dDevice, Name);
 	skinmodel.SetShadowReceiverFlag(false);
+	anim.PlayAnimation(0);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-	scale = D3DXVECTOR3(5.0, 5.0, 5.0);
+	scale = D3DXVECTOR3(4.0,4.0,4.0);
 	nowStatus = PikuminStatus::STAND;
 	D3DXVECTOR3 pos = position;
 	characterController.Init(0.3f, 1.0f, pos);
@@ -56,7 +56,7 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos, float MoveSpeed)
 	float L;
 	L = D3DXVec3Length(&to);
 	moveDir = D3DXVECTOR3(0.0f, 0.0f, 1.0f);
-	moveDir = game->GETunity()->Getmovedir();
+	moveDir = game->GETOrima()->Getmovedir();
 	D3DXVec3Normalize(&to, &to);
 	D3DXVec3Normalize(&moveDir, &moveDir);
 	D3DXVec3Cross(&direction_x, &direction_z, &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
@@ -84,6 +84,7 @@ D3DXVECTOR3 Pikumin::PikuminHoming(D3DXVECTOR3 SeatPos, float MoveSpeed)
 //更新。
 bool Pikumin::Update()
 {
+	anim.Update(1.0f / 60.0f);
 	int OK;
 	D3DXVECTOR3 origin = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 Move = characterController.GetMoveSpeed();
@@ -94,7 +95,7 @@ bool Pikumin::Update()
 	//立つ
 	if (nowStatus == PikuminStatus::STAND)
 	{
-		Seat* seat = game->GETunity()->Getseat();
+		Seat* seat = game->GETOrima()->Getseat();
 		seat[m_seatNo].Setflag(false);
 		m_seatNo = -1;
 		
@@ -113,13 +114,13 @@ bool Pikumin::Update()
 	if (m_seatNo != -1 )
 	{
 		//座っているときの処理。
-		Seat* seat = game->GETunity()->Getseat();
+		Seat* seat = game->GETOrima()->Getseat();
 		Move = PikuminHoming(seat[m_seatNo].GetSeatPos(),0.08f * 60.0f);
 	}
 	//オリマにセット
 	if (nowStatus == PikuminStatus::STAND_BY)
 	{
-		Move = PikuminHoming(game->GETunity()->Getpos(), 0.08f * 60.0f);
+		Move = PikuminHoming(game->GETOrima()->Getpos(), 0.08f * 60.0f);
 	}
 	//投げ投げ状態
 	if (nowStatus == PikuminStatus::THROW)
@@ -184,7 +185,7 @@ bool Pikumin::Update()
 	{
 		if (m_seatNo == -1)
 		{
-			Seat* seat = game->GETunity()->Getseat();
+			Seat* seat = game->GETOrima()->Getseat();
 			for (int i = 0; i < SEAT_NUM; i++)
 			{
 				
@@ -205,7 +206,7 @@ bool Pikumin::Update()
 		D3DXVec3Subtract(&dist, &ESeat->position, &position);
 		dist.y = 0.0f;
 
-		Move = PikuminHoming(ESeat->position, 0.08f*60.0f);
+		Move = PikuminHoming(ESeat->position, 0.08f * 60.0f);
 		
 
 		if (D3DXVec3LengthSq(&dist) > ATTACKRANGE * ATTACKRANGE)
@@ -234,7 +235,7 @@ bool Pikumin::Update()
 	characterController.Execute();
 	position = characterController.GetPosition();
 
-	position.y += 0.6f;
+	position.y += 0.8f;
 
 	return true;
 }

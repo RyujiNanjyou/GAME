@@ -60,7 +60,7 @@ public:
 		{
 		}
 		
-		///stepSimulation proceeds the simulation over 'timeStep', units in preferably in seconds.
+		///stepSimulation proceeds the simulation over 'timeStep', orimats in preferably in seconds.
 		///By default, Bullet will subdivide the timestep in constant substeps of each 'fixedTimeStep'.
 		///in order to keep the simulation real-time, the maximum number of substeps can be clamped to 'maxSubSteps'.
 		///You can disable subdividing the timestep/substepping by passing maxSubSteps=0 as second argument to stepSimulation, but in that case you have to keep the timeStep constant.

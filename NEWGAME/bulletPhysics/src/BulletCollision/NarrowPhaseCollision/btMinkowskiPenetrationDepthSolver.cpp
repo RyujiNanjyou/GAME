@@ -19,7 +19,7 @@ subject to the following restrictions:
 #include "BulletCollision/NarrowPhaseCollision/btGjkPairDetector.h"
 #include "BulletCollision/CollisionShapes/btConvexShape.h"
 
-#define NUM_UNITSPHERE_POINTS 42
+#define NUM_orimaTSPHERE_POINTS 42
 
 
 bool btMinkowskiPenetrationDepthSolver::calcPenDepth(btSimplexSolverInterface& simplexSolver,
@@ -77,13 +77,13 @@ bool btMinkowskiPenetrationDepthSolver::calcPenDepth(btSimplexSolverInterface& s
 #endif
 #ifdef USE_BATCHED_SUPPORT
 
-	btVector3	supportVerticesABatch[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
-	btVector3	supportVerticesBBatch[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
-	btVector3	seperatingAxisInABatch[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
-	btVector3	seperatingAxisInBBatch[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
+	btVector3	supportVerticesABatch[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
+	btVector3	supportVerticesBBatch[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
+	btVector3	seperatingAxisInABatch[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
+	btVector3	seperatingAxisInBBatch[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
 	int i;
 
-	int numSampleDirections = NUM_UNITSPHERE_POINTS;
+	int numSampleDirections = NUM_orimaTSPHERE_POINTS;
 
 	for (i=0;i<numSampleDirections;i++)
 	{
@@ -129,8 +129,8 @@ bool btMinkowskiPenetrationDepthSolver::calcPenDepth(btSimplexSolverInterface& s
 
 
 
-	convexA->batchedUnitVectorGetSupportingVertexWithoutMargin(seperatingAxisInABatch,supportVerticesABatch,numSampleDirections);
-	convexB->batchedUnitVectorGetSupportingVertexWithoutMargin(seperatingAxisInBBatch,supportVerticesBBatch,numSampleDirections);
+	convexA->batchedorimatVectorGetSupportingVertexWithoutMargin(seperatingAxisInABatch,supportVerticesABatch,numSampleDirections);
+	convexB->batchedorimatVectorGetSupportingVertexWithoutMargin(seperatingAxisInBBatch,supportVerticesBBatch,numSampleDirections);
 
 	for (i=0;i<numSampleDirections;i++)
 	{
@@ -170,7 +170,7 @@ bool btMinkowskiPenetrationDepthSolver::calcPenDepth(btSimplexSolverInterface& s
 	}	
 #else
 
-	int numSampleDirections = NUM_UNITSPHERE_POINTS;
+	int numSampleDirections = NUM_orimaTSPHERE_POINTS;
 
 #ifndef __SPU__
 	{
@@ -309,7 +309,7 @@ bool btMinkowskiPenetrationDepthSolver::calcPenDepth(btSimplexSolverInterface& s
 
 btVector3*	btMinkowskiPenetrationDepthSolver::getPenetrationDirections()
 {
-	static btVector3	sPenetrationDirections[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2] = 
+	static btVector3	sPenetrationDirections[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2] = 
 	{
 	btVector3(btScalar(0.000000) , btScalar(-0.000000),btScalar(-1.000000)),
 	btVector3(btScalar(0.723608) , btScalar(-0.525725),btScalar(-0.447219)),

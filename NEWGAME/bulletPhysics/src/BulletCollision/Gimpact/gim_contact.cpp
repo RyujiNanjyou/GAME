@@ -113,7 +113,7 @@ void gim_contact_array::merge_contacts(
 	}
 }
 
-void gim_contact_array::merge_contacts_unique(const gim_contact_array & contacts)
+void gim_contact_array::merge_contacts_orimaque(const gim_contact_array & contacts)
 {
 	clear();
 

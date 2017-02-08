@@ -81,7 +81,7 @@ public:
 #ifndef __SPU__
 	virtual btVector3	localGetSupportingVertex(const btVector3& vec)const;
 	virtual btVector3	localGetSupportingVertexWithoutMargin(const btVector3& vec)const;
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const;
 #endif
 
 

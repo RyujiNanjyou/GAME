@@ -21,13 +21,13 @@ subject to the following restrictions:
 
 
 
-#define UNIV_EPS btScalar(0.01f)
+#define orimaV_EPS btScalar(0.01f)
 
 
 // constructor
 // anchor, axis1 and axis2 are in world coordinate system
 // axis1 must be orthogonal to axis2
-btUniversalConstraint::btUniversalConstraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& anchor, const btVector3& axis1, const btVector3& axis2)
+btorimaversalConstraint::btorimaversalConstraint(btRigidBody& rbA, btRigidBody& rbB, const btVector3& anchor, const btVector3& axis1, const btVector3& axis2)
 : btGeneric6DofConstraint(rbA, rbB, btTransform::getIdentity(), btTransform::getIdentity(), true),
  m_anchor(anchor),
  m_axis1(axis1),
@@ -40,7 +40,7 @@ btUniversalConstraint::btUniversalConstraint(btRigidBody& rbA, btRigidBody& rbB,
 	// new position of Y - second (allowed limits are (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number 
 	// used to prevent constraint from instability on poles;
 	// new position of X, allowed limits are (-PI,PI);
-	// So to simulate ODE Universal joint we should use parent axis as Z, child axis as Y and limit all other DOFs
+	// So to simulate ODE orimaversal joint we should use parent axis as Z, child axis as Y and limit all other DOFs
 	// Build the frame in world coordinate system first
 	btVector3 zAxis = m_axis1.normalize();
 	btVector3 yAxis = m_axis2.normalize();
@@ -57,11 +57,11 @@ btUniversalConstraint::btUniversalConstraint(btRigidBody& rbA, btRigidBody& rbB,
 	// sei limits
 	setLinearLowerLimit(btVector3(0., 0., 0.));
 	setLinearUpperLimit(btVector3(0., 0., 0.));
-	setAngularLowerLimit(btVector3(0.f, -SIMD_HALF_PI + UNIV_EPS, -SIMD_PI + UNIV_EPS));
-	setAngularUpperLimit(btVector3(0.f,  SIMD_HALF_PI - UNIV_EPS,  SIMD_PI - UNIV_EPS));
+	setAngularLowerLimit(btVector3(0.f, -SIMD_HALF_PI + orimaV_EPS, -SIMD_PI + orimaV_EPS));
+	setAngularUpperLimit(btVector3(0.f,  SIMD_HALF_PI - orimaV_EPS,  SIMD_PI - orimaV_EPS));
 }
 
-void btUniversalConstraint::setAxis(const btVector3& axis1,const btVector3& axis2)
+void btorimaversalConstraint::setAxis(const btVector3& axis1,const btVector3& axis2)
 {
   m_axis1 = axis1;
   m_axis2 = axis2;

@@ -6,7 +6,7 @@
 /**
  * This class is used to compute the polar decomposition of a matrix. In
  * general, the polar decomposition factorizes a matrix, A, into two parts: a
- * unitary matrix (U) and a positive, semi-definite Hermitian matrix (H).
+ * orimatary matrix (U) and a positive, semi-definite Hermitian matrix (H).
  * However, in this particular implementation the original matrix, A, is
  * required to be a square 3x3 matrix with real elements. This means that U will
  * be an orthogonal matrix and H with be a positive-definite, symmetric matrix.

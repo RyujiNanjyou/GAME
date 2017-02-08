@@ -2,6 +2,7 @@
 #include "Physics.h"
 #include "RigidBody.h"
 
+CPhysicsWorld* physicsworld = NULL;
 
 	CPhysicsWorld::CPhysicsWorld()
 	{

@@ -127,7 +127,7 @@ void	btConvexInternalAabbCachingShape::recalcLocalAabb()
 		btVector3( 0., 0., 0.)
 	};
 	
-	batchedUnitVectorGetSupportingVertexWithoutMargin(_directions, _supporting, 6);
+	batchedorimatVectorGetSupportingVertexWithoutMargin(_directions, _supporting, 6);
 	
 	for ( int i = 0; i < 3; ++i )
 	{

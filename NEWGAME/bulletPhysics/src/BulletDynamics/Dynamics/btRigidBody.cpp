@@ -24,7 +24,7 @@ subject to the following restrictions:
 //'temporarily' global variables
 btScalar	gDeactivationTime = btScalar(2.);
 bool	gDisableDeactivation = false;
-static int uniqueId = 0;
+static int orimaqueId = 0;
 
 
 btRigidBody::btRigidBody(const btRigidBody::btRigidBodyConstructionInfo& constructionInfo)
@@ -82,7 +82,7 @@ void	btRigidBody::setupRigidBody(const btRigidBody::btRigidBodyConstructionInfo&
 	m_restitution = constructionInfo.m_restitution;
 
 	setCollisionShape( constructionInfo.m_collisionShape );
-	m_debugBodyId = uniqueId++;
+	m_debugBodyId = orimaqueId++;
 	
 	setMassProps(constructionInfo.m_mass, constructionInfo.m_localInertia);
 	updateInertiaTensor();

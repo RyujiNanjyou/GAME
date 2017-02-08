@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "game.h"
-#include "unity.h"
+#include "orima.h"
 #include "seat.h"
 #include "Input.h"
 #include "pikumin.h"
  
 
 //コンストラクタ
-Unity::Unity()
+Orima::Orima()
 {
 	//初期化。
 	D3DXMatrixIdentity(&mWorld);
@@ -16,12 +16,13 @@ Unity::Unity()
 	direction_x = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
 }
 //デストラクタ
-Unity::~Unity()
+Orima::~Orima()
 {
 	Release();
 }
-void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name){
+void Orima::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name){
 	GameObject::Init(pd3dDevice, Name);
+	anim.PlayAnimation(0);
 	position = D3DXVECTOR3(0.0f, 1.0f, 0.5f);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
 	scale = D3DXVECTOR3(3.0, 3.0, 3.0);
@@ -34,12 +35,12 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name){
 	for (int i = 0; i < SEAT_NUM; i++)
 	{
 		if (retu == 0) {
-			seat[i].Setseat(D3DXVECTOR3(0.0f, 0.6f, -0.5f * gyou));
+			seat[i].Setseat(D3DXVECTOR3(0.0f, 1.0f, -0.5f * gyou));
 			seat[i].Init();
 			retu = 1;
 		}
 		else {
-			seat[i].Setseat(D3DXVECTOR3(0.5f * retu, 0.6f, -0.5f * gyou));
+			seat[i].Setseat(D3DXVECTOR3(0.5f * retu, 1.0f, -0.5f * gyou));
 			seat[i].Init();
 			retu *= -1.0f;
 			if (retu > 0) {
@@ -66,9 +67,9 @@ void Unity::Init(LPDIRECT3DDEVICE9 pd3dDevice,const char* Name){
 
 
 //更新。
-bool Unity::Update()
+bool Orima::Update()
 {
-
+	anim.Update(1.0f/60.0f);
 	D3DXVECTOR3 MoveSpeed = characterController.GetMoveSpeed();
 	MoveSpeed.x = 0.0f;	
 	MoveSpeed.z = 0.0f;
@@ -110,7 +111,6 @@ bool Unity::Update()
 	{
 		seat[i].Update();
 	}
-
 	int	OK = -1;
 	const std::vector<Pikumin*>& pikuminList = game->GetPikumin();
 	if (game->GETPad()->IsTrigger(enButtonX))
@@ -150,7 +150,7 @@ bool Unity::Update()
 
 		D3DXVECTOR3 toplayer = position - pikuminList[OK]->Getpos();
 		float l = D3DXVec3Length(&toplayer);
- 		if (pikuminList[OK]->GetStatus() == PikuminStatus::STAND_BY && l < 0.7)
+ 		if (pikuminList[OK]->GetStatus() == PikuminStatus::STAND_BY && l < 0.8)
 		{
 			pikuminList[OK]->SetNowStatus(PikuminStatus::THROW);
 		}
@@ -159,10 +159,10 @@ bool Unity::Update()
 	//増産テスト
 	if (game->GETPad()->IsTrigger(enButtonY))
 	{
-		/*Pikumin* pikumin = new Pikumin;
+		Pikumin* pikumin = new Pikumin;
 		D3DXVECTOR3 pikuminpos = D3DXVECTOR3(0.0, 0.0, 0.0);
 		pikumin->Init(g_pd3dDevice, "Assets/pikumin");
-		game->AddPikumin(pikumin);*/
+		game->AddPikumin(pikumin);
 	}
 	
 	position.y += 0.6f;

@@ -785,7 +785,7 @@ static void btFindPenetr(const btConvexTemplate& a, const btConvexTemplate& b,
 static void btFindPenetrTouch(btMprSimplex_t *portal,float *depth, btVector3 *dir, btVector3 *pos)
 {
     // Touching contact on portal's v1 - so depth is zero and direction
-    // is unimportant and pos can be guessed
+    // is orimamportant and pos can be guessed
     *depth = 0.f;
     btVector3 zero = btVector3(0,0,0);
 	btVector3* origin = &zero;

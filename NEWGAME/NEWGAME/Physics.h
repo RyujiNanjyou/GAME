@@ -5,6 +5,7 @@
 
 	class CPhysicsWorld
 	{
+		
 		btDefaultCollisionConfiguration*		collisionConfig;
 		btCollisionDispatcher*					collisionDispatcher;	//!<衝突解決処理。
 		btBroadphaseInterface*					overlappingPairCache;	//!<ブロードフェーズ。衝突判定の枝切り。
@@ -36,5 +37,4 @@
 			dynamicWorld->convexSweepTest(castShape, convexFromWorld, convexToWorld, resultCallback, allowedCcdPenetration);
 		}
 	};
-
-
+	extern CPhysicsWorld* physicsworld;

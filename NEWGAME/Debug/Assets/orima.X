@@ -2167,7 +2167,7 @@ AnimTicksPerSecond fps {
  4800;
 }
 
-AnimationSet  {
+AnimationSet walk {
  
 
  Animation Anim- {

@@ -19,7 +19,7 @@ subject to the following restrictions:
 #include "btShapeHull.h"
 #include "LinearMath/btConvexHull.h"
 
-#define NUM_UNITSPHERE_POINTS 42
+#define NUM_orimaTSPHERE_POINTS 42
 
 btShapeHull::btShapeHull (const btConvexShape* shape)
 {
@@ -38,7 +38,7 @@ btShapeHull::~btShapeHull ()
 bool
 btShapeHull::buildHull (btScalar /*margin*/)
 {
-	int numSampleDirections = NUM_UNITSPHERE_POINTS;
+	int numSampleDirections = NUM_orimaTSPHERE_POINTS;
 	{
 		int numPDA = m_shape->getNumPreferredPenetrationDirections();
 		if (numPDA)
@@ -47,17 +47,17 @@ btShapeHull::buildHull (btScalar /*margin*/)
 			{
 				btVector3 norm;
 				m_shape->getPreferredPenetrationDirection(i,norm);
-				getUnitSpherePoints()[numSampleDirections] = norm;
+				getorimatSpherePoints()[numSampleDirections] = norm;
 				numSampleDirections++;
 			}
 		}
 	}
 
-	btVector3 supportPoints[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
+	btVector3 supportPoints[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2];
 	int i;
 	for (i = 0; i < numSampleDirections; i++)
 	{
-		supportPoints[i] = m_shape->localGetSupportingVertex(getUnitSpherePoints()[i]);
+		supportPoints[i] = m_shape->localGetSupportingVertex(getorimatSpherePoints()[i]);
 	}
 
 	HullDesc hd;
@@ -118,9 +118,9 @@ btShapeHull::numIndices () const
 }
 
 
-btVector3* btShapeHull::getUnitSpherePoints()
+btVector3* btShapeHull::getorimatSpherePoints()
 {
-	static btVector3 sUnitSpherePoints[NUM_UNITSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2] = 
+	static btVector3 sorimatSpherePoints[NUM_orimaTSPHERE_POINTS+MAX_PREFERRED_PENETRATION_DIRECTIONS*2] = 
 	{
 		btVector3(btScalar(0.000000) , btScalar(-0.000000),btScalar(-1.000000)),
 		btVector3(btScalar(0.723608) , btScalar(-0.525725),btScalar(-0.447219)),
@@ -165,6 +165,6 @@ btVector3* btShapeHull::getUnitSpherePoints()
 		btVector3(btScalar(-0.425323) , btScalar(0.309011),btScalar(0.850654)),
 		btVector3(btScalar(0.162456) , btScalar(0.499995),btScalar(0.850654))
 	};
-	return sUnitSpherePoints;
+	return sorimatSpherePoints;
 }
 

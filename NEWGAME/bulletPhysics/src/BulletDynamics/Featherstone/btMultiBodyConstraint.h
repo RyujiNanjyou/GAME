@@ -28,7 +28,7 @@ struct btSolverInfo;
 struct btMultiBodyJacobianData
 {
 	btAlignedObjectArray<btScalar>		m_jacobians;
-	btAlignedObjectArray<btScalar>		m_deltaVelocitiesUnitImpulse;	//holds the joint-space response of the corresp. tree to the test impulse in each constraint space dimension
+	btAlignedObjectArray<btScalar>		m_deltaVelocitiesorimatImpulse;	//holds the joint-space response of the corresp. tree to the test impulse in each constraint space dimension
 	btAlignedObjectArray<btScalar>		m_deltaVelocities;				//holds joint-space vectors of all the constrained trees accumulating the effect of corrective impulses applied in SI
 	btAlignedObjectArray<btScalar>		scratch_r;
 	btAlignedObjectArray<btVector3>		scratch_v;
@@ -53,7 +53,7 @@ protected:
     int				m_jacSizeBoth;
     int				m_posOffset;
 
-	bool			m_isUnilateral;
+	bool			m_isorimalateral;
 	int				m_numDofsFinalized;
 	btScalar		m_maxAppliedImpulse;
 
@@ -80,7 +80,7 @@ protected:
 
 public:
 
-	btMultiBodyConstraint(btMultiBody* bodyA,btMultiBody* bodyB,int linkA, int linkB, int numRows, bool isUnilateral);
+	btMultiBodyConstraint(btMultiBody* bodyA,btMultiBody* bodyB,int linkA, int linkB, int numRows, bool isorimalateral);
 	virtual ~btMultiBodyConstraint();
 
 	void updateJacobianSizes();
@@ -123,7 +123,7 @@ public:
 		return m_data[dof];
 	}
 	// current constraint position
-    // constraint is pos >= 0 for unilateral, or pos = 0 for bilateral
+    // constraint is pos >= 0 for orimalateral, or pos = 0 for bilateral
     // NOTE: ignored position for friction rows.
     btScalar getPosition(int row) const
 	{
@@ -136,9 +136,9 @@ public:
 	}
 
 
-	bool isUnilateral() const
+	bool isorimalateral() const
 	{
-		return m_isUnilateral;
+		return m_isorimalateral;
 	}
 
 	// jacobian blocks.

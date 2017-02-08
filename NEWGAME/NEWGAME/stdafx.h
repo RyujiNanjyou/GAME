@@ -8,11 +8,14 @@
 #include <vector>
 #include <Math.h>
 #include <limits.h>
-#include "System.h"
-#include "SkinModel.h"
 #include <list>
 #include <map>
 #include <memory>
+
+#include "System.h"
+#include "SkinModel.h"
 #include "tkEnginePreCompile.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
+
+extern void DrawQuadPrimitive();

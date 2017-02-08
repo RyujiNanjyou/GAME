@@ -34,7 +34,7 @@ btVector3 btMinkowskiSumShape::localGetSupportingVertexWithoutMargin(const btVec
 	return  supVertexA - supVertexB;
 }
 
-void	btMinkowskiSumShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btMinkowskiSumShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	///@todo: could make recursive use of batching. probably this shape is not used frequently.
 	for (int i=0;i<numVectors;i++)

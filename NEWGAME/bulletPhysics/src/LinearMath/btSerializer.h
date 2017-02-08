@@ -82,7 +82,7 @@ public:
 
 	virtual	 void*	findPointer(void* oldPtr)  = 0;
 
-	virtual	void*	getUniquePointer(void*oldPtr) = 0;
+	virtual	void*	getorimaquePointer(void*oldPtr) = 0;
 
 	virtual	void	startSerialization() = 0;
 
@@ -135,7 +135,7 @@ struct	btPointerUid
 	union
 	{
 		void*	m_ptr;
-		int		m_uniqueIds[2];
+		int		m_orimaqueIds[2];
 	};
 };
 
@@ -181,8 +181,8 @@ protected:
 
 	btHashMap<btHashPtr,const char*>	m_nameMap;
 
-	btHashMap<btHashPtr,btPointerUid>	m_uniquePointers;
-	int	m_uniqueIdGenerator;
+	btHashMap<btHashPtr,btPointerUid>	m_orimaquePointers;
+	int	m_orimaqueIdGenerator;
 
 	int					m_totalSize;
 	unsigned char*		m_buffer;
@@ -490,7 +490,7 @@ public:
 
 		virtual	void	startSerialization()
 		{
-			m_uniqueIdGenerator= 1;
+			m_orimaqueIdGenerator= 1;
 			if (m_totalSize)
 			{
 				unsigned char* buffer = internalAlloc(BT_HEADER_LENGTH);
@@ -535,16 +535,16 @@ public:
 			m_skipPointers.clear();
 			m_chunkP.clear();
 			m_nameMap.clear();
-			m_uniquePointers.clear();
+			m_orimaquePointers.clear();
 			m_chunkPtrs.clear();
 		}
 
-		virtual	void*	getUniquePointer(void*oldPtr)
+		virtual	void*	getorimaquePointer(void*oldPtr)
 		{
 			if (!oldPtr)
 				return 0;
 
-			btPointerUid* uptr = (btPointerUid*)m_uniquePointers.find(oldPtr);
+			btPointerUid* uptr = (btPointerUid*)m_orimaquePointers.find(oldPtr);
 			if (uptr)
 			{
 				return uptr->m_ptr;
@@ -556,12 +556,12 @@ public:
 				return 0;
 			}
 
-			m_uniqueIdGenerator++;
+			m_orimaqueIdGenerator++;
 
 			btPointerUid uid;
-			uid.m_uniqueIds[0] = m_uniqueIdGenerator;
-			uid.m_uniqueIds[1] = m_uniqueIdGenerator;
-			m_uniquePointers.insert(oldPtr,uid);
+			uid.m_orimaqueIds[0] = m_orimaqueIdGenerator;
+			uid.m_orimaqueIds[1] = m_orimaqueIdGenerator;
+			m_orimaquePointers.insert(oldPtr,uid);
 			return uid.m_ptr;
 
 		}
@@ -587,10 +587,10 @@ public:
 
 			chunk->m_chunkCode = chunkCode;
 
-			void* uniquePtr = getUniquePointer(oldPtr);
+			void* orimaquePtr = getorimaquePointer(oldPtr);
 
-			m_chunkP.insert(oldPtr,uniquePtr);//chunk->m_oldPtr);
-			chunk->m_oldPtr = uniquePtr;//oldPtr;
+			m_chunkP.insert(oldPtr,orimaquePtr);//chunk->m_oldPtr);
+			chunk->m_oldPtr = orimaquePtr;//oldPtr;
 
 		}
 
@@ -707,7 +707,7 @@ public:
 struct btInMemorySerializer : public btDefaultSerializer
 {
     btHashMap<btHashPtr,btChunk*> m_uid2ChunkPtr;
-    btHashMap<btHashPtr,void*> m_orgPtr2UniqueDataPtr;
+    btHashMap<btHashPtr,void*> m_orgPtr2orimaqueDataPtr;
     btHashMap<btHashString,const void*> m_names2Ptr;
     
 
@@ -728,9 +728,9 @@ struct btInMemorySerializer : public btDefaultSerializer
 
     
 
-    btChunk* findChunkFromUniquePointer(void* uniquePointer)
+    btChunk* findChunkFromorimaquePointer(void* orimaquePointer)
     {
-        btChunk** chkPtr = m_uid2ChunkPtr[uniquePointer];
+        btChunk** chkPtr = m_uid2ChunkPtr[orimaquePointer];
         if (chkPtr)
         {
             return *chkPtr;
@@ -748,13 +748,13 @@ struct btInMemorySerializer : public btDefaultSerializer
     {
     }
 
-    virtual void* getUniquePointer(void*oldPtr)
+    virtual void* getorimaquePointer(void*oldPtr)
     {
         if (oldPtr==0)
             return 0;
 
-        // void* uniquePtr = getUniquePointer(oldPtr);
-        btChunk* chunk = findChunkFromUniquePointer(oldPtr);
+        // void* orimaquePtr = getorimaquePointer(oldPtr);
+        btChunk* chunk = findChunkFromorimaquePointer(oldPtr);
         if (chunk)
         {
             return chunk->m_oldPtr;
@@ -774,7 +774,7 @@ struct btInMemorySerializer : public btDefaultSerializer
 								} else
 								{
 									//If this assert hit, serialization happened in the wrong order
-									// 'getUniquePointer'
+									// 'getorimaquePointer'
 									btAssert(0);
 								}
 
@@ -793,9 +793,9 @@ struct btInMemorySerializer : public btDefaultSerializer
 
         chunk->m_dna_nr = getReverseType(structType);
         chunk->m_chunkCode = chunkCode;
-        //void* uniquePtr = getUniquePointer(oldPtr);
+        //void* orimaquePtr = getorimaquePointer(oldPtr);
         m_chunkP.insert(oldPtr,oldPtr);//chunk->m_oldPtr);
-        // chunk->m_oldPtr = uniquePtr;//oldPtr;
+        // chunk->m_oldPtr = orimaquePtr;//oldPtr;
 
         void* uid = findPointer(oldPtr);
         m_uid2ChunkPtr.insert(uid,chunk);

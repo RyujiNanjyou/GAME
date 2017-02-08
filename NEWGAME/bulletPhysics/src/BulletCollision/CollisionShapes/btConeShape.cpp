@@ -108,7 +108,7 @@ btVector3	btConeShape::localGetSupportingVertexWithoutMargin(const btVector3& ve
 		return coneLocalSupport(vec);
 }
 
-void	btConeShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btConeShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 	for (int i=0;i<numVectors;i++)
 	{

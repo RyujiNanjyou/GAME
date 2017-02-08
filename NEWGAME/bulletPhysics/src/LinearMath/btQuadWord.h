@@ -39,7 +39,7 @@ class btQuadWord
 protected:
 
 #if defined (__SPU__) && defined (__CELLOS_LV2__)
-	union {
+	orimaon {
 		vec_float4 mVec128;
 		btScalar	m_floats[4];
 	};

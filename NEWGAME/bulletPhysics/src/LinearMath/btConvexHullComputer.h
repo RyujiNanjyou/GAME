@@ -77,7 +77,7 @@ class btConvexHullComputer
 		/*
 		Compute convex hull of "count" vertices stored in "coords". "stride" is the difference in bytes
 		between the addresses of consecutive vertices. If "shrink" is positive, the convex hull is shrunken
-		by that amount (each face is moved by "shrink" length units towards the center along its normal).
+		by that amount (each face is moved by "shrink" length orimats towards the center along its normal).
 		If "shrinkClamp" is positive, "shrink" is clamped to not exceed "shrinkClamp * innerRadius", where "innerRadius"
 		is the minimum distance of a face to the center of the convex hull.
 

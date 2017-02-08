@@ -70,7 +70,7 @@ public:
 			btFsels(vec.z(), halfExtents.z(), -halfExtents.z()));
 	}
 
-	virtual void	batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+	virtual void	batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 	{
 		const btVector3& halfExtents = getHalfExtentsWithoutMargin();
 	

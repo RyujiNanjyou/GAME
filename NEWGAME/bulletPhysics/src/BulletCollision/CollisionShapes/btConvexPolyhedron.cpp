@@ -121,11 +121,11 @@ void	btConvexPolyhedron::initialize()
 
 			bool found = false;
 
-			for (int p=0;p<m_uniqueEdges.size();p++)
+			for (int p=0;p<m_orimaqueEdges.size();p++)
 			{
 				
-				if (IsAlmostZero(m_uniqueEdges[p]-edge) || 
-					IsAlmostZero(m_uniqueEdges[p]+edge))
+				if (IsAlmostZero(m_orimaqueEdges[p]-edge) || 
+					IsAlmostZero(m_orimaqueEdges[p]+edge))
 				{
 					found = true;
 					break;
@@ -134,7 +134,7 @@ void	btConvexPolyhedron::initialize()
 
 			if (!found)
 			{
-				m_uniqueEdges.push_back(edge);
+				m_orimaqueEdges.push_back(edge);
 			}
 
 			if (edptr)

@@ -168,11 +168,8 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 		//スキンなし。
 		CalcWorldPosAndNormal(In, Pos, Normal, Tangent );
 	}
-  
-	float4 worldpos = mul(In.Pos,g_worldMatrix);
-	worldpos.w = 1.0f;
 
-	o.lightViewPos_1 = mul(worldpos,g_mLVP );
+	o.lightViewPos_1 = mul(float4(Pos,1.0f), g_mLVP);
 
 	o.Pos = mul(float4(Pos.xyz, 1.0f), g_mViewProj);	//ビュー空間から射影空間に変換。
     ////拡散光+環境光。
@@ -239,7 +236,7 @@ float4 posInLVP = In.lightViewPos_1;
 	}
 	float4 color = tex2D(g_diffuseTextureSampler, In.Tex0);
 
-	if(g_ShadowReceiverFlag == true)
+	if(g_ShadowReceiverFlag == 1)
 	{
 		if ((shadowMapUV.x > 0.0f && shadowMapUV.x <1.0f) && (shadowMapUV.y > 0.0f && shadowMapUV.y < 1.0f))
 		{

@@ -364,7 +364,7 @@ btVector3	btPolyhedralConvexShape::localGetSupportingVertexWithoutMargin(const b
 
 
 
-void	btPolyhedralConvexShape::batchedUnitVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
+void	btPolyhedralConvexShape::batchedorimatVectorGetSupportingVertexWithoutMargin(const btVector3* vectors,btVector3* supportVerticesOut,int numVectors) const
 {
 #ifndef __SPU__
 	int i;
@@ -472,7 +472,7 @@ void	btPolyhedralConvexAabbCachingShape::recalcLocalAabb()
 		btVector3( 0., 0., 0.)
 	};
 	
-	batchedUnitVectorGetSupportingVertexWithoutMargin(_directions, _supporting, 6);
+	batchedorimatVectorGetSupportingVertexWithoutMargin(_directions, _supporting, 6);
 	
 	for ( int i = 0; i < 3; ++i )
 	{

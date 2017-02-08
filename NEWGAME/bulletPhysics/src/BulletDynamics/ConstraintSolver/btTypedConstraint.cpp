@@ -111,10 +111,10 @@ const char*	btTypedConstraint::serialize(void* dataBuffer, btSerializer* seriali
 {
 	btTypedConstraintData2* tcd = (btTypedConstraintData2*) dataBuffer;
 
-	tcd->m_rbA = (btRigidBodyData*)serializer->getUniquePointer(&m_rbA);
-	tcd->m_rbB = (btRigidBodyData*)serializer->getUniquePointer(&m_rbB);
+	tcd->m_rbA = (btRigidBodyData*)serializer->getorimaquePointer(&m_rbA);
+	tcd->m_rbB = (btRigidBodyData*)serializer->getorimaquePointer(&m_rbB);
 	char* name = (char*) serializer->findNameForPointer(this);
-	tcd->m_name = (char*)serializer->getUniquePointer(name);
+	tcd->m_name = (char*)serializer->getorimaquePointer(name);
 	if (tcd->m_name)
 	{
 		serializer->serializeName(name);

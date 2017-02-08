@@ -9,10 +9,10 @@ class LightCamera
 public:
 	LightCamera();
 	~LightCamera();
-	void Start(Light* Light);
+	void Start();//Light* Light
 	void Update();
 	//ƒJƒƒ‰‚ğæ“¾B
-	const Camera& GetCamera() const
+	 Camera& GetCamera()
 	{
 		return camera;
 	}

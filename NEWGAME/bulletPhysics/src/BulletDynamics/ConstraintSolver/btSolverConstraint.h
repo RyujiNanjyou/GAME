@@ -51,7 +51,7 @@ ATTRIBUTE_ALIGNED16 (struct)	btSolverConstraint
     btScalar		m_lowerLimit;
 	btScalar		m_upperLimit;
 	btScalar		m_rhsPenetration;
-    union
+	union
 	{
 		void*		m_originalContactPoint;
 		btScalar	m_unusedPadding4;

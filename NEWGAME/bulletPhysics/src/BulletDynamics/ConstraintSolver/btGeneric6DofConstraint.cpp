@@ -100,7 +100,7 @@ bool	matrixToEulerXYZ(const btMatrix3x3& mat,btVector3& xyz)
 		}
 		else
 		{
-			// WARNING.  Not unique.  XA - ZA = -atan2(r10,r11)
+			// WARNING.  Not orimaque.  XA - ZA = -atan2(r10,r11)
 			xyz[0] = -btAtan2(btGetMatrixElem(mat,3),btGetMatrixElem(mat,4));
 			xyz[1] = -SIMD_HALF_PI;
 			xyz[2] = btScalar(0.0);
@@ -109,7 +109,7 @@ bool	matrixToEulerXYZ(const btMatrix3x3& mat,btVector3& xyz)
 	}
 	else
 	{
-		// WARNING.  Not unique.  XAngle + ZAngle = atan2(r10,r11)
+		// WARNING.  Not orimaque.  XAngle + ZAngle = atan2(r10,r11)
 		xyz[0] = btAtan2(btGetMatrixElem(mat,3),btGetMatrixElem(mat,4));
 		xyz[1] = SIMD_HALF_PI;
 		xyz[2] = 0.0;

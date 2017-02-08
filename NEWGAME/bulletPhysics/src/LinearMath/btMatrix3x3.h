@@ -403,7 +403,7 @@ public:
         btScalar trace = m_el[0].x() + m_el[1].y() + m_el[2].z();
         btScalar s, x;
         
-        union {
+		union {
             btSimdFloat4 vec;
             btScalar f[4];
         } temp;

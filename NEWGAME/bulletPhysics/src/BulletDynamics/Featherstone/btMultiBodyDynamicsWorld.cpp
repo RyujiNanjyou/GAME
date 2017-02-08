@@ -53,7 +53,7 @@ void	btMultiBodyDynamicsWorld::calculateSimulationIslands()
             if (((colObj0) && (!(colObj0)->isStaticOrKinematicObject())) &&
                 ((colObj1) && (!(colObj1)->isStaticOrKinematicObject())))
             {
-				getSimulationIslandManager()->getUnionFind().unite((colObj0)->getIslandTag(),(colObj1)->getIslandTag());
+				getSimulationIslandManager()->getorimaonFind().orimate((colObj0)->getIslandTag(),(colObj1)->getIslandTag());
             }
         }
     }
@@ -72,7 +72,7 @@ void	btMultiBodyDynamicsWorld::calculateSimulationIslands()
 				if (((colObj0) && (!(colObj0)->isStaticOrKinematicObject())) &&
 					((colObj1) && (!(colObj1)->isStaticOrKinematicObject())))
 				{
-					getSimulationIslandManager()->getUnionFind().unite((colObj0)->getIslandTag(),(colObj1)->getIslandTag());
+					getSimulationIslandManager()->getorimaonFind().orimate((colObj0)->getIslandTag(),(colObj1)->getIslandTag());
 				}
 			}
 		}
@@ -94,7 +94,7 @@ void	btMultiBodyDynamicsWorld::calculateSimulationIslands()
 				{
 					int tagPrev = prev->getIslandTag();
 					int tagCur = cur->getIslandTag();
-					getSimulationIslandManager()->getUnionFind().unite(tagPrev, tagCur);
+					getSimulationIslandManager()->getorimaonFind().orimate(tagPrev, tagCur);
 				}
 				if (cur && !cur->isStaticOrKinematicObject())
 					prev = cur;
@@ -111,7 +111,7 @@ void	btMultiBodyDynamicsWorld::calculateSimulationIslands()
 			int tagA = c->getIslandIdA();
 			int tagB = c->getIslandIdB();
 			if (tagA>=0 && tagB>=0)
-				getSimulationIslandManager()->getUnionFind().unite(tagA, tagB);
+				getSimulationIslandManager()->getorimaonFind().orimate(tagA, tagB);
 		}
 	}
 

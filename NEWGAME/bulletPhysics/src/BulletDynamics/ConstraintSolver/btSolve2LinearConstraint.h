@@ -38,9 +38,9 @@ public:
 		m_damping = damping;
 	}
 	//
-	// solve unilateral constraint (equality, direct method)
+	// solve orimalateral constraint (equality, direct method)
 	//
-	void resolveUnilateralPairConstraint(		
+	void resolveorimalateralPairConstraint(		
 														   btRigidBody* body0,
 		btRigidBody* body1,
 
