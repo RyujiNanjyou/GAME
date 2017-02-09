@@ -14,8 +14,8 @@ PlayerCamera::~PlayerCamera()
 }
 void PlayerCamera::Start(Orima* orima)
 {
-	toEyePos.z = -5.0f;
-	toEyePos.y = 0.0f;
+	toEyePos.z = -8.0f;
+	toEyePos.y = 5.0f;
 	targetOffset.y = 1.0f;
 	targetOffset.x = 0.0f;
 	camera.SetAspect(1280.0f / 720.0f);

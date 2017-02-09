@@ -20,10 +20,11 @@ Enemy::~Enemy()
 void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 {
 	GameObject::Init(pd3dDevice, Name);
+	//anim.PlayAnimation(0,0.5);
 	skinmodel.SetShadowReceiverFlag(false);
 	//model.Setshadowflag(false);
 	rotation = D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f);
-	scale = D3DXVECTOR3(3.0, 3.0, 3.0);
+	scale = D3DXVECTOR3(10.0f, 10.0f, 10.0f);
 	nowEnemyStatus = EnemyStatus::IDOL;
 	float angleBase = 2.0f * PI / ENEMY_SEAT;
 	for (int i = 0; i < ENEMY_SEAT; i++)
@@ -44,7 +45,7 @@ void Enemy::Init(LPDIRECT3DDEVICE9 pd3dDevice, const char* Name)
 
 bool Enemy::Update()
 {
-
+	//anim.Update(1.0f / 60.0f);
 	bool  flag = true;
 
 	//ピクミン追尾テスト操作
